@@ -1,0 +1,35 @@
+  {% include head.html %}
+
+    {% include SiteHeader.html %}
+
+    <section class="ContentArea">
+      <section class="container__xlarge {{ page.class }} mb-2 mt-3"></section>
+      <section class="mb-2">
+
+        <section class="ContentArea__main">
+          <div class="container__small">
+            <h2 class="ContentHeadline">{{ page.title }}</h2>
+            <section class="ContentArea__data">
+              <div class="ContentArea__data-item">
+                <h4>Completed</h4>
+                <p>{{ page.year }}</p>
+              </div>
+              <div class="ContentArea__data-item">
+                <h4>Role</h4>
+                <p>{{ page.role }}</p>
+              </div>
+              <div class="ContentArea__data-item">
+                <h4>Platform</h4>
+                <p>{{ page.platform }}</p>
+              </div>
+            </section>
+          </div>
+          {{ page.content }}
+
+          {% include PageNavigation.html %}
+
+        </section>
+      </section>
+    </section>
+
+  {% include footer.html %}

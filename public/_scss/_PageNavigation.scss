@@ -1,0 +1,18 @@
+.PageNavigation {
+  margin: 4rem 0 -2rem;
+  padding: 1rem 1rem 2rem;
+  background-color: lighten($color--resume, 59%);
+  text-align: left;
+
+  h4 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 1em;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}

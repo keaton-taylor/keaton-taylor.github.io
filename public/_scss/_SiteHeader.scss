@@ -1,0 +1,101 @@
+.SiteHeader {
+  grid-gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  height: max-content;
+  margin: 5rem 0;
+  padding: 0;
+
+  @include breakpoint(large) {
+    grid-template-columns: 1fr max-content;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  &__nav {
+    display: grid;
+    max-width: 100%;
+
+    @include breakpoint(large) {
+      justify-items: end;
+      width: max-content;
+    }
+  }
+
+  &__nav-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    align-content: center;
+    list-style: none;
+    margin: 0;
+
+    @include breakpoint(medium) {
+      grid-gap: 2em;
+      justify-items: end;
+      margin-bottom: 0;
+      width: max-content
+    }
+  }
+
+  &__name {
+    margin-bottom: 2rem;
+    width: 70%;
+
+    @include breakpoint(medium) {
+      margin-bottom: 1rem;
+      width: 45%;
+    }
+
+    @include breakpoint(large) {
+      margin-bottom: 0;
+      justify-content: left;
+      text-align: left;
+      width: 100%;
+    }
+
+    h1 a {
+      font-size: 2rem;
+      font-weight: 600;
+      color: $color--darkest-gray;
+    }
+  }
+
+  &__nav-item.icon {
+
+    &.img {
+      filter: grayscale(100%);
+    }
+
+    @include breakpoint(large) {
+      &.resume svg:hover {
+        fill: lighten($color--resume, 5%) !important;
+      }
+
+      &.twitter svg:hover {
+        fill: lighten($color--twitter, 5%) !important;
+      }
+
+      &.github svg:hover {
+        fill: lighten($color--github, 5%) !important;
+      }
+
+      &.dribbble svg:hover {
+        fill: lighten($color--dribbble, 5%) !important;
+      }
+
+      &.medium svg:hover {
+        fill: lighten($color--medium, 5%) !important;
+      }
+
+      &.linkedin svg:hover {
+        fill: lighten($color--linkedin, 5%) !important;
+      }
+
+      &.img:hover {
+        filter: grayscale(0%);
+      }
+    }
+  }
+}

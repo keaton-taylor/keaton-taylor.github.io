@@ -1,0 +1,138 @@
+body {
+  -webkit-font-smoothing: antialiased;
+  border-top: 0.5rem solid $color--resume;
+  font-family: $sans-stack;
+  font-size: 16px !important;
+  font-weight: 400;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 75rem;
+  padding: 0 1rem 0;
+
+  @include breakpoint(medium_only) {
+    padding: 0 2rem;
+  }
+
+  &__xsmall {
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 0 1rem 0;
+  }
+
+  &__small {
+    margin: 0 auto;
+    max-width: 840px;
+    padding: 0 1rem 0;
+  }
+
+  &__large {
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 0 1rem 0;
+
+    @include breakpoint(medium_only) {
+      padding: 0 2rem;
+    }
+  }
+
+  &__xlarge {
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 1rem;
+
+    @include breakpoint(medium_only) {
+      padding: 0 2rem;
+    }
+  }
+
+  &__xxlarge {
+    margin: 0 auto;
+    max-width: 95vw;
+    padding: 0 1rem 2rem;
+
+    @include breakpoint(medium_only) {
+      padding: 0 2rem;
+    }
+  }
+
+  &__half {
+    @include breakpoint(medium_only) {
+      padding: 0 2rem;
+    }
+
+    @include breakpoint(large) {
+      grid-gap: 1em;
+      align-items: center;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__split {
+    margin: 0 auto;
+    padding: 0 1rem;
+
+
+    @include breakpoint(medium_only) {
+      padding: 0 2rem;
+    }
+
+    @include breakpoint(large) {
+      grid-gap: 1rem;
+      grid-gap: 2rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      max-width: 1024px;
+    }
+  }
+}
+
+.Headline {
+  align-content: center;
+  display: grid;
+  height: 60vh;
+  text-align: left;
+
+  @include breakpoint(medium_only) {
+    height: 30vh;
+  }
+
+  h2 {
+    color: $color--darkest-gray;
+    font-family: $sans-stack;
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.6;
+    margin: 0;
+
+    a {
+      color: #f8423c !important;
+      font-weight: 600;
+      transition: $trans--short-out;
+
+
+      &:hover {
+        color: darken(#f8423c, 15%) !important;
+        transition: $trans--short-in;
+
+      }
+    }
+
+    @include breakpoint(large) {
+      font-size: 2.5rem;
+    }
+  }
+}
+
+footer {
+  @include gradient;
+  color: white;
+  font-weight: bolder;
+  overflow: hidden;
+  padding: 1rem 0;
+}

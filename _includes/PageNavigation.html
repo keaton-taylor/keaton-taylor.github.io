@@ -1,0 +1,15 @@
+<div class="PageNavigation">
+  {% unless page.category == null %}
+    {% capture case_study %}{{ page.category }}{% endcapture %}
+    {% unless site.categories[pageCategory].size == 1 %}
+      <div class="container__small RelatedPosts__wrap">
+      <h4>More of My Work</h4>
+        {% for post in site.categories[case_study] limit:5 %}
+          {% unless post.title == page.title %}
+           <p><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></p>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    {% endunless %}
+  {% endunless %}
+</div>

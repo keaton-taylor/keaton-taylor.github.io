@@ -1,0 +1,87 @@
+.AboutSection {
+
+  p {
+    font-size: 1rem;
+  }
+
+  img {
+    border-radius: 2px;
+  }
+
+  @include breakpoint(medium) {
+    grid-gap: 1em;
+    display: grid;
+    padding: 1rem 0;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    @include breakpoint(large) {
+      font-size: 2rem;
+    }
+
+    span {
+      color: $color--resume;
+    }
+  }
+
+  &__family {
+    margin-bottom: 1em;
+
+    @include breakpoint(medium) {
+      grid-column: 1 / span 5;
+      grid-row: 2 / span 4;
+      margin-bottom: 0;
+    }
+
+    @include breakpoint(large) {
+      grid-column: 1 / span 5;
+      grid-row: 2 / span 2;
+    }
+  }
+
+  &__parents {
+    @include breakpoint(medium) {
+      box-shadow: $resting-box;
+      grid-column: 3 / span 3;
+      grid-row: 4 / span 2;
+    }
+
+    @include breakpoint(large) {
+      grid-column: 5 / span 2;
+      grid-row: 3 / span 1;
+      margin: 6em -8em 0 0;
+    }
+  }
+
+  &__hattie {
+    @include breakpoint(medium) {
+      box-shadow: $resting-box;
+      grid-column: 5 / span 2;
+      grid-row: 3 / span 2;
+      margin: 0 -1em 0 0 ;
+    }
+
+    @include breakpoint(large) {
+      grid-column: 6 / span 1;
+      grid-row: 2 / span 1;
+      margin: -17px 0px 0 -2em;
+    }
+  }
+
+  &__emma {
+    @include breakpoint(medium) {
+      box-shadow: $resting-box;
+      grid-column: 1 / span 2;
+      grid-row: 3 / span 2;
+      margin-top: 9em;
+    }
+    @include breakpoint(large) {
+      grid-column: 1 / span 1;
+      grid-row: 3 / span 1;
+      margin: 0 0 0 -5em;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<section class="Teaser ">
+  <div class="container__large">
+
+  <h3 class="Teaser__section-title section-title"><span>Selected</span><br>Work</h3>
+
+   {% for post in site.categories.case_study limit:4 %}
+
+    <div class="Teaser__wrap">
+      <div class="Teaser__image">
+        <img src="{{ post.image }}">
+      </div>
+      <div class="Teaser__content">
+        <small class="Teaser__kicker mb-half">{{ post.series }}</small>
+        <h3 class="Teaser__title mb-half"> {{ post.title }}</h3>
+        <p class="Teaser__summary mt-half mb-2"> {{ post.excerpt }}</p>
+        <a href="{{ post.url }}">Read more about it <span>→</span></a>
+      </div>
+    </div>
+
+  {% endfor %}
+  </div>
+</section>
