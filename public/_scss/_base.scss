@@ -95,11 +95,24 @@ body {
 .Headline {
   align-content: center;
   display: grid;
+  grid-template-columns: 1fr;
   height: 60vh;
   text-align: left;
 
+  img {
+    display: none;
+  }
+
   @include breakpoint(medium_only) {
     height: 30vh;
+  }
+
+  @include breakpoint(large) {
+    grid-template-columns: 2fr;
+
+    img {
+      display: block;
+    }
   }
 
   h2 {
