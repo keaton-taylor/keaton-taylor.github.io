@@ -5,9 +5,12 @@
   height: max-content;
   margin: 5rem 0;
   padding: 0;
+  align-content: center;
 
   @include breakpoint(large) {
     grid-template-columns: 1fr max-content;
+    margin: 0;
+    height: 10vh;
   }
 
   a {
@@ -52,6 +55,7 @@
       margin-bottom: 0;
       justify-content: left;
       text-align: left;
+      align-content: center;
       width: 100%;
     }
 

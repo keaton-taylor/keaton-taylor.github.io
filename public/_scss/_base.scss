@@ -60,6 +60,15 @@ body {
     }
   }
 
+  &__full {
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    @include breakpoint(large) {
+      padding: 0;
+    }
+  }
+
   &__half {
     @include breakpoint(medium_only) {
       padding: 0 2rem;
@@ -95,49 +104,57 @@ body {
 .Headline {
   align-content: center;
   display: grid;
-  grid-template-columns: 1fr;
-  height: 60vh;
   text-align: left;
 
-  img {
-    display: none;
-  }
-
-  @include breakpoint(medium_only) {
-    height: 30vh;
-  }
-
   @include breakpoint(large) {
-    grid-template-columns: 2fr;
-
-    img {
-      display: block;
-    }
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: max-content;
+    grid-gap: 2rem;
   }
 
-  h2 {
-    color: $color--darkest-gray;
-    font-family: $sans-stack;
-    font-size: 1.75rem;
-    font-weight: 600;
-    line-height: 1.6;
-    margin: 0;
-
-    a {
-      color: #f8423c !important;
-      font-weight: 600;
-      transition: $trans--short-out;
-
-
-      &:hover {
-        color: darken(#f8423c, 15%) !important;
-        transition: $trans--short-in;
-
-      }
-    }
+  .ImageContainer {
+    display: none;
 
     @include breakpoint(large) {
-      font-size: 2.5rem;
+      display: block;
+      height: 90vh;
+      width: 100%;
+      background-image: url(https://ktportfolio.sirv.com/img/IMG_9419.png);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+  }
+
+  .TextContainer {
+    display: grid;
+    align-content: center;
+
+    h2 {
+      color: $color--darkest-gray;
+      font-family: $sans-stack;
+      font-size: 1.75rem;
+      font-weight: 600;
+      line-height: 1.4;
+      margin: auto 0;
+
+      a {
+        color: #f8423c !important;
+        font-weight: 600;
+        transition: $trans--short-out;
+
+
+        &:hover {
+          color: darken(#f8423c, 15%) !important;
+          transition: $trans--short-in;
+
+        }
+      }
+
+      @include breakpoint(large) {
+        font-size: 2.5rem;
+        padding: 0;
+      }
     }
   }
 }
