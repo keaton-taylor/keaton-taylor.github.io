@@ -113,18 +113,13 @@ body {
   }
 
   .ImageContainer {
-    display: none;
-
-    @include breakpoint(large) {
       display: block;
       height: 90vh;
       width: 100%;
       background-image: url(https://ktportfolio.sirv.com/img/IMG_9419.png);
       background-repeat: no-repeat;
       background-size: cover;
-      background-position: center center;
-    }
-  }
+      background-position: center center;  }
 
   .TextContainer {
     display: grid;
@@ -159,10 +154,20 @@ body {
   }
 }
 
-footer {
+.footer {
   @include gradient;
-  color: white;
-  font-weight: bolder;
-  overflow: hidden;
-  padding: 1rem 0;
+
+  &__nav {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    color: white;
+    font-weight: bold;
+    height: 9vh;
+    align-items: center;
+
+    p {
+      line-height: normal;
+      font-size: 12px;
+    }
+  }
 }
