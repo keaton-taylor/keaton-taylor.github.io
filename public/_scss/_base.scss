@@ -107,7 +107,7 @@ body {
   text-align: left;
 
   @include breakpoint(large) {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: max-content;
     grid-gap: 2rem;
   }
