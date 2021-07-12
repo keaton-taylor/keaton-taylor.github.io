@@ -140,13 +140,13 @@ body {
       margin: auto 0;
 
       a {
-        color: #f8423c !important;
+        color: #5865F2 !important;
         font-weight: 600;
         transition: $trans--short-out;
 
 
         &:hover {
-          color: darken(#f8423c, 15%) !important;
+          color: darken(#5865F2, 15%) !important;
           transition: $trans--short-in;
 
         }
