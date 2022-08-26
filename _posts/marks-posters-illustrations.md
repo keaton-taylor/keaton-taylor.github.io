@@ -1,5 +1,5 @@
 ---
-layout: PostPage
+layout: default
 date:   2017-09-01 16:16:01 -0600
 category: case_study
 title: "Marks, Posters & Illustrations"

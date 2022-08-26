@@ -1,5 +1,5 @@
 ---
-layout: PostPage
+layout: default
 date:   2017-09-13 16:16:01 -0600
 category: case_study
 title: "Websites, Apps and Features"
