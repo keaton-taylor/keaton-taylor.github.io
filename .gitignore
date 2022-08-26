@@ -6,3 +6,4 @@ Gemfile
 Gemfile.lock
 .bashrc
 .ruby-version
+node_modules
