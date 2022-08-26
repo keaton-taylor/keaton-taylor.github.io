@@ -12,6 +12,8 @@
 markdown: kramdown
 plugins:
   - jekyll-postcss
+environment:
+      - JEKYLL_ENV=development jekyll build
 
 # Exclude from processing.
 # The following items will not be processed, by default. Create a custom list
