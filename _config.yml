@@ -11,7 +11,7 @@
 # Build settings
 markdown: kramdown
 plugins:
-  - jekyll-postcss
+  - jekyll-postcss-v2
 environment:
   - JEKYLL_ENV=development jekyll build
 
