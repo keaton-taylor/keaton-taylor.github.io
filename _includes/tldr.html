@@ -1,0 +1,32 @@
+<section class="max-w-3xl my-12 px-4 md:px-0 mx-auto ">
+  <section class="grid grid-cols-1 md:grid-flow-col md:auto-cols-fr md:border-b-2 border-slate-400">
+    <div class="py-2 md:pr-4 md:py-4 md:border-r-2 border-slate-400">
+      <small class="font-bold">Role</small>
+      <p>{{ post.role }}</p>
+    </div>
+    <div class="py-2 md:p-4 md:border-r-2 border-slate-400">
+      <small class="font-bold">Year</small>
+      <p>{{ post.year }}</p>
+    </div>
+    <div class="py-2 md:pl-4 md:py-4 border-slate-400">
+      <small class="font-bold">Team</small>
+      <p class="">{{ post.team }}</p>
+    </div>
+  </section>
+  <section class="grid grid-cols-1 md:grid-flow-col md:auto-cols-fr md:border-b-2 border-slate-400">
+    <div class="py-2 md:pr-4 md:py-4">
+      <small class="font-bold">Responsibilities</small>
+      <p>{{ post.responsibilities }}</p>
+    </div>
+  </section>
+  <section class="grid grid-cols-2 md:grid-flow-col md:auto-cols-fr">
+    <div class="py-2 md:pr-4 md:py-4">
+      <small class="font-bold">TL;DR</small>
+      <p>{{ post.tldr }}</p>
+    </div>
+    <div class="py-2 md:p-4 md:border-l-2 border-slate-400">
+      <small class="font-bold">Results</small>
+      <p>{{ post.results }}</p>
+    </div>
+  </section>
+</section>
