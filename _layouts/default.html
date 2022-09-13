@@ -4,13 +4,13 @@
 {% include header.html %}
 
 
-<section class="max-w-7xl grid md:grid-cols-6 md:gap-16 mx-auto px-4 md:mt-8 mb-16" id="main">
+<section class="max-w-7xl grid lg:grid-cols-6 lg:gap-16 mx-auto px-4 lg:mt-8 mb-16" id="main">
 
-  <section class="mt-8 pb-8 md:col-start-3 md:col-span-4">
-    <h1 class="text-3xl md:text-5xl md:leading-tight mb-2">I'm a husband and dad living in Wichita, Kansas. I'm also a Designer on the Platform Ecosystem team at <a class="discord" href="https://www.discordapp.com">Discord.</a></h1>
+  <section class="mt-8 pb-8 lg:col-start-3 lg:col-span-4">
+    <h1 class="text-3xl lg:text-5xl lg:leading-tight mb-2">I'm a husband and dad living in Wichita, Kansas. I'm also a Designer on the Platform Ecosystem team at <a class="discord" href="https://www.discordapp.com">Discord.</a></h1>
   </section>
 
-  <div class="md:col-span-2 md:mt-72">
+  <div class="lg:col-span-2 lg:mt-72">
     <h2 class="text-slate-800 text-2xl font-semibold pb-2">Selected projects</h2>
     <p class="text-slate-500 text-md mb-6">My best work is built on the ability of a team from
       different functions to come together and work harmoniously as a single unit. No work is done in a vacuum and none
@@ -18,18 +18,18 @@
       been on a team with over the years and likely, so do you.</p>
   </div>
 
-  <div class="md:col-span-4 grid gap-4">
+  <div class="lg:col-span-4 grid gap-4">
     {% for post in site.categories.case_study limit: 6 %}
     <a href="{{ post.url }}">
       <section
-        class="grid md:gap-8 grid-col-1 px-8 pt-8 pb-{{ post.bottomPadding }} rounded-xl {{ post.gradientFrom }} {{ post.gradientTo }} bg-gradient-to-br sm:grid-cols-2 gap-12 md:mx-auto h-auto drop-shadow-md hover:drop-shadow-xl hover:ease-in-out hover:duration-300">
-        <div class="self-start md:order-2">
-          <img class="mb-2" src="{{ post.company }}" width="{{ post.logoHeight }}">
+        class="grid lg:gap-8 grid-col-1 px-8 pt-8 pb-{{ post.bottomPadding }} rounded-xl {{ post.gradientFrom }} {{ post.gradientTo }} bg-gradient-to-br sm:grid-cols-2 gap-12 lg:mx-auto h-auto drop-shadow-md hover:drop-shadow-xl hover:ease-in-out hover:duration-300">
+        <div class="self-start lg:order-2">
+          <img rel="preload" as="image" class="mb-2" src="{{ post.company }}" width="{{ post.logoHeight }}">
           <h2 class="text-xl font-semibold mb-1">{{ post.title }}</h2>
           <p class="text-md">{{ post.excerpt }}</p>
         </div>
-        <div class="{{ post.imgHeight }} overflow-hidden align-middle">
-          <img class="md:order-1 rounded-md" src="{{ post.image }}">
+        <div class="{{ post.imgHeight }} overflow-hidden">
+          <img class="lg:order-1 rounded-md" src="{{ post.image }}">
         </div>
       </section>
     </a>
