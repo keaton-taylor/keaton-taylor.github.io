@@ -21,8 +21,7 @@
   <div class="lg:col-span-4 grid gap-4">
     {% for post in site.categories.case_study limit: 6 %}
     <a href="{{ post.url }}">
-      <section
-        class="grid lg:gap-8 grid-col-1 px-8 pt-8 pb-{{ post.bottomPadding }} rounded-xl {{ post.gradientFrom }} {{ post.gradientTo }} bg-gradient-to-br sm:grid-cols-2 gap-12 lg:mx-auto h-auto drop-shadow-md hover:drop-shadow-xl hover:ease-in-out hover:duration-300">
+      <section class="grid lg:gap-8 grid-col-1 px-8 pt-8 pb-{{ post.bottomPadding }} rounded-xl {{ post.gradientFrom }} {{ post.gradientVia }} {{ post.gradientTo }} bg-gradient-to-br sm:grid-cols-2 gap-12 lg:mx-auto h-auto shadow-md hover:shadow-xl hover:ease-in-out hover:duration-300">
         <div class="self-start lg:order-2">
           <img rel="preload" as="image" class="mb-2" src="{{ post.company }}" width="{{ post.logoHeight }}">
           <h2 class="text-xl font-semibold mb-1">{{ post.title }}</h2>
