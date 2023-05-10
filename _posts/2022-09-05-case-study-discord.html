@@ -3,16 +3,16 @@
 layout: post
 date: 2022-09-5 16:16:01 -0600
 category: case_study
-title: "Discord Activities"
-excerpt: "I'm a Senior-level IC working closely with cross-functional folks to bring activities to the Discord platform."
+title: "Discord Activities Desktop Launch"
+excerpt: "After building a standalone platform for playing games with friends, our team was acquired and we did the hard work of taking activities from 0 - 1 inside a fast moving, late stage startup."
 published: true
 company: "/images/Discord-logo.png"
 logoHeight: 120px
 image: /images/Macbook.png
 bottomPadding: 8
-gradientFrom: from-slate-50
+<!-- gradientFrom: from-slate-50
 gradientVia: via-slate-50
-gradientTo: to-purple-100
+gradientTo: to-purple-100 -->
 imgHeight: h-full
 
 ---
@@ -52,4 +52,32 @@ imgHeight: h-full
       <p>Customer interviews, UX Research + data collection, Spec creation/collaboration, Design prioritization and strategy, Running multiple team meetings.</p>
     </div>
   </section>
+</section>
+
+<section class="max-w-3xl px-4 md:p-8 mx-auto">
+  <h2 class="font-bold text-2xl">Platform Changes</h2>
+  <p class="py-2">As part of the newly formed Activities Platform team, we made the decision to integrate Activities into Discord's Voice feature. A mixture of technical and operational constraints made the decision pretty easy, but the challenges were only starting.</p>
+
+  <p class="py-2">Since Activities are only available during Voice Calls, we needed to find ways to make them accessible both inside and outside of these calls. We added new viewing options, such as a video grid view and a focused view that highlights ongoing Activities. We also introduced an activity shelf launcher UI, which makes it easy to access Activities from different parts of the app.</p>
+  <img class="my-4 rounded-xl drop-shadow-md" src="/images/ActivityShelf.gif" alt="activity shelf being activated">
+
+  <p class="py-2">To ensure that Activities were easily found by users, we integrated them into different areas of the app, including the channel list sidebar, RTC panel, rich presence on profiles, and the Active Now panels.</p>
+  <img class="my-4 rounded-xl drop-shadow-md" src="/images/RTCPanelLaunch.gif" alt="activity shelf being activated from RTC panel">
+
+  <p class="py-2">Designing a way to display Activities in different areas of the app while maintaining a clean, cohesive look was a challenge we faced. After several iterations, we came up with the "Activity shelf," which displays the necessary metadata and artwork in an optimal way.</p>
+
+  <section class="max-w-3xl mx-auto py-8">
+    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 gap-4">
+      <a href="/images/Voice - None - shelf.png" data-fancybox="gallery" class="w-full md:w-1/2">
+        <img src="/images/Voice - None - shelf.png" alt="Image 1" class="w-full">
+        <p class="text-center mt-2 text-sm">Beta 1 Activity Shelf</p>
+      </a>
+      <a href="/images/Voice - Shelf - modal2.png" data-fancybox="gallery" class="w-full md:w-1/2">
+        <img src="/images/Voice - Shelf - modal2.png" alt="Image 2" class="w-full">
+        <p class="text-center mt-2 text-sm">Beta 2 Activity Shelf</p>
+      </a>
+    </div>
+  </section>
+
+  <p class="py-2">In summary, our team made significant changes to the Discord platform by integrating Activities into the Voice feature, implementing new ways to view and access them, and integrating them into different parts of the app while maintaining a consistent, polished design.</p>
 </section>
