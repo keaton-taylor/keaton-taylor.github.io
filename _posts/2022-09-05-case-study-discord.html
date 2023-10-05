@@ -11,6 +11,7 @@ logoHeight: 120px
 image: /images/discord/Macbook.png
 bottomPadding: 8
 imgHeight: h-full
+permalink: /discord-activities.html
 
 ---
 
@@ -18,15 +19,15 @@ imgHeight: h-full
   <img src="/images/discord/Macbook.png" alt="">
 </section>
 
-<section class="max-w-3xl mb-8 mx-auto">
+<section class="max-w-5xl mb-8 mx-auto">
   <h2 class="font-bold text-5xl my-8 md:text-6xl !leading-snug">Bringing casual games to an established communication platform</h2>
 </section>
 
-<section class="max-w-3xl px-4 md:p-8 mx-auto md:bg-slate-50 rounded-2xl md:shadow-md">
+<section class="max-w-5xl px-4 md:p-8 mx-auto md:bg-slate-50 rounded-2xl md:shadow-md">
   <section class="grid md:grid-cols-1 md:grid-flow-col md:border-b-2 border-slate-400">
     <div class="py-2 md:pb-4 md:pt-0 md:col-span-3">
       <small class="font-bold">TL;DR</small>
-      <p>Incoming from an acquisition, I was part of a small team that concepted and designed the new platfom systems that have allowed Discord to inject casual games into the Voice Channel expeirence on desktop and mobile. After many user-threshold and geo-fenced tests I am facilitating the design and development polish sprints with XFN partners on oour way to an immenent global launch.</p>
+      <p>After Discord acquired our startup, Ubiquity 6/Backyard, we aimed to integrate casual games into Discord's Voice features with the ultimate goal of creating a two-sided marketplace for developers. Despite technical and operational challenges, we successfully launched the Activities feature, which not only increased user engagement but also a sizable increase in ARR attributable to our features. The project has opened doors for further diversification of offerings, allowed our team to evangelize a customer-obsessed way of working, and has led our studio teams toto dream partnerships in the casual gaming space.</p>
     </div>
   </section>
   <section class="grid grid-cols-1 md:grid-flow-col md:border-b-2 border-slate-400">
@@ -40,7 +41,7 @@ imgHeight: h-full
     </div>
     <div class="py-2 md:pl-4 md:py-4 border-slate-400">
       <small class="font-bold">Team</small>
-      <p class="">2 Product Designers, 2 PM, 6 Engineers</p>
+      <p class="">Product Designer, 2 PM, 4 Engineers</p>
     </div>
   </section>
   <section class="grid grid-cols-1 md:grid-flow-col md:auto-cols-fr">
@@ -51,30 +52,209 @@ imgHeight: h-full
   </section>
 </section>
 
-<section class="max-w-3xl px-4 md:p-8 mx-auto">
-  <h2 class="font-bold text-2xl">Platform Changes</h2>
-  <p class="py-2">As part of the newly formed Activities Platform team, we made the decision to integrate Activities into Discord's Voice feature. A mixture of technical and operational constraints made the decision pretty easy, but the challenges were only starting.</p>
+<section class="max-w-5xl mx-auto md:py-16">
+  <div>
+    <h3 class="text-2xl font-bold pb-2">Goals</h3>
+    <p class="pb-4">Our mandate coming into Discord was to bolt on to the company and seamlessly integrate casual games into Discord's Voice features in order to eventually create a 2 sided marketplace for developers to create and launch experiences inside Discord similar to the way the Bots ecosystem had grow on the platform. Inside our mandate were aggressive goals to show that this was the right path forward.
+    </p>
+    <ul class="pb-6 pl-4">
+      <li>- Prove that people on Discord would play casual games @ 20% Adoption Rate with a 35%+ week 4 retention.</li>
+      <li>- Prove that people on Discord would pay to access some casual games @ MRR increase of low to mid 6 figures.</li>
+      <li>- Understand the user base that's growing on Discord and how we can serve them.</li>
+      <li>- Globally launch activities as a desktop-first feature and start moving toward a developer ecosystem.</li>
+    </ul> 
+  </div>
 
-  <p class="py-2">Since Activities are only available during Voice Calls, we needed to find ways to make them accessible both inside and outside of these calls. We added new viewing options, such as a video grid view and a focused view that highlights ongoing Activities. We also introduced an activity shelf launcher UI, which makes it easy to access Activities from different parts of the app.</p>
-  <img class="my-4 rounded-xl drop-shadow-md" src="/images/discord/ActivityShelf.gif" alt="activity shelf being activated">
+  <div>
+    <h3 class="text-2xl font-bold pb-2">Research</h3>
+    <p class="pb-2">Before joining Discord, our team at Backyard had already honed a user-centric approach, working with industry expert Julie Supan to identify a young, engaged audience hungry for deeper connections via video chats and casual games. This research didn't just inform our work; it was our north star, guiding us in weekly design and feature decisions. When we transitioned to Discord, we hit the ground running, immediately validating our findings in a new context. Over 50% of Discord users were willing to pay between $2 and $5 for Activities, far outpacing the nearly $10 price point of Discord's Nitro subscription. This wasn't just validation; it was a compelling signal to move forward.</p>
 
-  <p class="py-2">To ensure that Activities were easily found by users, we integrated them into different areas of the app, including the channel list sidebar, RTC panel, rich presence on profiles, and the Active Now panels.</p>
-  <img class="my-4 rounded-xl drop-shadow-md" src="/images/discord/RTCPanelLaunch.gif" alt="activity shelf being activated from RTC panel">
+    <p class="pb-6">Leveraging these insights, we explored bundling as a strategy, setting up key performance indicators in collaboration with our data team. Our approach was Lean but rigorous: rapid shipping, continuous iteration, and a laser focus on user feedback. We segmented our results to measure the impact of each treatment, ensuring that every step we took was both agile and data-informed.</p>
 
-  <p class="py-2">Designing a way to display Activities in different areas of the app while maintaining a clean, cohesive look was a challenge we faced. After several iterations, we came up with the "Activity shelf," which displays the necessary metadata and artwork in an optimal way.</p>
+  <div class="pb-6">
+    <h3 class="text-2xl font-bold pb-2">Challenges and Opportunities</h3>
+    <p>Even with really positive feedback from our research and initial tests it was no easy feat navigating through technical and operational hurdles to seamlessly integrate it into synchronous voice calls.</p>
 
-  <section class="max-w-3xl mx-auto py-8">
-    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 gap-4">
-      <a href="/images/discord/Voice - None - shelf.png" data-fancybox="gallery" class="w-full md:w-1/2">
-        <img src="/images/discord/Voice - None - shelf.png" alt="Image 1" class="w-full">
-        <p class="text-center mt-2 text-sm">Beta 1 Activity Shelf</p>
-      </a>
-      <a href="/images/discord/Voice - Shelf - modal2.png" data-fancybox="gallery" class="w-full md:w-1/2">
-        <img src="/images/discord/Voice - Shelf - modal2.png" alt="Image 2" class="w-full">
-        <p class="text-center mt-2 text-sm">Beta 2 Activity Shelf</p>
-      </a>
+    <h4 class="text-xl font-bold mt-4 mb-2">Challenges</h4>
+    <ul class="list-disc list-inside pl-4">
+      <li><strong>Technical Constraints:</strong> Difficulty in embedding Activities via an iframe, particularly for games requiring real-time interaction. This was a challenge because Discord's infrastructure was built completely for this synchronous communication loop - while we were thinking about asynch communication and spontaneous synchronicity through viral loops - work we wouldn't get to for literal years.</li>
+      <li><strong>Executive Pushback:</strong> Resistance to making changes to the chat interface, necessitating an alternative approach for Activities integration. Alterations to the video and voice calling UI were less contentious since the video and voice engagement numbers were dwarfed by chat.</li>
+      <li><strong>Design Consistency:</strong> The challenge of incorporating Activities into the existing voice experience without disrupting the user interface. Regardless of engagement, there were expectations around how the voice chat would work and I created this world where we created consistency of expectation when there was not necessarily a consistency of UI or style.</li>
+    </ul>
+
+    <h4 class="text-xl font-bold mt-4 mb-2">Opportunities</h4>
+    <ul class="list-disc list-inside pl-4">
+      <li><strong>User Engagement:</strong> The high willingness to pay for Activities suggests potential for revenue growth and increased user retention. If we could attract a new breed of user to pay for an existing monetization, but attribute it to activities, that's a huge win.</li>
+      <li><strong>Expanded Offerings:</strong> The interest in a variety of games opens the door for partnerships with game developers, diversifying the Activities feature set. We would have early conversations with well-known web-game studios and eventually support a variety of second and third party games to go along with our embedded studio titles.</li>
+      <li><strong>Community Building:</strong> The Activities feature can enhance social interaction on the platform, potentially attracting a broader user demographic. We saw this at Backyard - where deepening connections was our primary goal and we got feedback through email, Discord server, and TikTok that playing these games with friends and acquaintances made them closer and spread the use to new circles of influence.</li>
+    </ul>
+  </div>
+  </div>
+
+  <div class="pb-6">
+    <h3 class="text-2xl font-bold pb-2">Hypotheses</h3>
+    <p class="pb-2">1. Integrating Activities will increase user engagement and retention for both the voice channel feature and the app.</p>
+    <p class="pb-2">2. The willingness of users to pay for Activities suggests a new, potentially lucrative revenue stream.</p>
+    <p class="pb-2">3. Activities will deepen user connections for our key user groups and expand Discord's community.</p>
+    <p class="pb-2">4. First Party Activities will draw more developers to Discord, creating a vibrant the developer ecosystem, similarly to bots.</p>
+  </div>
+
+  <div class="pb-6">
+    <h3 class="text-2xl font-bold pb-2">Solutions</h3>
+    <p class="pb-6">The design process for this project were phased and ranged from early explorations, to initial testing, to the Global Launch.</p>
+
+
+    <h4 class="text-2xl pb-2">Early Explorations</h4>
+    <p class="pb-2">In the early stages of this project, our first task was to immerse ourselves in Discord's existing design language. Fortunately, the organization had already invested in robust Design Systems and Sticker Sheets, enabling us to prototype at a higher fidelity than is often possible. Over the first few weeks, we focused on conceptualizing how Discord's platform could evolve to accommodate activities, particularly within the framework of a two-sided marketplace for both developers and end-users.</p>
+
+    <p class="pb-2">To ensure we were on the right track, we held feedback sessions involving product managers, engineers, and our design team. These meetings served as pivotal checkpoints, allowing us to present our ideas to leadership for validation and to identify areas requiring iteration. Interestingly, our initial designs were considered too ambitious, prompting us to pivot towards a more iterative and component-driven approach. This shift led us to explore specific questions that would guide our subsequent design efforts. All of this exploration led to some more structural questions we wanted to dive into - here are a couple of examples:</p>
+    <div class="py-4">
+      <h4 class="pb-2 font-bold">What are some of the best-case scenario primitives for how we integrate Activities into the wider product?</h4>
+      <p>Like "how might we's" around notifications, Active now, and how we can represent ongoing activity presence in places like someone's profile. </p>
+      <figure class="mt-2 mb-8">
+        <a href="/images/discord/exploration2.png" data-fancybox="gallery" class="w-full md:w-1/2">
+        <img class="drop-shadow-lg rounded-md" src="/images/discord/exploration2.png" alt="Explorations around an Activities Home, Notifications inside the chat, and how a mobile activity might look."/>
+        </a>
+        <figcaption class="text-sm pt-4 text-center text-slate-400">Explorations around an Activities Home, Notifications inside the chat, and how a mobile activity might look.</figcaption>
+      </figure>
+
+      <h4 class="pb-2 font-bold">What can we ship quickly to test the waters on how users will receive this change?</h4>
+      <p>A huge piece of this exploration work was to make a call on how we might start testing the hypothesis that activities are A. Wanted and B. will deepen connections as folks use them. Luckily we were working with users from our previous startup, Backyard, to create a coalition of folks to come try this new thing we were working on.</p>
+      <figure class="mt-2 mb-8">
+        <a href="/images/discord/explorations1.png" data-fancybox="gallery" class="w-full md:w-1/2">
+        <img class="drop-shadow-lg rounded-md" src="/images/discord/explorations1.png" alt="Explorations around an Activities Home, Notifications inside the chat, and how a mobile activity might look."/>
+        </a>
+        <figcaption class="text-sm pt-4 text-center text-slate-400">What might some longer term primatives look like?</figcaption>
+      </figure>
     </div>
-  </section>
+  </div>
 
-  <p class="py-2">In summary, our team made significant changes to the Discord platform by integrating Activities into the Voice feature, implementing new ways to view and access them, and integrating them into different parts of the app while maintaining a consistent, polished design.</p>
+  <h4 class="text-2xl pb-2">Initial Testing</h4>
+  <p class="pb-6">To rigorously assess user engagement and willingness to pay, we launched targeted alpha and beta tests. These tests were deployed to 15% of total servers, specifically those with fewer than 100 members. While the tests may seem straightforward, they laid the essential groundwork for the feature set and provided critical data for future decision-making.</p>
+
+  <h5 class="text-xl pb-2"><strong>The Alpha: Baseline Engagement Bundle (BEB)</strong></h5>
+  <p class="pb-6">Our alpha test, known as the Baseline Engagement Bundle (BEB), was a resounding success. We rolled out basic functionalities and a bundle of games, focusing primarily on Voice Chat (VC) usage and secondarily on user adoption and retention rates. This really hammered home that there was a willingness to play and it could be an engagement and experience lever!</p>
+ 
+  <p class="pb-2"><strong>Updates to the VC and RTC Controls:</strong> We leveraged Discord's existing RTC panel, a relic from its gamer-focused days, as a strategic entry point for activities. This decision paid off: more than two-thirds of all activity starts originated from this panel. We also added an entry point in the video controls to guide new users, and both entry points have been retained due to their effectiveness.</p>
+
+  <div class="grid grid-cols-2 gap-4 pb-6">
+    <figure class="mt-2 mb-8 col-span-1">
+      <a href="/images/discord/01.png" data-fancybox="gallery" class="w-full md:w-1/2">
+      <img class="drop-shadow-lg rounded-md" src="/images/discord/01.png" alt="Explorations around an Activities Home, Notifications inside the chat, and how a mobile activity might look."/>
+      </a>
+      <figcaption class="text-sm pt-4 text-center text-slate-400">The simplified activity shelf launched from control UI</figcaption>
+    </figure>
+    <figure class="mt-2 mb-8 col-span-1 col-start-2">
+      <a href="/images/discord/02.png" data-fancybox="gallery" class="w-full md:w-1/2">
+      <img class="drop-shadow-lg rounded-md" src="/images/discord/02.png" alt="Explorations around an Activities Home, Notifications inside the chat, and how a mobile activity might look."/>
+      </a>
+      <figcaption class="text-sm pt-4 text-center text-slate-400">The same simplified shelf launched from the RTC panel in early versions</figcaption>
+    </figure>
+  </div>
+
+  <p class="pb-2"><strong>Updates to the Video Grid:</strong> We updated the video grid to offer a focused view, similar to how screen sharing works, allowing users to immerse themselves in the activity while still interacting with friends. This required significant cross-functional collaboration to ensure alignment with Discord's core values.</p>
+  <div class="grid grid-cols-2 gap-4">
+    <figure class="mt-2 mb-8 col-span-1">
+      <a href="/images/discord/04.png" data-fancybox="gallery" class="w-full md:w-1/2">
+      <img class="drop-shadow-lg rounded-md" src="/images/discord/04.png" alt="Explorations around an Activities Home, Notifications inside the chat, and how a mobile activity might look."/>
+      </a>
+      <figcaption class="text-sm pt-4 text-center text-slate-400">The modified grid with an entry point into already started activities.</figcaption>
+    </figure>
+    <figure class="mt-2 mb-8 col-span-1 col-start-2">
+      <a href="/images/discord/03.png" data-fancybox="gallery" class="w-full md:w-1/2">
+      <img class="drop-shadow-lg rounded-md" src="/images/discord/03.png" alt="Explorations around an Activities Home, Notifications inside the chat, and how a mobile activity might look."/>
+      </a>
+      <figcaption class="text-sm pt-4 text-center text-slate-400">The earliest version of the focused iframe integration</figcaption>
+    </figure>
+  </div>
+
+  <h4 class="text-xl pb-2">Alpha Results</h4>
+  <p class="pb-6">The alpha test led to a 35% adoption rate, surpassing our 20% target, and a 30% week-one retention rate among servers that engaged with the new features. Additionally, 65% of surveyed users indicated a strong likelihood to continue using Activities. Importantly, we observed no negative impact on key performance indicators at the end of the first month. These data led us to move to phase 2 where we would focus in on the monetary themes we'd been exploring. We made only a few specific UI changes from here to make sure we were keeping that consistency of expectation, while zeroing in on the new data we needed to understand.</p>
+
+  <h5 class="text-xl pb-2"><strong>The Beta: Willingness to Pay or Boost Gating</strong></h5>
+  <p class="pb-6">The beta phase aimed to test users' willingness to pay for Activities. We introduced server-level perks, allowing one person's purchase to grant access to the entire server. While this approach limited the total addressable market (TAM), it facilitated rapid testing because the infrastructure was already there to integrate a feature set into the Boosting package at a server level. Ultimately, this would prove out our hypotheses that we were driving sellable value to users!</p>
+
+  <p class="pb-2"><strong>A Revenue Focused Activity Menu: </strong>Building on insights from the alpha, we designed a revenue-focused activity menu with clear labeling and messaging. We also introduced a "Rotating Free Activity" feature, accessible to all users regardless of subscription status.</p>
+
+    <figure class="mt-2 mb-8 col-span-1">
+      <a href="/images/discord/BoostGate.png" data-fancybox="gallery" class="w-full md:w-1/2">
+      <img class="drop-shadow-lg rounded-md" src="/images/discord/BoostGate.png" alt="Explorations around an Activities Home, Notifications inside the chat, and how a mobile activity might look."/>
+      </a>
+      <figcaption class="text-sm pt-4 text-center text-slate-400">The simplified activity shelf launched from control UI</figcaption>
+    </figure>
+
+  <p class="pb-2"><strong>Upsells and Quality of Life Improvements:</strong> We integrated the existing boosting payment flow and developed new upsell strategies and promotional surfaces to test willingness to pay.</p>
+  <div class="grid grid-cols-2 gap-4">
+    <figure class="mt-2 mb-8 col-span-1">
+      <a href="/images/discord/Upsells.png" data-fancybox="gallery" class="w-full md:w-1/2">
+      <img class="drop-shadow-lg rounded-md" src="/images/discord/Upsells.png" alt="Purchasing and upsell modals and coachmarks."/>
+      </a>
+      <figcaption class="text-sm pt-4 text-center text-slate-400">Purchasing and upsell modals and coachmarks.</figcaption>
+    </figure>
+    <figure class="mt-2 mb-8 col-span-1 col-start-2">
+      <a href="/images/discord/Quality.png" data-fancybox="gallery" class="w-full md:w-1/2">
+      <img class="drop-shadow-lg rounded-md" src="/images/discord/Quality.png" alt="Surveys, Server Statuses, and Happening Now. Oh My."/>
+      </a>
+      <figcaption class="text-sm pt-4 text-center text-slate-400">Surveys, Server Statuses, and Happening Now. Oh My.</figcaption>
+    </figure>
+  </div>
+
+  <h4 class="text-xl pb-2">Beta Results</h4>
+  <p class="pb-6">Although the beta test was generally successful, it raised some strategic questions for the global launch. We observed a 12% increase in Level 1 boosting among servers but also noted some negative impact on other metrics, such as Messages Sent. However, the test did result in a low-six-figure bump in Monthly Recurring Revenue (MRR) - which aligned with our goals... but made us curious if we could do more.</p>
+
+  <div>
+    <h4 class="text-2xl pb-2">Global Launch and beyond</h4>
+    <p class="pb-6">Leveraging the insights and successes from our alpha and beta tests, we implemented targeted design solutions to address remaining challenges and enhance user experience. We continue to use these insights to improve the platform with updates to add more content, expanding the Activities to both Mobile and G/DM surfaces, and eventually filling out some of that Viral Loops work as well.</p>
+    <div class="pb-6">
+        <p class="pb-2"><strong>The Evolution of the List-Based Shelf:</strong> We evolved the initial small menu into a comprehensive Activity Shelf, enriching the user experience with illustrated moments of delight and gif previews of activities. This was not just an aesthetic upgrade; it was a strategic move to increase user engagement. Subsequently, we introduced the Mini Shelf—a streamlined, hover-activated version featuring promotional space and a recommendation engine that suggests activities based on user behavior.</p>
+        <figure class="mt-2 mb-8">
+          <a href="/images/discord/shelfDetail.gif" data-fancybox="gallery" class="w-full md:w-1/2">
+          <img class="drop-shadow-lg rounded-md" src="/images/discord/shelfDetail.gif" alt="The mini shelf and the activity shelf."/>
+          </a>
+          <figcaption class="text-sm pt-4 text-center text-slate-400">The Activity Shelf with a Promo spot and the updated activity shelf.</figcaption>
+        </figure>
+
+        <p class="pb-2"><strong>Higher Visibility Promotional Surfaces:</strong> Recognizing the untapped potential of empty states within the Voice Channel UI, we transformed these spaces into high-visibility promotional surfaces. This not only filled a visual gap but also served as a strategic location for upsells and user engagement.</p>
+        <div class="grid grid-cols-2 gap-4">
+          <figure class="mt-2 mb-8 col-span-1">
+            <a href="/images/discord/Waiting.png" data-fancybox="gallery" class="w-full md:w-1/2">
+            <img class="drop-shadow-lg rounded-md" src="/images/discord/Waiting.png" alt="Purchasing and upsell modals and coachmarks."/>
+            </a>
+            <figcaption class="text-sm pt-4 text-center text-slate-400">Empty state upsell with before friends show up..</figcaption>
+          </figure>
+          <figure class="mt-2 mb-8 col-span-1 col-start-2">
+            <a href="/images/discord/2Plus.png" data-fancybox="gallery" class="w-full md:w-1/2">
+            <img class="drop-shadow-lg rounded-md" src="/images/discord/2Plus.png" alt="Surveys, Server Statuses, and Happening Now. Oh My."/>
+            </a>
+            <figcaption class="text-sm pt-4 text-center text-slate-400">Empty state upsell for groups of 2 - 4 people.</figcaption>
+          </figure>
+        </div>
+
+        <p class="pb-2"><strong>From Boosting to Nitro:</strong> Recognizing that our Total Addressable Market (TAM) was one of the things that might be holding back our success on the platform, we made the decision to move our pricing strategy from server-based to person-based. This opened up a huge new opportunity to sell Nitro to more of our 170M MAU - but also opened up a lot of new challenges around how we would gate certain users from using Activities. With this change came some really interesting mitigation of edge cases and unforeseen use cases. </p>
+        <div class="grid grid-cols-2 gap-4">
+          <figure class="mt-2 mb-8 col-span-1">
+            <a href="/images/discord/NitroShelf.png" data-fancybox="gallery" class="w-full md:w-1/2">
+            <img class="drop-shadow-lg rounded-md" src="/images/discord/NitroShelf.png" alt="Purchasing and upsell modals and coachmarks."/>
+            </a>
+            <figcaption class="text-sm pt-4 text-center text-slate-400">New layouts and processes for purchasing access to Activities.</figcaption>
+          </figure>
+          <figure class="mt-2 mb-8 col-span-1 col-start-2">
+            <a href="/images/discord/EdgeCases.png" data-fancybox="gallery" class="w-full md:w-1/2">
+            <img class="drop-shadow-lg rounded-md" src="/images/discord/EdgeCases.png" alt="Surveys, Server Statuses, and Happening Now. Oh My."/>
+            </a>
+            <figcaption class="text-sm pt-4 text-center text-slate-400">Empty state upsell for groups of 2 - 4 people.</figcaption>
+          </figure>
+        </div>
+    </div>
+  </div>
+
+  <div class="pb-6">
+    <h3 class="text-2xl font-bold pb-2">Overall Results</h3>
+    <p class="pb-6">In the end we saw a ton of success from the launch and ongoing work on Activities. We made a really positive attributable ARR increase - beating early goals by nearly 2x. We saw retention rates start to move toward positive areas with week 1 continuing to float in the 25 - 30% area, and week 4 dropping but getting better. We also saw a significant jump in the use of Voice Channels on the platform - which correlates to more time spent on the platform and deeper connections. Today we continue to grow our content library with First and third party titles from FRVR, Gartic, and other great indie studios.</p>
+  </div>
+
+  <div class="pb-6">
+    <h3 class="text-2xl font-bold pb-2">Learnings</h3>
+    <p class="pb-6">This project was a long hual. Lots of skill learnings around interviewing and writing surveys. I feel like I learned a lot about my own process as well - What I'm interested in, how I like to work and where my skills can continue to grow. The most important thing I learned from this project, and honestly, my time at Discord has been that agility and competent partnerships are worth their weight in gold. I was lucky enough to be paired up with an engineering partner that was well-versed in moving quickly and shipping great work. It made all the difference in the world when releasing new features and moving from project to project on the Platform Ecosystems team. Agility is the sword that good product teams live and die by. Having people around you who are just as bought in and excited as you are about the work you're doing makes the work lighter and the time move faster.</p>
+  </div>
 </section>
