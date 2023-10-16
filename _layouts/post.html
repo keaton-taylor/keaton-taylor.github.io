@@ -1,13 +1,16 @@
+
 {% include head.html %}
-  <div class="max-w-full mx-8">
-  {% include navigation.html %}
-  </div>
-<section>
+<section class="px-4">
+    <div class="max-w-full">
+    {% include navigation.html %}
+    </div>
+  <section>
 
-  {{ page.content }}
+    {{ page.content }}
 
-  {% include footernavigation.html %}
+    {% include footernavigation.html %}
 
+  </section>
+
+  {% include footer.html %}
 </section>
-
-{% include footer.html %}
