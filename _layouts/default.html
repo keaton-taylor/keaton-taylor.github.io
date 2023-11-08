@@ -8,19 +8,30 @@
     </div>
 
     <section class="grid max-w-[1560px] grid-cols-1 gap-6 mb-6 mx-auto md:grid-cols-6">
-      {% for article in site.data.casestudies %}
+      {% for casestudy in site.data.casestudies %}
         <figure class="rounded-xl relative col-start-1 col-span-3 md:col-start-{{ forloop.index0 | modulo:3 | times:2 | plus:1 }} md:col-span-2">
-          <a href="{{ article.permalink }}">
-            <img class="rounded-xl shadow-md hover:transition-all hover:shadow-lg" src="{{ article.image_src }}" alt="{{ article.image_alt }}">
-            {% if article.logo_src %}
-              <img class="absolute top-2 right-2 md:top-4 md:right-4" src="{{ article.logo_src }}" width="20%" alt="">
+          <a href="{{ casestudy.permalink }}">
+            <picture>
+              <!-- Use the 'replace' filter to change the file extension to .webp for the main image -->
+              <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
+              <!-- Fallback PNG image for browsers that do not support WebP -->
+              <img class="rounded-xl shadow-md hover:transition-all hover:shadow-lg" src="{{ casestudy.image_src }}" alt="{{ casestudy.image_alt }}">
+            </picture>
+            {% if casestudy.logo_src %}
+              <picture>
+                <!-- Use the 'replace' filter to change the file extension to .webp for the logo if it exists -->
+                <source type="image/webp" srcset="{{ casestudy.logo_src | replace: 'png', 'webp' }}">
+                <img class="absolute top-2 right-2 md:top-4 md:right-4" src="{{ casestudy.logo_src }}" width="20%" alt="">
+              </picture>
             {% endif %}
           </a>
         </figure>
       {% endfor %}
     </section>
-  </section>
+  
+  </section>  
 
 {% include values.html %}
-
+"
+"
 {% include footer.html %}
