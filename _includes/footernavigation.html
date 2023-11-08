@@ -7,7 +7,7 @@
     {% if site.categories[case_study].size > 1 %}
       <div>
         <h4 class="text-2xl font-bold mb-8 pt-16">More of My Work</h4>
-        {% for post in site.categories[case_study] limit:10 %}
+        {% for post in site.categories[case_study] limit:8 %}
           {% unless post.title == page.title %}
             <p class="pb-4"><a class="text-indigo-800 font-bold text-xl" href="{{ post.url | relative_url }}">{{ post.title }}</a></p>
           {% endunless %}

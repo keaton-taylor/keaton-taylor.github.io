@@ -43,8 +43,11 @@ footer .DateTime {
   font-weight: 800;
 }
 
-h1 .discord  {
+.discord  {
   color: #5865F2;
+}
+.discord:hover {
+  color: #B377F3;
 }
 
 /* Write your styles above this line. */
