@@ -1,0 +1,22 @@
+<section class=" bg-slate-50 py-12">
+  <div class="grid grid-cols-3 gap-8 mx-auto max-w-[1560px] px-4">
+    <div class="lg:col-span-1 lg:mt-16 mb-6 lg:mb-0">
+      <h2 class="text-2xl font-semibold mb-2">Thought Larder</h2>
+      <p>Some notes on what I believe to be true about the ups and downs of making things with and for human beings.</p>
+    </div>
+    <div class="lg:col-span-2 grid gap-6">
+    {% for blog in site.data.blog %}
+      <figure class="max-w-4xl">
+          <div class="grid grid-cols-1 gap-4">
+            <div>
+              <a href="{{ blog.permalink }}">
+              <h3 class="text-2xl font-bold">{{ blog.title }}</h3>
+              <p>{{ blog.excerpt }}</p>
+            </a>
+            </div>
+          </div>
+      </figure>
+    {% endfor %}
+    </div>
+  </div>
+</section>
