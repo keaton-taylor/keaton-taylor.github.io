@@ -21,7 +21,7 @@
               <picture>
                 <!-- Use the 'replace' filter to change the file extension to .webp for the logo if it exists -->
                 <source type="image/webp" srcset="{{ casestudy.logo_src | replace: 'png', 'webp' }}">
-                <img class="absolute top-2 right-2 md:top-4 md:right-4" src="{{ casestudy.logo_src }}" width="20%" height="auto" alt="">
+                <img class="absolute top-2 right-2 md:top-4 md:right-4" src="{{ casestudy.logo_src }}" width="20%" height="auto" alt="{{ casestudy.image_alt }}" loading="lazy">
               </picture>
             {% endif %}
           </a>
