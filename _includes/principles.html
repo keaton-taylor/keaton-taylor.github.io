@@ -1,0 +1,20 @@
+<section class="text-slate-800 bg-slate-100 mx-auto pt-8 pb-4 px-4">
+  <div class="max-w-3xl mx-auto pb-2 pt-4 lg:px-0">
+    
+    <div class="mb-12 max-w-3xl">
+      <h2 class="text-xl font-semibold mb-2">Principles and methodology</h2>
+      <p>Some notes on what I believe to be true about the ups and downs of making things with and for human beings. Not hard and fast rules or even guidelines. Just mantra's of sorts to keep me grounded in my practice. Who knows, maybe they're helpful for more than just me. </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-8">
+      {% for item in site.data.principles %}
+        <div class="border-l-2 pl-4 mb-8">
+          <h4 class="font-semibold">{{ item.title }}</h4>
+          <p>{{ item.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+</section>

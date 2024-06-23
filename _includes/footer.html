@@ -1,18 +1,46 @@
-<footer class="grid m-auto text-center h-16 items-center">
-  <small class="DateTime">All work and words by Keaton Taylor &copy; {{ site.time | date: '%Y' }}</small>
-</footer>
+    <footer>
+      <section 
+        class="grid text-center items-center grid-cols-1 md:grid-flow-row md:grid-cols-2 md:gap-4
+        md:flex md:max-w-3xl md:mx-auto md:px-0"
+      >
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
-<script>
-    // Initialize Magnific Popup
-    $(document).ready(function() {
-      $('.image-link').magnificPopup({
-        type: 'image',
-        closeOnContentClick: true,
-        closeBtnInside: false,
-        fixedContentPos: true,
-        mainClass: 'mfp-no-margins mfp-with-zoom', // class to remove default margin from left and right side
-</script>
-</body>
+        <small class="DateTime text-base font-normal py-2">All work and words by Keaton Taylor &copy; {{ site.time | date: '%Y' }}</small>
+
+        <ul class="grid md:mx-auto md:max-w-4xl justify-items-center items-center text-center grid-cols-3 
+          md:pb-0 md:items-center md:mb-0">
+          <li class="w-10">
+            <a class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://www.twitter.com/keaton_taylor" target="_blank" rel="noopener">
+            {% include icon--bird.svg %}
+            </a>
+          </li>
+          <li class="w-10">
+            <a class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://www.linkedin.com/in/keatontaylor/" target="_blank" rel="noopener">
+            {% include icon--linkedin.svg %}
+            </a>
+          </li>
+          <li class="w-10">
+            <a class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://read.cv/keaton" target="_blank" rel="noopener">
+            {% include icon--readcv.svg %}
+            </a>
+          </li>
+        </ul>
+      </section>
+    </footer>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script>
+        // Initialize Magnific Popup
+        $(document).ready(function() {
+          $('.image-link').magnificPopup({
+            type: 'image',
+            closeOnContentClick: true,
+            closeBtnInside: false,
+            fixedContentPos: true,
+            mainClass: 'mfp-no-margins mfp-with-zoom',   // class to remove default margin from left and right side
+          });
+        });
+    </script>
+
+  </body>
 </html>

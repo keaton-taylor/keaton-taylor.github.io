@@ -1,0 +1,48 @@
+---
+layout: work
+permalink: /work.html
+---
+  
+{% include head.html %}
+
+{% include navigation.html %}
+
+ <div class="bg-slate-100"> 
+
+  <section class="pb-8 pt-8 px-4 -z-10">
+    <div class="lg:px-0 pb-12 pt-4 max-w-3xl mx-auto relative">
+      <h2 class="-top-10 -inset-5 absolute text-white text-[6rem] font-semibold md:-top-10 md:-inset-32 z-0">The Work</h2>
+      <p class="text-slate-700 text-left z-50 relative">My best work is built on the ability of a team from different functions to come together and work harmoniously as a single unit. No work is done in a vacuum and none of this was singularly "my" work. Just want to put that out there. I stand on the shoulders of every person I've been on a team with over the years and likely, so do you.</p>
+    </div>
+  </section>
+  
+
+  <section class="grid px-4 max-w-5xl grid-cols-1 gap-6 mb-6 mx-auto md:px-0 md:grid-cols-6">
+    {% for casestudy in site.data.casestudies %}
+      <figure class="rounded-xl relative col-start-1 col-span-3 md:col-start-{{ forloop.index0 | modulo:3 | times:2 | plus:1 }} md:col-span-2">
+        <a href="{{ casestudy.permalink }}">
+          <picture>
+            <!-- Use the 'replace' filter to change the file extension to .webp for the main image -->
+            <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
+            <!-- Fallback PNG image for browsers that do not support WebP -->
+            <img class="rounded-xl shadow-md hover:transition-all hover:shadow-lg" src="{{ casestudy.image_src }}" height="100%" width="100%" alt="{{ casestudy.image_alt }}">
+          </picture>
+          {% if casestudy.logo_src %}
+            <picture>
+              <!-- Use the 'replace' filter to change the file extension to .webp for the logo if it exists -->
+              <source type="image/webp" srcset="{{ casestudy.logo_src | replace: 'png', 'webp' }}">
+              <img class="absolute top-2 right-2 md:top-4 md:right-4" src="{{ casestudy.logo_src }}" width="20%" height="auto" alt="{{ casestudy.image_alt }}" loading="lazy">
+            </picture>
+          {% endif %}
+        </a>
+      </figure>
+    {% endfor %}
+  </section>
+
+</div>
+
+</section>  
+
+{% include values.html %}
+  
+{% include footer.html %}
