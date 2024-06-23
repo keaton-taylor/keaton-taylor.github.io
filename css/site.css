@@ -23,7 +23,6 @@ footer {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
 	background-size: 400% 400%;
 	animation: gradient 15s ease infinite;
-	height: 100vh;
 }
 
 @keyframes gradient {
@@ -40,7 +39,20 @@ footer {
 
 footer .DateTime {
   color: white;
-  font-weight: 800;
+}
+
+a span {;
+  transition: 0.3s ease-out; /* Replace with the actual value of $trans--short-out */
+}
+
+a:hover span {
+    padding-left: 0.5rem;
+    transition: 0.3s ease-out; /* Replace with the actual value of $trans--short-out */
+}
+
+img.old {
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
 }
 
 .discord  {
@@ -48,6 +60,27 @@ footer .DateTime {
 }
 .discord:hover {
   color: #B377F3;
+}
+
+.pinkjoy {
+  color: #FF277D;
+}
+.pinkjoy:hover {
+  color: #C22459;
+}
+
+.envoy {
+  color: #fa4338;
+}
+.envoy:hover {
+  color: #fa4338A0;
+}
+
+.treehouse {
+  color: #5fcf80;
+}
+.treehouse:hover {
+  color: #5fcf80A0;
 }
 
 /* Write your styles above this line. */

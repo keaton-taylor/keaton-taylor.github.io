@@ -29,9 +29,15 @@ GEM
       rouge (~> 3.0)
       safe_yaml (~> 1.0)
       terminal-table (~> 2.0)
+    jekyll-browsersync (1.0.0)
+      jekyll (>= 3.0.0, < 5.0)
+      tty-which (~> 0.4.1)
+    jekyll-paginate (1.1.0)
     jekyll-postcss-v2 (1.0.1)
     jekyll-sass-converter (2.2.0)
       sassc (> 2.0.1, < 3.0)
+    jekyll-sitemap (1.4.0)
+      jekyll (>= 3.7, < 5.0)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
     kramdown (2.4.0)
@@ -56,6 +62,7 @@ GEM
       ffi (~> 1.9)
     terminal-table (2.0.0)
       unicode-display_width (~> 1.1, >= 1.1.1)
+    tty-which (0.4.2)
     unicode-display_width (1.8.0)
     webrick (1.7.0)
 
@@ -64,7 +71,10 @@ PLATFORMS
 
 DEPENDENCIES
   jekyll (~> 4.2.2)
+  jekyll-browsersync
+  jekyll-paginate
   jekyll-postcss-v2
+  jekyll-sitemap
   webrick
 
 BUNDLED WITH

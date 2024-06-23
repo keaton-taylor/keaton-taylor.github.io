@@ -11,8 +11,8 @@
 title: Keaton Taylor | Product Designer
 email: keatontaylor@me.com
 description: "Keaton is a product designer, his beard is pretty good."
-baseurl: "/" # the subpath of your site, e.g. /blog
-url: "http://keaton-taylor.com" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://keaton-taylor.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: keaton_taylor
 github_username:  keaton-taylor
 
