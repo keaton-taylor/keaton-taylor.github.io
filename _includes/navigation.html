@@ -1,33 +1,9 @@
 
-<nav class="px-4 md:max-w-3xl md:mb-0 md:pt-12 md:px-0 md:pb-16 md:mx-auto">
-  
-  <ul class="font-semibold grid grid-flow-col pt-1 gap-0 mb-16 mt-8 
-    md:mb-0 md:pr-[26rem] md:gap-4">
-      <li class="{% if item.url == page.url %} border-b-2 {% endif %} hover:text-gray-400">
-        <a class="block py-4" href="/">Home</a></li>
-      {% for item in site.data.nav.docs %}
-        <li class="{% if item.url == page.url %} border-b-2 {% endif %}  hover:text-gray-400">
-          <a class="block py-4" href="{{ item.url }}">{{ item.title }}</a></li>
-      {% endfor %}
+<nav class="px-4 max-w-2xl flex justify-between mx-auto py-12 md:px-0 text-gray-900">
+  <h1 class="text-xl font-bold py-4 ">Keaton Taylor</h1>
+  <ul class="">
+    <li class="grid">
+      <a class="p-4" href="{{ item.url }}">{{ item.title }}</a>
+    </li>
   </ul>
-
-  <!-- <ul 
-    class="grid justify-items-center items-center text-center grid-cols-3 justify-end order-1 pb-8 
-    md:pb-0 md:order-2 md:items-center md:mb-0">
-    <li class="w-10">
-      <a class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://www.twitter.com/keaton_taylor" target="_blank" rel="noopener">
-      {% include icon--bird.svg %}
-      </a>
-    </li>
-    <li class="w-10">
-      <a class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://www.linkedin.com/in/keatontaylor/" target="_blank" rel="noopener">
-      {% include icon--linkedin.svg %}
-      </a>
-    </li>
-    <li class="w-10">
-      <a class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://read.cv/keaton" target="_blank" rel="noopener">
-      {% include icon--readcv.svg %}
-      </a>
-    </li>
-  </ul> -->
 </nav> 

@@ -1,11 +1,4 @@
 docs_list_title: Navigation
 docs:
-
-- title: "Work"
-  url: /work.html
-
-- title: "Thoughts"
-  url: /thoughts.html
-
-- title: "Principles"
-  url: /principles.html
+- title: "Home"
+  url: /

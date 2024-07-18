@@ -1,15 +1,13 @@
     <footer>
       <section 
-        class="grid text-center items-center grid-cols-1 md:grid-flow-row md:grid-cols-2 md:gap-4
-        md:flex md:max-w-3xl md:mx-auto md:px-0"
+        class="grid py-2 text-center items-center grid-cols-1 md:grid-flow-row md:grid-cols-2 md:gap-4 md:flex md:max-w-2xl md:mx-auto md:px-0"
       >
 
         <small class="DateTime text-base font-normal py-2">All work and words by Keaton Taylor &copy; {{ site.time | date: '%Y' }}</small>
 
-        <ul class="grid md:mx-auto md:max-w-4xl justify-items-center items-center text-center grid-cols-3 
-          md:pb-0 md:items-center md:mb-0">
+        <ul class="grid grid-cols-3 justify-items-center md:pb-0 md:ml-auto">
           <li class="w-10">
-            <a class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://www.twitter.com/keaton_taylor" target="_blank" rel="noopener">
+            <a class="px-2 py-4 md:py-1 flex items-center justify-center" href="https://www.twitter.com/keaton_taylor" target="_blank" rel="noopener">
             {% include icon--bird.svg %}
             </a>
           </li>
@@ -40,7 +38,15 @@
             mainClass: 'mfp-no-margins mfp-with-zoom',   // class to remove default margin from left and right side
           });
         });
+        <script>
+          $(document).on('click', '.smooth-goto', function(event) {
+            event.preventDefault();
+            var targetOffset = $(this.hash).offset().top - 50;
+            $('html, body').animate({scrollTop: targetOffset}, 1000);
+          });
+        </script>
     </script>
+
 
   </body>
 </html>

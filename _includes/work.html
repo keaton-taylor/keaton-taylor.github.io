@@ -1,0 +1,38 @@
+
+
+<div id="Work" class="bg-gray-100 pb-12">
+  <section class="pb-4 pt-8 pl-4 pr-0 -z-10">
+    <div class="lg:px-0 pb-12 pt-4 max-w-2xl mx-auto relative">
+      <h2 class="-top-10 absolute text-gray-200 text-[6rem] font-semibold md:top-[-.25em] md:left-[-60px] z-0 leading-tight overflow-hidden pr-0">The</br>Work</h2>
+      <p class="text-lg font-regular text-left z-50 relative pr-4 text-gray-900">My best work is built on the ability of a team from different functions to come together and work harmoniously as a single unit. No work is done in a vacuum and none of this was singularly "my" work. Just want to put that out there. I stand on the shoulders of every person I've been on a team with over the years and likely, so do you.</p>
+    </div>
+  </section>
+  
+
+  <section class="grid px-4 max-w-2xl grid-cols-1 gap-6 mx-auto md:px-0 md:grid-cols-2">
+    {% for casestudy in site.data.casestudies %}
+      <div class="rounded-lg relative p-4 hover:bg-gray-200 hover:shadow-lg">
+        <figure class="col-start-1 col-span-3 md:col-start-{{ forloop.index0 | modulo:3 | times:2 | plus:1 }} md:col-span-2">
+          <a href="{{ casestudy.permalink }}">
+            <div class="mb-4 text-gray-900">{% include icon--arrow.svg %}</div>
+            <picture>
+              <!-- Use the 'replace' filter to change the file extension to .webp for the main image -->
+              <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
+              <!-- Fallback PNG image for browsers that do not support WebP -->
+              <img class="rounded-md hover:transition-all hover:shadow-lg" src="{{ casestudy.image_src }}" height="100%" width="100%" alt="{{ casestudy.image_alt }}">
+            </picture>
+            {% if casestudy.logo_src %}
+              <picture>
+                <!-- Use the 'replace' filter to change the file extension to .webp for the logo if it exists -->
+                <source type="image/webp" srcset="{{ casestudy.logo_src | replace: 'png', 'webp' }}">
+                <img class="absolute top-5 right-5 md:top-4 md:right-4" src="{{ casestudy.logo_src }}" width="20%" height="auto" alt="{{ casestudy.image_alt }}" loading="lazy">
+              </picture>
+            {% endif %}
+            <figcaption class="mt-4 font-medium text-gray-900">{{ casestudy.title }}
+          </a>
+        </figure>
+      </div>
+    {% endfor %}
+  </section>
+
+</div>
