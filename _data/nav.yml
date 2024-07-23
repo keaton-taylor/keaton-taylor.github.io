@@ -2,3 +2,6 @@ docs_list_title: Navigation
 docs:
 - title: "Home"
   url: /
+
+- title: "Twitter"
+  url: "https://twitter.com/keaton_taylor"

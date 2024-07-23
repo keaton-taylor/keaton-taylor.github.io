@@ -1,9 +1,9 @@
-
 <nav class="px-4 max-w-2xl flex justify-between mx-auto py-12 md:px-0 text-gray-900">
-  <h1 class="text-xl font-bold py-4 ">Keaton Taylor</h1>
-  <ul class="">
-    <li class="grid">
-      <a class="p-4" href="{{ item.url }}">{{ item.title }}</a>
-    </li>
-  </ul>
-</nav> 
+  <h1 class="text-xl font-bold py-4">
+    <a href="/">Keaton Taylor</a>
+  </h1>
+
+  {% if page.url != "/" %}
+    {% include socialIcons.html %}
+  {% endif %}
+</nav>

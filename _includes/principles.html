@@ -1,20 +1,16 @@
-{% include head.html %}
-
-{% include navigation.html %}
-
 
   <div class="bg-gray-100">
     <section class="pb-4 pt-8 pl-4 pr-0 -z-10">
       <div class="lg:px-0 pb-6 pt-4 max-w-2xl mx-auto relative ">
         <h2 class="-top-10 absolute text-gray-300 text-[6rem] font-semibold md:top-[-.25em] md:left-[-60px] z-0 leading-tight overflow-hidden pr-0">Principles</h2>
-        <p class="text-gray-700 text-left z-50 relative pr-4 pt-12 md:pt-16">Some simple statements on what I believe to be true about the ups and downs of making things with and for human beings. Not hard and fast rules or even guidelines. Just mantra's of sorts to keep me grounded in my practice. Who knows, maybe they're helpful for more than just me.</p>
+        <p class="text-slate-700 text-left z-50 relative pr-4 pt-12 md:pt-16">Some simple statements on what I believe to be true about the ups and downs of making things with and for human beings. Not hard and fast rules or even guidelines. Just mantra's of sorts to keep me grounded in my practice. Who knows, maybe they're helpful for more than just me.</p>
       </div>
     </section>
 
     <section class="max-w-2xl mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-8 z-50 relative">
         {% for item in site.data.principles %}
-          <div class="border-l-2 pl-4 mb-8">
+          <div class="border-l-2 pl-4 mb-8 text-slate-900">
             <h4 class="font-semibold">{{ item.title }}</h4>
             <p>{{ item.description }}</p>
           </div>
@@ -23,4 +19,3 @@
     </section>
   </div>
 
-{% include footer.html %}
