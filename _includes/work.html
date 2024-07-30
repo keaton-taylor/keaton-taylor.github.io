@@ -11,7 +11,7 @@
 
   <section class="grid px-4 max-w-2xl grid-cols-1 gap-6 mx-auto md:px-0 md:grid-cols-2">
     {% for casestudy in site.data.casestudies %}
-      <div class="rounded-lg relative md:p-4 md:hover:bg-gray-200 md:hover:shadow-lg hover:transition-shadow duration-200 ease-in-out">
+      <div class="rounded-lg relative md:p-4 md:hover:bg-gray-200 md:hover:shadow-lg hover:transition-shadow duration-200 ease-in-out mb-12">
         <figure class="col-start-1 col-span-3 md:col-start-{{ forloop.index0 | modulo:3 | times:2 | plus:1 }} md:col-span-2">
           <a href="{{ casestudy.permalink }}">
             <div class="mb-4 text-gray-900">{% include icon--arrow.svg %}</div>

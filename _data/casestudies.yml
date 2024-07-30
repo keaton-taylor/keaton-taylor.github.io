@@ -11,17 +11,11 @@
     image_alt: "Discord's eighth Birthday landing page"
     logo_src: "images/discord/Discord-logo.webp"
 
-  - title: "TechRadar: Discord Activities Might Be Its Most Ingenious Addition Yet"
-    permalink: "https://www.techradar.com/features/discord-activities-might-be-its-most-ingenious-addition-yet"
-    image_src: "images/discord/viralloops.gif"
-    image_alt: "a gif showing a game opening the new social sharing feature we built."
-    logo_src: "images/discord/Discord-logo.webp"
-
-  # - title: "Backyard "
-  #   permalink: "/backyard.html"
-  #   image_src: "images/backyard/backyardmobile.webp"
-  #   image_alt: "The design of our V0 mobile app at Backyard."
-  #   logo_src: "images/backyard/backyardlogo.webp"
+  - title: "Backyard "
+    permalink: "/backyard.html"
+    image_src: "images/backyard/backyardmobile.webp"
+    image_alt: "The design of our V0 mobile app at Backyard."
+    logo_src: "images/backyard/backyardlogo.webp"
 
   - title: "Mobile Design and the Early Days of the Pandemic"
     permalink: "/envoy.html"
