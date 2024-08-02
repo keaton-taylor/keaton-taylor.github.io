@@ -1,36 +1,24 @@
 {% include head.html %}
 
-{% include header.html %}
+{% include navigation.html %}
 
-  <section class="bg-slate-100 pb-16 pt-8 px-4">
-    <div class="lg:px-0 pb-12 pt-4 max-w-5xl mx-auto">
-      <p class="text-slate-700 text-left font-bold md:text-xl lg:text-center md:col-start-2 md:col-span-2 ">My best work is built on the ability of a team from different functions to come together and work harmoniously as a single unit. No work is done in a vacuum and none of this was singularly "my" work. Just want to put that out there. I stand on the shoulders of every person I've been on a team with over the years and likely, so do you.</p>
-    </div>
-
-    <section class="grid max-w-[1560px] grid-cols-1 gap-6 mb-6 mx-auto md:grid-cols-6">
-      {% for casestudy in site.data.casestudies %}
-        <figure class="rounded-xl relative col-start-1 col-span-3 md:col-start-{{ forloop.index0 | modulo:3 | times:2 | plus:1 }} md:col-span-2">
-          <a href="{{ casestudy.permalink }}">
-            <picture>
-              <!-- Use the 'replace' filter to change the file extension to .webp for the main image -->
-              <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
-              <!-- Fallback PNG image for browsers that do not support WebP -->
-              <img class="rounded-xl shadow-md hover:transition-all hover:shadow-lg" src="{{ casestudy.image_src }}" height="100%" width="100%" alt="{{ casestudy.image_alt }}">
-            </picture>
-            {% if casestudy.logo_src %}
-              <picture>
-                <!-- Use the 'replace' filter to change the file extension to .webp for the logo if it exists -->
-                <source type="image/webp" srcset="{{ casestudy.logo_src | replace: 'png', 'webp' }}">
-                <img class="absolute top-2 right-2 md:top-4 md:right-4" src="{{ casestudy.logo_src }}" width="20%" height="auto" alt="{{ casestudy.image_alt }}" loading="lazy">
-              </picture>
-            {% endif %}
-          </a>
-        </figure>
-      {% endfor %}
-    </section>
+<section class="max-w-2xl mx-auto">
+  <div class="rounded-xl relative grid grid-cols-1 mx-auto">
+    <section class="px-4 text-gray-900 md:max-w-2xl md:mx-auto md:px-0">
+      <div class="md:max-w-2xl pb-8 font-regular">
+        <p class="pb-6 text-md leading-relaxed">I’m designing for growth at <a class="font-medium pinkjoy" href="www.soundstripe.com">Soundstripe</a>. Before that, I worked on the Activity and Platform teams at <a class="font-medium discord" href="www.discordapp.com">Discord</a> and even further back I worked at places like <a class="font-medium envoy" href="www.envoy.com">Envoy</a> and <a class="font-medium treehouse" href="www.teamtreehouse.com.com">Treehouse</a>. I'm really good at cutting through the noise that makes it hard for small teams to move with conviction and velocity. I really enjoy simplifying systems, developing common sense processes, and producing positive outcomes for design, product, and engineering teams.</p>
   
-  </section>  
+        <p class="pb-6 text-md leading-relaxed">I love talking shop so feel free to hit me up on <a class="hover:underline" href="www.twitter.com/keaton_taylor">Twitter</a>, <a class="hover:underline" href="www.instagram.com/keaton_taylor">Instagram</a>, or in real life if you make your way to Kansas. </p>
+      </div>
+    </section>
+  </ul>
+</section>
 
-{% include values.html %}
+
+{% include work.html %}
+
+{% include thoughts.html %}
+
+{% include principles.html %}
 
 {% include footer.html %}

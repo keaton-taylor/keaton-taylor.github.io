@@ -1,15 +1,7 @@
 {% include head.html %}
-<section>
-    <div class="max-w-full">
-    {% include navigation.html %}
-    </div>
-  <section>
+  {% include navigation.html %}
 
+  <section class="max-w-2xl mx-auto mb-24">
     {{ page.content }}
-
-    {% include footernavigation.html %}
-
   </section>
-
-  {% include footer.html %}
-</section>
+{% include footer.html %}

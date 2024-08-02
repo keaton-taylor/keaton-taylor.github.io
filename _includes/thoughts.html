@@ -1,18 +1,25 @@
-<section class="text-slate-800 mx-auto max-w-[1560px] pt-16 pb-8 px-4">
-  <div class="gap-8 lg:grid lg:grid-cols-3">
-    <div class="lg:col-span-1 lg:mt-16 mb-6 lg:mb-0">
-      <h2 class="text-2xl font-semibold mb-2">Principles and methodology</h2>
-      <p>Some notes on what I believe to be true about the ups and downs of making things with and for human beings.</p>
+
+<div class="bg-gray-900 px-4 pb-16">
+  <section class="pb-4 pt-8 pl-4 pr-0 -z-10">
+    <div class="lg:px-0 pb-12 pt-4 max-w-2xl mx-auto relative">
+      <h2 id="thoughts" class="smooth-goto -top-10 absolute text-gray-600 text-[6rem] font-semibold md:top-[-.12em] md:left-[-60px] z-0 leading-tight overflow-hidden pr-0">Thought Larder</h2>
     </div>
-    <div class="lg:col-span-2">
-      <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-8">
-        {% for item in site.data.principles %}
-          <div class="border-l-2 pl-4 mb-8">
-            <h4 class="font-semibold">{{ item.title }}</h4>
-            <p>{{ item.description }}</p>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+
+  <section class="max-w-2xl mx-auto px-4 text-white">
+    <ul class="rounded-xl relative grid grid-cols-1 mx-auto">
+    {% for blog in site.data.blog %}
+      <li class="mb-4 grid pb-4"> 
+        <p class="text-xs font-bold uppercase">{{blog.kicker}}</p>
+        <a class="hover:text-gray-300 hover:underline" href="{{ blog.permalink }}">
+          <p class="smooth-goto text-2xl">{{ blog.title }}</p>
+          {%if blog.subtitle%}
+          <p class="text-sm font-medium">{{ blog.subtitle }}</p>
+          {% else %}
+          {% endif %}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
+</div>

@@ -12,21 +12,21 @@ permalink: /envoy.html
 ---
 
 
-<div class="max-w-4xl mb-16 mx-auto px-4 md:px-0">
-<section class="grid justify-items-center mx-auto mt-8">
-  <section class="max-w-7xl my-8 md:my-16">
-    <img src="https://ktportfolio.sirv.com/img/invite-signin.png?profile=portfolio" alt="an image prtraying several steps in an invite flow">
-  </section>
-</section>
 
-<section class="max-w-4xl mb-16 mx-auto px-4 md:px-0">
-  <h2 class="font-bold text-3xl md:text-6xl">Touchless Sign in and the Early Days of the Pandemic</h2>
-</section>
+  <section class="grid justify-items-center mx-auto mt-8">
+    <section class="max-w-7xl my-8 md:my-16">
+      <img src="https://ktportfolio.sirv.com/img/invite-signin.png?profile=portfolio" alt="an image prtraying several steps in an invite flow" loading="lazy"/>
+    </section>
+  </section>
+
+  <section class="max-w-2xl mb-16 mx-auto px-4 md:px-0">
+    <h2 class="font-bold text-3xl md:text-6xl">Touchless Sign in and the Early Days of the Pandemic</h2>
+  </section>
 
 {% include tldr.html %}
 
-
-<section class="max-w-4xl mx-auto mt-24">
+<div class="max-w-2xl mb-16 mx-auto md:px-0 px-4">
+  <section class="max-w-2xl mx-auto mt-24">
   <div class="grid grid-cols-1 md:grid-cols-6 gap-8">
     <div class="col-span-1 md:col-span-4">
       <div class="pb-6">
@@ -36,7 +36,7 @@ permalink: /envoy.html
 
       <div class="pb-6">
         <h3 class="text-2xl font-bold pb-2">Research</h3>
-        <p>As the pandemic began, we received an influx of customer inqueries focused on safety and hygiene. Both employees and cleaning crews needed a touchless, intuitive way to sign in via the Envoy kiosk. The urgency was evident; companies were eager to adopt preventive measures while maintaining operational efficiency. Over the course of several weeks we did interviews with the workplace teams at companies like Lululemon to better understand their needs and their challenges.</p>
+        <p>As the pandemic began, we received an influx of customer inquiries focused on safety and hygiene. Both employees and cleaning crews needed a touchless, intuitive way to sign in via the Envoy kiosk. The urgency was evident; companies were eager to adopt preventive measures while maintaining operational efficiency. Over the course of several weeks we did interviews with the workplace teams at companies like Lululemon to better understand their needs and their challenges.</p>
       </div>
 
       <div class="pb-6">
@@ -56,12 +56,12 @@ permalink: /envoy.html
 
     <figure class="col-span-1 md:col-span-2">
       <img src="images/envoy/signingFlow.gif" alt="a gif showing the full sign in flow" class="w-full">
-      <figcaption class="text-sm pt-4 text-center text-slate-400">Invite acceptance flow</figcaption>
+      <figcaption class="text-sm pt-4 text-center text-gray-400">Invite acceptance flow</figcaption>
     </figure>
   </div>
-</section>
+  </section>
 
-<section class="max-w-4xl mx-auto">
+  <section class="max-w-2xl mx-auto">
   <div class="pb-6">
     <h3 class="text-2xl font-bold pb-2">Hypotheses</h3>
     <p class="pb-2">1. Integrating Bluetooth Low Energy (BLE) technology will facilitate a more seamless touchless check-in experience.</p>
@@ -72,40 +72,42 @@ permalink: /envoy.html
       <a href="https://ktportfolio.sirv.com/img/presence-required.png?profile=portfolio" data-fancybox="gallery" class="w-full md:w-1/2">
       <img class="drop-shadow-lg" src="https://ktportfolio.sirv.com/img/presence-required.png?profile=portfolio" alt="The workflow with edge cases"/>
       </a>
-      <figcaption class="text-sm pt-4 text-center text-slate-400">The workflow for presence required with the two main edge cases</figcaption>
+      <figcaption class="text-sm pt-4 text-center text-gray-400">The workflow for presence required with the two main edge cases</figcaption>
     </figure>
   </div>
 
   <div>
     <h3 class="text-2xl font-bold pb-2">Solutions</h3>
 
-    <section class="max-w-4xl">
+    <section class="max-w-2xl">
       <figure class="mt-2 mb-6">
         <img class="shadow-lg rounded-md" src="images/envoy/UIchanges.webp" alt="Updates to previous invite UI moving it into a more traditional modal"/>
-      <figcaption class="text-sm pt-4 text-center text-slate-400">UI updates to the Visitor Invite</figcaption>
+      <figcaption class="text-sm pt-4 text-center text-gray-400">UI updates to the Visitor Invite</figcaption>
       </figure>
     </section>
   </div>
 
-  <section class="max-w-4xl py-4 grid grid-cols-1 md:grid-cols-6 gap-8">
+  <section class="max-w-2xl py-4 grid grid-cols-1 md:grid-cols-6 md:gap-8">
     <section class="col-start-1 col-span-2">
       <figure class="mt-2">
         <img src="images/envoy/proximity.gif" alt="a gif showing the full sign in flow" class="w-full">
-      <figcaption class="text-sm pt-4 text-center text-slate-400">BLE pings are intermittent, pull to refresh demo</figcaption>
+      <figcaption class="text-sm pt-4 text-center text-gray-400">BLE pings are intermittent, pull to refresh demo</figcaption>
       </figure>
     </section>
     
-    <div class="col-start-3 col-span-4">
-      <p class="pb-2"><strong>Design Overhaul:</strong> A redesigned user interface aimed to put upcoming invotes top of mind for folks - literally.  taesthetics aligned with new mobile platform design languages gives the app itself a more refined feel and gives users a clear expectation on what things should look and feel like. This work also aligns our app with updated branding guidelines at the time.</p>
+    <div class="md:col-start-3 md:col-span-4">
+      <p class="pb-2"><strong>Design Overhaul:</strong> A redesigned user interface aimed to put upcoming invites top of mind for folks - literally.  Aesthetics aligned with new mobile platform design languages gives the app itself a more refined feel and gives users a clear expectation on what things should look and feel like. This work also aligns our app with updated branding guidelines at the time.</p>
 
-      <p class="pb-4"><strong>Touchless Features:</strong> BLE technology was incorporated to detect a user’s proximity, enabling touchless sign-ins. This tech was super helpful in fulfilling some of the needs of customers. Tryign to keep surfaces free of germs as much as possible was the name of the game.</p>     
+      <p class="pb-4"><strong>Touchless Features:</strong> BLE technology was incorporated to detect a user’s proximity, enabling touchless sign-ins. This tech was super helpful in fulfilling some of the needs of customers. Trying to keep surfaces free of germs as much as possible was the name of the game.</p>     
       <p class="pb-6"><strong>Edge Cases:</strong> Developed robust workflows to address different scenarios where a visitor might lack necessary location permissions or be too far away from the kiosk. either of these situations results in messaging that gets you to a "learn more" state that gives you instructions on how to fix it. Apple's Location Services checks, specifically can be problematic if a user has previously said 'no' or turned them off.</p>
 
       <h3 class="text-2xl font-bold pb-2">Learnings</h3>
       <p class="pb-4"><strong>Stay Customer-Centric:</strong> Responding to user needs in real-time strengthens brand reliability and showed the world that we were serious about building the workforce platform for the future.</p>
-      <p class="pb-4"><strong>Technological Agility:</strong> The move to swiftly integrate new technologies like BLE was crucial. It not only distinguished us from competitors through acting quickly, it gave us the ability to ship to learn. Taking that risk made all the difference. This work would become the building blocks for all the woprkplace features that now exist, like Rooms and Scheduling. </p>
+      <p class="pb-4"><strong>Technological Agility:</strong> The move to swiftly integrate new technologies like BLE was crucial. It not only distinguished us from competitors through acting quickly, it gave us the ability to ship to learn. Taking that risk made all the difference. This work would become the building blocks for all the workplace features that now exist, like Rooms and Scheduling. </p>
     </div>
   </section>
   </div>
   </div>
-</section>
+  </section>
+
+{% include footernavigation.html %}

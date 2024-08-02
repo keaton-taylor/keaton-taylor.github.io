@@ -1,35 +1,9 @@
+<nav class="px-4 max-w-2xl flex justify-between mx-auto py-12 md:px-0 text-gray-900">
+  <h1 class="text-xl font-bold py-4">
+    <a href="/">Keaton Taylor</a>
+  </h1>
 
-<section class="py-8 max-w-7xl mx-auto grid gap-4 md:grid-flow-col px-4">
-  <div class="text-center md:text-left">
-    <a href="/">
-    <h1 class="text-2xl font-bold">Keaton Taylor</h1>
-    <p class="font-normal text-base">Product Designer</p>
-    </a>
-  </div>
-
-  <div class="grid justify-self-center text-center md:text-left">
-    <small>What I'm listening to:</small>
-    <p class="font-bold md:text-sm lg:text-base">Country <span class="font-normal">by</span> Medium Build</p>
-  </div>
-
-  <div class="grid w-max justify-self-center text-center md:text-left md:justify-self-end">
-    <small>Find me here</small>
-    <ul class="grid grid-flow-col gap-10 justify-end pt-1">
-      <li class="w-8 md:w-6">
-        <a href="https://www.twitter.com/keaton_taylor" target="_blank" rel="noopener">
-        {% include icon--bird.svg %}
-        </a>
-      </li>
-      <li class="w-8 md:w-6">
-        <a href="https://www.linkedin.com/in/keatontaylor/" target="_blank" rel="noopener">
-        {% include icon--linkedin.svg %}
-        </a>
-      </li>
-      <li class="w-8 md:w-6">
-        <a href="https://read.cv/keaton" target="_blank" rel="noopener">
-        {% include icon--readcv.svg %}
-        </a>
-      </li>
-    </ul>
-  </div>
-</section>
+  {% if page.url != "/" %}
+    {% include socialIcons.html %}
+  {% endif %}
+</nav>

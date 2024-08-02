@@ -1,0 +1,6 @@
+<picture>
+  <!-- Use the 'replace' filter to change the file extension to .webp -->
+  <source type="image/webp" srcset="{{ include.image_src | replace: '.png', '.webp' }}">
+  <!-- Fallback PNG image for browsers that do not support WebP -->
+  <img class="{{ include.classes }}" src="{{ include.image_src }}" width="{{ include.width }}" height="{{ include.height }}" alt="{{ include.alt }}" loading="lazy">
+</picture>
