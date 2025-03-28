@@ -8,33 +8,30 @@
 # For technical reasons, this file is *NOT* reloaded automatically when you use
 # 'bundle exec jekyll serve'. If you change this file, please restart the server process.
 
-title: Keaton Taylor | Product Designer
-email: keatontaylor@me.com
-description: "Keaton is a product designer, his beard is pretty good."
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://keaton-taylor.com" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: keaton_taylor
-github_username:  keaton-taylor
+title: Keaton Taylor
+description: Product Designer and Front-End Developer
+baseurl: ""
+url: "https://keaton-taylor.github.io"
 
 # Build settings
 markdown: kramdown
 plugins:
-  - jekyll-postcss-v2
-environment:
-  - JEKYLL_ENV=development jekyll build
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
-# Exclude from processing.
-# The following items will not be processed, by default. Create a custom list
-# to override the default setting.
+# Exclude from processing
 exclude:
-  - Gemfile
-  - Gemfile.lock
   - node_modules
-  - yarn.lock
+  - package.json
   - package-lock.json
   - README.md
+  - Gemfile
+  - Gemfile.lock
+  - tailwind.config.js
   - postcss.config.js
-  - purgecss.config.js
-  - netlify.toml
-  - bin
-  - .gitignore
+  - src
+
+# PostCSS configuration
+postcss:
+  cache: false

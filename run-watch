@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Start Jekyll server in the background
+/usr/local/opt/ruby/bin/bundle exec jekyll serve --livereload --port 4001 &
+
+# Start Tailwind CSS watcher
+npx tailwindcss -i ./src/styles.css -o ./assets/css/styles.css --watch 
