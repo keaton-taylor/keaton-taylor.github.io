@@ -1,15 +1,15 @@
 module.exports = {
   content: [
-    './_includes/*.html',
-    './_layouts/*.html',
-    './*.html',
-    './css/*.css'
+    './_includes/**/*.{html,md}',
+    './_layouts/**/*.{html,md}',
+    './_posts/**/*.{html,md}',
+    './*.{html,md}'
   ],
-  media: false,
   theme: {
     extend: {},
   },
-  variants: {},
   plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/forms'),
   ],
-}
+} 

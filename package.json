@@ -1,15 +1,43 @@
 {
+  "name": "keaton-taylor.github.io",
+  "version": "1.0.0",
+  "main": "postcss.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "JEKYLL_ENV=production bundle exec jekyll build",
+    "start": "bundle exec jekyll serve --livereload",
+    "dev": "bundle exec jekyll serve --livereload"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "@tailwindcss/aspect-ratio": "^0.4.0",
-    "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/line-clamp": "^0.4.0",
-    "@tailwindcss/typography": "^0.5.4",
-    "autoprefixer": "^10.4.8",
-    "cssnano": "^5.1.13",
-    "postcss": "^8.4.16",
-    "postcss-cli": "^10.0.0",
-    "postcss-import": "^12.0.1",
-    "purgecss": "^1.1.0",
-    "tailwindcss": "^3.1.8"
-  }
+    "@tailwindcss/forms": "^0.5.10",
+    "@tailwindcss/typography": "^0.5.16",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.17"
+  },
+  "dependencies": {
+    "browserslist": "^4.24.4",
+    "caniuse-lite": "^1.0.30001707",
+    "cssesc": "^3.0.0",
+    "electron-to-chromium": "^1.5.128",
+    "escalade": "^3.2.0",
+    "fraction.js": "^4.3.7",
+    "lodash.castarray": "^4.4.0",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.merge": "^4.6.2",
+    "mini-svg-data-uri": "^1.4.4",
+    "nanoid": "^3.3.11",
+    "node-releases": "^2.0.19",
+    "normalize-range": "^0.1.2",
+    "picocolors": "^1.1.1",
+    "postcss-selector-parser": "^6.0.10",
+    "postcss-value-parser": "^4.2.0",
+    "source-map-js": "^1.2.1",
+    "update-browserslist-db": "^1.1.3",
+    "util-deprecate": "^1.0.2"
+  },
+  "description": ""
 }
