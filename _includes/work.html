@@ -1,38 +1,76 @@
+<div id="Work" class="relative py-8 -mt-24 bg-white">
+  <!-- Background that fades in -->
+  <div class="bg-fade absolute inset-0 pointer-events-none bg-gray-400 -z-10 opacity-0 transition-opacity duration-700"></div>
 
+  <section class="relative px-4 max-w-5xl lg:max-w-7xl mx-auto md:px-8">
+    <div class="pb-16">
+      <h2 class="text-4xl font-bold text-gray-900 mb-6">Selected Work</h2>
+      <p class="text-lg text-gray-600 max-w-2xl">
+        My best work is built on the ability of a team from different functions to come together and work harmoniously as a single unit. 
+        No work is done in a vacuum and none of this was singularly "my" work.
+      </p>
+    </div>
 
-<div id="Work" class="bg-gray-100 pb-12">
-  <section class="pb-4 pt-8 pl-4 pr-0 -z-10">
-    <div class="lg:px-0 pb-12 pt-4 max-w-2xl mx-auto relative">
-      <h2 class="-top-10 absolute text-gray-200 text-[6rem] font-semibold md:top-[-.25em] md:left-[-60px] z-0 leading-tight overflow-hidden pr-0">The</br>Work</h2>
-      <p class="text-md font-regular text-left z-50 relative pr-4 text-slate-700">My best work is built on the ability of a team from different functions to come together and work harmoniously as a single unit. No work is done in a vacuum and none of this was singularly "my" work. Just want to put that out there. I stand on the shoulders of every person I've been on a team with over the years and likely, so do you.</p>
+    <div class="grid gap-24">
+      {% for casestudy in site.data.casestudies %}
+        <div class="group relative drop-shadow-lg">
+          <a href="{{ casestudy.permalink }}" class="block relative overflow-hidden">
+            <!-- Background Overlay -->
+            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-80 transition-opacity duration-500 z-10"></div>
+            
+            <!-- Project Title and Logo - Appears on Hover -->
+            <div class="absolute inset-0 z-20 grid place-content-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div class="text-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                <img src="{{ casestudy.logo_src }}" alt="{{ casestudy.company_name }} logo" class="h-12 mx-auto mb-6">
+                <h3 class="text-white text-4xl max-w-xl px-4 font-bold mb-2">{{ casestudy.title }}</h3>
+                <p class="text-white/80 text-lg">View Project</p>
+              </div>
+            </div>
+
+            <!-- Image -->
+            <picture class="block aspect-[16/9] w-full">
+              <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
+              <img 
+                class="w-full h-full object-cover rounded-xl transform group-hover:scale-[1.02] transition-transform duration-700" 
+                src="{{ casestudy.image_src }}" 
+                alt="{{ casestudy.image_alt }}"
+                loading="lazy"
+              >
+            </picture>
+          </a>
+        </div>
+      {% endfor %}
     </div>
   </section>
-  
-
-  <section class="grid px-4 max-w-2xl grid-cols-1 gap-6 mx-auto md:px-0 md:grid-cols-2">
-    {% for casestudy in site.data.casestudies %}
-      <div class="rounded-lg relative md:p-4 md:hover:bg-gray-200 md:hover:shadow-lg hover:transition-shadow duration-200 ease-in-out mb-12">
-        <figure class="col-start-1 col-span-3 md:col-start-{{ forloop.index0 | modulo:3 | times:2 | plus:1 }} md:col-span-2">
-          <a href="{{ casestudy.permalink }}">
-            <div class="mb-4 text-gray-900">{% include icon--arrow.svg %}</div>
-            <picture>
-              <!-- Use the 'replace' filter to change the file extension to .webp for the main image -->
-              <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
-              <!-- Fallback PNG image for browsers that do not support WebP -->
-              <img class="rounded-md " src="{{ casestudy.image_src }}" height="100%" width="100%" alt="{{ casestudy.image_alt }}">
-            </picture>
-            {% if casestudy.logo_src %}
-              <picture>
-                <!-- Use the 'replace' filter to change the file extension to .webp for the logo if it exists -->
-                <source type="image/webp" srcset="{{ casestudy.logo_src | replace: 'png', 'webp' }}">
-                <img class="absolute top-0 right-0 md:top-4 md:right-4" src="{{ casestudy.logo_src }}" width="30%" height="auto" alt="{{ casestudy.image_alt }}" loading="lazy">
-              </picture>
-            {% endif %}
-            <figcaption class="mt-4 font-medium text-gray-900">{{ casestudy.title }}
-          </a>
-        </figure>
-      </div>
-    {% endfor %}
-  </section>
-
 </div>
+
+<script>
+  // Wait for the DOM to be ready
+  document.addEventListener('DOMContentLoaded', function() {
+    const workSection = document.getElementById('Work');
+    const bgFade = workSection.querySelector('.bg-fade');
+    
+    function updateBackgroundOpacity() {
+      // Get the work section's position relative to the viewport
+      const workRect = workSection.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+      
+      // Calculate when to start fading (when the section enters viewport)
+      const startFade = workRect.top <= viewportHeight;
+      
+      // Calculate fade progress - adjusted to be more gradual
+      if (startFade) {
+        const scrollProgress = Math.min(0.6, Math.max(0, (viewportHeight - workRect.top) / (viewportHeight * 1.5)));
+        bgFade.style.opacity = scrollProgress;
+      } else {
+        bgFade.style.opacity = 0;
+      }
+    }
+
+    // Add scroll listener
+    window.addEventListener('scroll', updateBackgroundOpacity, { passive: true });
+    
+    // Initial check
+    updateBackgroundOpacity();
+  });
+</script>

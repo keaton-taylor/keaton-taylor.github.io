@@ -1,52 +1,60 @@
-    <footer>
-      <section 
-        class="grid py-2 text-center items-center grid-cols-1 md:grid-flow-row md:grid-cols-2 md:gap-4 md:flex md:max-w-2xl md:mx-auto md:px-0"
-      >
+    <footer class="bg-white dark:bg-gray-900 py-8">
+      <div class="max-w-5xl lg:max-w-7xl px-4 md:px-8 mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+          <small class="text-base text-gray-600 dark:text-gray-400">
+            All work and words by Keaton Taylor &copy; {{ site.time | date: '%Y' }}
+          </small>
 
-        <small class="DateTime text-base font-normal py-2">All work and words by Keaton Taylor &copy; {{ site.time | date: '%Y' }}</small>
-
-        <ul class="grid grid-cols-3 justify-items-center md:pb-0 md:ml-auto">
-          <li class="w-10">
-            <a fill="#fff" class="px-2 py-4 md:py-1 flex items-center justify-center" href="https://www.twitter.com/keaton_taylor" target="_blank" rel="noopener">
-            {% include icon--bird.svg %}
-            </a>
-          </li>
-          <li class="w-10">
-            <a fill="#fff" class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://www.linkedin.com/in/keatontaylor/" target="_blank" rel="noopener">
-            {% include icon--linkedin.svg %}
-            </a>
-          </li>
-          <li class="w-10">
-            <a fill="#fff" stroke="#fff" class="block px-2 py-4 md:py-1 flex items-center justify-center" href="https://read.cv/keaton" target="_blank" rel="noopener">
-            {% include icon--readcv.svg %}
-            </a>
-          </li>
-        </ul>
-      </section>
+          <ul class="flex items-center gap-6">
+            <li>
+              <a href="https://www.twitter.com/keaton_taylor" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="block p-2 text-gray-600 hover:text-blue-500 dark:text-gray-400 dark:hover:text-blue-400 transition-colors">
+                {% include icon--bird.svg %}
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/in/keatontaylor/" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="block p-2 text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-500 transition-colors">
+                {% include icon--linkedin.svg %}
+              </a>
+            </li>
+            <li>
+              <a href="https://read.cv/keaton" 
+                 target="_blank" 
+                 rel="noopener"
+                 class="block p-2 text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
+                {% include icon--readcv.svg %}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </footer>
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
     <script>
-        // Initialize Magnific Popup
-        $(document).ready(function() {
-          $('.image-link').magnificPopup({
-            type: 'image',
-            closeOnContentClick: true,
-            closeBtnInside: false,
-            fixedContentPos: true,
-            mainClass: 'mfp-no-margins mfp-with-zoom',   // class to remove default margin from left and right side
-          });
+      // Initialize Fancybox
+      $(document).ready(function() {
+        $('.image-link').fancybox({
+          closeOnContentClick: true,
+          closeBtnInside: false,
+          fixedContentPos: true,
+          mainClass: 'fancybox-no-margins fancybox-with-zoom'
         });
-        <script>
-          $(document).on('click', '.smooth-goto', function(event) {
-            event.preventDefault();
-            var targetOffset = $(this.hash).offset().top - 50;
-            $('html, body').animate({scrollTop: targetOffset}, 1000);
-          });
-        </script>
+
+        // Smooth scroll
+        $('.smooth-goto').on('click', function(event) {
+          event.preventDefault();
+          var targetOffset = $(this.hash).offset().top - 50;
+          $('html, body').animate({scrollTop: targetOffset}, 1000);
+        });
+      });
     </script>
-
-
   </body>
 </html>

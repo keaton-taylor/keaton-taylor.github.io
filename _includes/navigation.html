@@ -1,9 +1,15 @@
-<nav class="px-4 max-w-2xl flex justify-between mx-auto py-12 md:px-0 text-gray-900">
-  <h1 class="text-xl font-bold py-4">
-    <a href="/">Keaton Taylor</a>
-  </h1>
+<nav>
+  <div class="px-4 grid grid-cols-2 mx-auto py-4 md:px-8 max-w-5xl lg:max-w-7xl">
+    <h1 class="text-xl font-bold">
+      <a href="/" class="inline-grid items-center text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02]">
+        Keaton Taylor
+      </a>
+    </h1>
 
-  {% if page.url != "/" %}
-    {% include socialIcons.html %}
-  {% endif %}
+    {% if page.url != "/" %}
+      <div class="justify-self-end">
+        {% include socialIcons.html %}
+      </div>
+    {% endif %}
+  </div>
 </nav>

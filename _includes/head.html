@@ -1,22 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keaton Taylor - Product Designer and front-end dabbler </title>
-    <meta name="description" content="Keaton taylor is a product designer with 15 years of experience crafting websites, mobile apps, and software focused on solving business and user problems at scale.">
+    <meta name="color-scheme" content="dark light">
+    
+    <!-- Primary Meta Tags -->
+    <title>Keaton Taylor - Product Designer and Front-end Developer</title>
+    <meta name="title" content="Keaton Taylor - Product Designer and Front-end Developer">
+    <meta name="description" content="Keaton Taylor is a product designer with 15 years of experience crafting websites, mobile apps, and software focused on solving business and user problems at scale.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://keaton-taylor.com/">
+    <meta property="og:title" content="Keaton Taylor - Product Designer and Front-end Developer">
+    <meta property="og:description" content="Keaton Taylor is a product designer with 15 years of experience crafting websites, mobile apps, and software focused on solving business and user problems at scale.">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://keaton-taylor.com/">
+    <meta property="twitter:title" content="Keaton Taylor - Product Designer and Front-end Developer">
+    <meta property="twitter:description" content="Keaton Taylor is a product designer with 15 years of experience crafting websites, mobile apps, and software focused on solving business and user problems at scale.">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/favicon/manifest.json">
-    <meta name="theme-color" content="#ffffff">
-    <meta name+" keywords" content="Product Design, UX/UI Design, Design Leadership, DesignOps, Cross-Functional Collaboration, Remote Team Management, Figma, Prototyping, User Interviews, Accessibility Design (a11y), Conversion Optimization, Revenue Growth, Startups, SaaS Products, Mobile App Design, Design Systems, Design Thinking, Interaction Design, User Experience Principles, Design Strategy, Design Innovation, Design Education, Customer-Centric Design, Data-Driven Design, Design for Enterprise, Branding, Design for Social Media, Design for Marketplaces, Front-End Development, React "/>
-    <link rel="stylesheet" href="/css/site.css">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)">
+    
+    <!-- Keywords -->
+    <meta name="keywords" content="Product Design, UX/UI Design, Design Leadership, DesignOps, Cross-Functional Collaboration, Remote Team Management, Figma, Prototyping, User Interviews, Accessibility Design (a11y), Conversion Optimization, Revenue Growth, Startups, SaaS Products, Mobile App Design, Design Systems, Design Thinking, Interaction Design, User Experience Principles, Design Strategy, Design Innovation, Design Education, Customer-Centric Design, Data-Driven Design, Design for Enterprise, Branding, Design for Social Media, Design for Marketplaces, Front-End Development, React"/>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 
-    <!-- Include Fancybox CSS and JS files in the head of your HTML document -->
+    <!-- Fancybox -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+
+    <!-- Dark mode script -->
+    <script>
+      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+    </script>
   </head>
-  <body class="">
+  <body class="min-h-full bg-white text-gray-900 antialiased">
