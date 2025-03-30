@@ -26,14 +26,13 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <link rel="manifest" href="/favicon/manifest.json">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff">
     
     <!-- Keywords -->
     <meta name="keywords" content="Product Design, UX/UI Design, Design Leadership, DesignOps, Cross-Functional Collaboration, Remote Team Management, Figma, Prototyping, User Interviews, Accessibility Design (a11y), Conversion Optimization, Revenue Growth, Startups, SaaS Products, Mobile App Design, Design Systems, Design Thinking, Interaction Design, User Experience Principles, Design Strategy, Design Innovation, Design Education, Customer-Centric Design, Data-Driven Design, Design for Enterprise, Branding, Design for Social Media, Design for Marketplaces, Front-End Development, React"/>
     
     <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,15 +42,5 @@
 
     <!-- Fancybox -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
-
-    <!-- Dark mode script -->
-    <script>
-      // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    </script>
   </head>
   <body class="min-h-full bg-white text-gray-900 antialiased">
