@@ -1,29 +1,24 @@
-<section class="max-w-2xl px-4 py-6 mx-auto bg-gray-50 rounded-2xl shadow-sm mb-12">
-  <!-- Summary Section -->
-  <div class="mb-8 pb-6 border-b border-gray-200">
-    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Summary</h3>
-    <p class="text-gray-900">{{ page.summary }}</p>
-  </div>
+<section class="max-w-5xl py-6 mx-auto md:p-8 md:bg-gray-50 md:rounded-2xl md:shadow-lg mb-12 not-prose">
 
-  <!-- Project Details Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 pb-6 border-b border-gray-200">
-    <div>
+  <!-- Project Details - Using flex instead of grid to hug content -->
+  <div class="flex flex-col md:flex-row gap-6 lg:gap-24 pb-8">
+    <div class="w-auto lg:w-auto">
       <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Role</h3>
-      <p class="text-gray-900">{{ page.role }}</p>
+      <p class="text-gray-900 text-base whitespace-nowrap">{{ page.role }}</p>
     </div>
-    <div>
+    <div class="w-auto md:w-auto">
       <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Year</h3>
-      <p class="text-gray-900">{{ page.year }}</p>
+      <p class="text-gray-900 text-base whitespace-nowrap">{{ page.year }}</p>
     </div>
-    <div>
+    <div class="w-auto lg:w-auto">
       <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Team</h3>
-      <p class="text-gray-900">{{ page.team }}</p>
+      <p class="text-gray-900 text-base whitespace-nowrap">{{ page.team }}</p>
     </div>
   </div>
 
   <!-- Responsibilities Section -->
   <div>
-    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Responsibilities</h3>
-    <p class="text-gray-900">{{ page.responsibility }}</p>
+    <h3 class="text-sm font-medium text-gray-500 uppercase tracking-wider mb-2">Outcomes</h3>
+    <p class="text-gray-900 text-base ">{{ page.responsibilities }}</p>
   </div>
 </section>

@@ -11,7 +11,7 @@
       </p>
     </div>
 
-    <div class="grid gap-24">
+    <div class="grid gap-24 mb-16">
       {% for casestudy in site.data.casestudies %}
         <div class="group relative drop-shadow-lg">
           <a href="{{ casestudy.permalink }}" class="block relative overflow-hidden">
@@ -28,7 +28,7 @@
             </div>
 
             <!-- Image -->
-            <picture class="block aspect-[16/9] w-full">
+            <picture class="block aspect-[16/9] w-full max-h-[70vh]">
               <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
               <img 
                 class="w-full h-full object-cover rounded-xl transform group-hover:scale-[1.02] transition-transform duration-700" 
