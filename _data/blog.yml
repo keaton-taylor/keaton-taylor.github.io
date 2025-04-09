@@ -1,16 +1,15 @@
+- title: "Some Thoughts on Failing Better"
+  excerpt: "In \"Some Thoughts on Failing Better,\" I share my perspective on turning setbacks into momentum by embracing failure as an essential step toward personal and professional growth."
+  kicker: "Quick Thought - Fall 2024"
+  permalink: "/fail-better.html"
+  image: "assets/images/failBetter.png"
+  image_alt: "the mess becomes the message."
 
 - title: "ShopTalkShow E.530: Keaton Taylor on Product Design, Career Paths, and Dad Talk"
   kicker: "Link"
   permalink: "https://shoptalkshow.com/530/"
   image: "https://shoptalkshow.com/wp-content/themes/shoptalk6/images/logo.png"
   image_alt: "A Handsome man in black and white."
-
-- title: "Fail Better"
-  excerpt: "In "Some Thoughts on Failing Better," I share my perspective on turning setbacks into momentum by embracing failure as an essential step toward personal and professional growth."
-  kicker: "Quick Thought - Spring 2025"
-  permalink: "/fail-better.html"
-  image: "assets/images/failBetter.png"
-  image_alt: "the mess becomes the message."
 
 - title: "Design and business: A shitty link (for humans)"
   excerpt: "Although design is rooted in commercial art and business, the push for monetization often compromises the positive impact of design on human relationships, making the connection between design and business a problematic one."
@@ -25,10 +24,3 @@
   permalink: "https://www.techradar.com/features/discord-activities-might-be-its-most-ingenious-addition-yet"
   image: "assets/images/discord/viralloops.gif"
   image_alt: "a gif showing the activity shelf opening and someone sharing their game with others."
-
-- title: "Advertising Is Only Evil If You Do It Like a Supervillain"
-  excerpt: "If no one is using your editorial products, your products cannot make money. How do we sustain profitability while preserving our soul?"
-  kicker: "Quick Thought - Fall 2018"
-  permalink: "/advertise-like-a-hero.html"
-  image: "assets/images/advertiseHero.webp"
-  image_alt: "a shackle on a white board with a pie graph and a bar graph."

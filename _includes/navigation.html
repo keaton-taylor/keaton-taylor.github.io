@@ -1,16 +1,69 @@
-<nav>
-  <div class="px-4 grid grid-cols-2 mx-auto py-4 md:px-0 max-w-5xl lg:max-w-7xl">
-    <h1 class="text-xl font-bold self-center">
+<nav class="relative">
+  <div class="px-4 grid grid-cols-2 mx-auto py-4 md:px-6 max-w-5xl lg:max-w-7xl">
+    <h1 class="text-2xl font-bold self-center">
       <a href="/" class="inline-grid text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02]">
         Keaton Taylor
       </a>
     </h1>
 
-    <div class="justify-self-end flex items-center gap-6">
-      <a href="#work" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Work</a>
-      <a href="#thoughts" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Thoughts</a>
-      <a href="#principles" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Principles</a>
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex justify-self-end items-center gap-6">
+      {% if page.url == "/" %}
+        <a href="#work" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Work</a>
+        <a href="#thoughts" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Thoughts</a>
+        <a href="#principles" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Principles</a>
+      {% else %}
+        <a href="{{ site.baseurl }}/#work" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Work</a>
+        <a href="{{ site.baseurl }}/#thoughts" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Thoughts</a>
+        <a href="{{ site.baseurl }}/#principles" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Principles</a>
+      {% endif %}
       {% include socialIcons.html %}
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button class="md:hidden justify-self-end text-gray-900 hover:text-blue-600 transition-colors p-3" onclick="toggleMobileMenu()">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation -->
+  <div id="mobileMenu" class="hidden md:hidden fixed inset-0 bg-white z-50">
+    <div class="px-4 py-4 flex justify-between items-center border-b">
+      <h1 class="text-2xl font-bold">
+        <a href="/" class="text-gray-900">Keaton Taylor</a>
+      </h1>
+      <button onclick="toggleMobileMenu()" class="text-gray-900 hover:text-blue-600 transition-colors p-3">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="px-4 py-4 flex flex-col gap-6">
+      <div class="mb-4flex justify-start">
+        <a href="https://www.linkedin.com/in/keatontaylor/" target="_blank" class="bg-gray-200 rounded-full py-3 flex gap-2 mx-auto items-center justify-center w-full active:bg-gray-300 transition-all">
+          <span class="font-semibold text-gray-900">LinkedIn</span>
+          <span class="block h-6 w-6 ">{% include icon--linkedin.svg %}</span>
+        </a>
+      </div>
+      {% if page.url == "/" %}
+        <a href="#work" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Work</a>
+        <a href="#thoughts" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Thoughts</a>
+        <a href="#principles" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Principles</a>
+      {% else %}
+        <a href="{{ site.baseurl }}/#work" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Work</a>
+        <a href="{{ site.baseurl }}/#thoughts" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Thoughts</a>
+        <a href="{{ site.baseurl }}/#principles" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Principles</a>
+      {% endif %}
     </div>
   </div>
 </nav>
+
+<script>
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('hidden');
+    document.body.classList.toggle('overflow-hidden');
+  }
+</script>
