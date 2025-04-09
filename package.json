@@ -8,7 +8,7 @@
     "watch:css": "postcss assets/css/styles.css -o assets/css/main.css --watch",
     "build": "npm run build:css && bundle exec jekyll build",
     "start": "npm run watch:css & bundle exec jekyll serve --port 5000 --livereload-port 35729",
-    "dev": "npm run watch:css & bundle exec jekyll serve --port 5000 --livereload-port 35729"
+    "dev": "npm run watch:css & bundle exec jekyll serve --port 4000 --livereload-port 35729"
   },
   "keywords": [],
   "author": "",

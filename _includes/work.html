@@ -1,8 +1,8 @@
-<div id="Work" class="relative py-8 -mt-24 bg-white">
+<div class="relative py-8 -mt-24 bg-white">
   <!-- Background that fades in -->
-  <div class="bg-fade absolute inset-0 pointer-events-none bg-gray-400 -z-10 opacity-0 transition-opacity duration-700"></div>
+  <div class="bg-fade absolute inset-0 pointer-events-none bg-gray-700 -z-10 opacity-0 transition-opacity duration-700"></div>
 
-  <section class="relative px-4 max-w-5xl lg:max-w-7xl mx-auto md:px-8">
+  <section id="work" class="relative px-4 max-w-5xl lg:max-w-7xl mx-auto md:px-0">
     <div class="pb-16">
       <h2 class="text-4xl font-bold text-gray-900 mb-6">Selected Work</h2>
       <p class="text-lg text-gray-600 max-w-2xl">
@@ -11,27 +11,27 @@
       </p>
     </div>
 
-    <div class="grid gap-24 mb-16">
+    <div class="grid gap-8 md:gap-24 mb-16">
       {% for casestudy in site.data.casestudies %}
         <div class="group relative drop-shadow-lg">
           <a href="{{ casestudy.permalink }}" class="block relative overflow-hidden">
             <!-- Background Overlay -->
-            <div class="absolute inset-0 bg-black opacity-0 group-hover:opacity-80 transition-opacity duration-500 z-10"></div>
+            <div class="absolute inset-0 bg-black opacity-0 md:group-hover:opacity-80 transition-opacity duration-500 z-10"></div>
             
             <!-- Project Title and Logo - Appears on Hover -->
-            <div class="absolute inset-0 z-20 grid place-content-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <div class="text-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+            <div class="absolute inset-0 z-20 grid place-content-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+              <div class="text-center transform translate-y-8 md:group-hover:translate-y-0 transition-transform duration-500">
                 <img src="{{ casestudy.logo_src }}" alt="{{ casestudy.company_name }} logo" class="h-12 mx-auto mb-6">
                 <h3 class="text-white text-4xl max-w-xl px-4 font-bold mb-2">{{ casestudy.title }}</h3>
                 <button class="mt-4 text-white/80 bg-blue-600 text-lg px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300 drop-shadow-md">View Project</button>
               </div>
             </div>
 
-            <!-- Image -->
+            
             <picture class="block aspect-[16/9] w-full max-h-[70vh]">
               <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
               <img 
-                class="w-full h-full object-cover rounded-xl transform group-hover:scale-[1.02] transition-transform duration-700" 
+                class="w-full h-full object-cover rounded-xl transform md:group-hover:scale-[1.02] transition-transform duration-700" 
                 src="{{ casestudy.image_src }}" 
                 alt="{{ casestudy.image_alt }}"
                 loading="lazy"

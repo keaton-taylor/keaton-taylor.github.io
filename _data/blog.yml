@@ -1,15 +1,16 @@
-# - title: "What I learned in nearly three years at Discord"
-#   excerpt: "I joined Discord in 2021 and learned a lot about product design, good and bad team dynamics, and what it means to fail."
-#   kicker: "Article"
-#   permalink: "/discord-lessons.html"
-#   image: "www.fillmurray.com/160/300"
-#   image_alt: "Clyde, the Discord mascot."
 
 - title: "ShopTalkShow E.530: Keaton Taylor on Product Design, Career Paths, and Dad Talk"
   kicker: "Link"
   permalink: "https://shoptalkshow.com/530/"
   image: "https://shoptalkshow.com/wp-content/themes/shoptalk6/images/logo.png"
   image_alt: "A Handsome man in black and white."
+
+- title: "Fail Better"
+  excerpt: "In "Some Thoughts on Failing Better," I share my perspective on turning setbacks into momentum by embracing failure as an essential step toward personal and professional growth."
+  kicker: "Quick Thought - Spring 2025"
+  permalink: "/fail-better.html"
+  image: "assets/images/failBetter.png"
+  image_alt: "the mess becomes the message."
 
 - title: "Design and business: A shitty link (for humans)"
   excerpt: "Although design is rooted in commercial art and business, the push for monetization often compromises the positive impact of design on human relationships, making the connection between design and business a problematic one."
