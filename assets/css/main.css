@@ -1597,6 +1597,9 @@ img.old {
 .\!mt-8 {
   margin-top: 2rem !important;
 }
+.mt-10 {
+  margin-top: 2.5rem;
+}
 .block {
   display: block;
 }
@@ -1707,6 +1710,9 @@ img.old {
 }
 .\!max-w-3xl {
   max-width: 48rem !important;
+}
+.grow {
+  flex-grow: 1;
 }
 .-translate-y-12 {
   --tw-translate-y: -3rem;
