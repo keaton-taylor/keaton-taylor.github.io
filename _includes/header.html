@@ -1,23 +1,44 @@
-
-
 <section class="px-4 md:px-8 bg-white">
   <div class="grid grid-cols-1 lg:grid-cols-2 lg:gap-8 xl:grid-cols-[600px_1fr] xl:py-24 max-w-5xl lg:max-w-7xl mx-auto">
     <!-- Intro Text -->
-    <header class="grid min-h-[640px] lg:min-h-[75vh] place-content-center text-gray-900 md:max-w-xl">
+    <header class="grid min-h-[640px] lg:min-h-[75vh] place-content-center text-gray-900 md:max-w-xl" aria-label="Intro">
       <div class="grid gap-4">
         <h1 class="text-3xl md:text-[2.5rem] !leading-tight font-black md:text-5xl">
-          Hayo! I'm Keaton.</br>I lead Growth design at 
-          <a href="https://www.soundstripe.com" class="text-pink-500 hover:text-pink-700 transition-colors">Soundstripe.</a>
+          Hayo! I'm Keaton.<br>I’m Director of Design at
+          <a href="https://www.soundstripe.com"
+             class="text-pink-500 underline-offset-4 hover:underline focus:underline focus:outline-none transition-colors"
+             target="_blank" rel="noopener noreferrer"
+             aria-label="Soundstripe (opens in a new tab)">Soundstripe.</a>
         </h1>
 
-        <div class="text-xl text-gray-700 md:max-w-xl md:text-xl cl:text-4xl">
-          <p class="mb-4">Before this, I worked on the Activity and Platform teams at <a class="font-medium hover:text-blue-700 transition-colors" href="https://www.discordapp.com">Discord</a>, and even further back at places like <a class="font-medium hover:text-red-500 transition-colors" href="https://www.envoy.com">Envoy</a> and <a class="font-medium hover:text-green-500 transition-colors" href="https://www.teamtreehouse.com">Treehouse</a>. In real life, I'm married to the coolest woman I've ever met and I have 4 pretty rad kids. We live in Wichita, Kansas, and we like it here.</p>
+        <div class="text-xl text-gray-700 md:max-w-xl md:text-xl">
+          <p class="mb-4">
+            At Soundstripe I’m <span class="font-medium">building the company’s first standalone design org</span>, bringing product and marketing design together under one roof.
+            My focus today is <span class="font-medium">scaling systems</span>, <span class="font-medium">mentoring high‑impact teams</span>, and <span class="font-medium">weaving AI into our workflows</span> to accelerate design and research.
+          </p>
+          <p class="mb-4">
+            Before this, I <span class="font-medium">led desktop design on</span> 
+            <a class="font-medium underline-offset-4 hover:underline focus:underline transition-colors"
+               href="https://www.discord.com" target="_blank" rel="noopener noreferrer"
+               aria-label="Discord (opens in a new tab)">Discord Activities</a>,
+            creating a new category of social play with millions of users. Further back I worked on fast‑moving projects at
+            <a class="font-medium underline-offset-4 hover:underline focus:underline transition-colors"
+               href="https://www.envoy.com" target="_blank" rel="noopener noreferrer"
+               aria-label="Envoy (opens in a new tab)">Envoy</a>
+            and
+            <a class="font-medium underline-offset-4 hover:underline focus:underline transition-colors"
+               href="https://www.teamtreehouse.com" target="_blank" rel="noopener noreferrer"
+               aria-label="Treehouse (opens in a new tab)">Treehouse</a>.
+          </p>
+          <p>
+            In real life, I’m married to the coolest woman I’ve ever met and I have four pretty rad kids. We live in Wichita, Kansas, and we like it here.
+          </p>
         </div>
       </div>
     </header>
 
     <!-- Desktop Collage - Only visible at lg breakpoint and up -->
-    <div class="hidden lg:grid place-items-center">
+    <div class="hidden lg:grid place-items-center" aria-label="Selected work collage">
       {% include work-collage.html %}
     </div>
   </div>
