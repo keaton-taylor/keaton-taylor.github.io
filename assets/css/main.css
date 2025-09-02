@@ -1414,6 +1414,12 @@ li a:hover {
 img.old {
     filter: grayscale(100%);
   }
+.discord  {
+    color: #5865F2;
+  }
+.discord:hover {
+    color: #B377F3;
+  }
 .envoy {
     color: #fa4338;
   }
@@ -2230,6 +2236,9 @@ img.old {
   --tw-text-opacity: 1;
   color: rgb(55 48 163 / var(--tw-text-opacity));
 }
+.underline-offset-4 {
+  text-underline-offset: 4px;
+}
 .antialiased {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -2418,6 +2427,13 @@ table {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+.focus\:underline:focus {
+  text-decoration-line: underline;
+}
+.focus\:outline-none:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
 }
 .active\:bg-gray-300:active {
   --tw-bg-opacity: 1;
