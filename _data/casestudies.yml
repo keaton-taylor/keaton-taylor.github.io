@@ -1,21 +1,8 @@
-
   - title: "Launching Casual Games in a Place Nobody Asked for Them (Yet)"
     permalink: "/discord-activities.html"
     image_src: "assets/images/discord/ActivityShelf.gif"
     image_alt: "a gif showing the activity shelf opening and a game being selected."
     logo_src: "assets/images/discord/Discord-logo.webp"
-
-  # - title: "Celebrating 8 Years of Discord with a Birthday Landing Page"
-  #   permalink: "/discord-birthday.html"
-  #   image_src: "assets/images/discord/BirthdayConcept - null.webp"
-  #   image_alt: "Discord's eighth Birthday landing page"
-  #   logo_src: "assets/images/discord/Discord-logo.webp"
-
-  # - title: "Backyard "
-  #   permalink: "/backyard.html"
-  #   image_src: "assets/images/backyard/backyardmobile.webp"
-  #   image_alt: "The design of our V0 mobile app at Backyard."
-  #   logo_src: "assets/images/backyard/backyardlogo.webp"
 
   - title: "Mobile Design and the Early Days of the Pandemic"
     permalink: "/envoy.html"
@@ -23,24 +10,8 @@
     image_alt: "Envoy Mobile apps for iOS and Android."
     logo_src: "assets/images/envoy/envoylogo.png"
 
-  # - title: "Building Software and Hardware for the Discerning Home Cook"
-  #   permalink: "/mealthy.html"
-  #   image_src: "assets/images/mealthy/mealthyhome.webp"
-  #   image_alt: "Meal planning and recipe app."
-  #   logo_src: "assets/images/mealthy/Mealthy.webp"
-
   - title: "Creating a Student-First Culture for Treehouse Techdegree"
     permalink: "/treehouse-techdegree.html"
     image_src: "assets/images/treehouse/TechdegreeTwo.webp"
     image_alt: "Work for the Treehouse Techdegree program."
     logo_src: "assets/images/treehouse/treehouse.png"
-
-  # - title: "Other Projects"
-  #   permalink: "/other.html"
-  #   image_src: "assets/images/Frame 3.webp"
-  #   image_alt: "A Link to misc work"
-
-  # - title: "Web Design Work"
-  #   permalink: "/web.html"
-  #   image_src: "assets/images/Web.webp"
-  #   image_alt: "A link to web and mobile work"
