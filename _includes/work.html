@@ -45,8 +45,11 @@
 <script>
   // Wait for the DOM to be ready
   document.addEventListener('DOMContentLoaded', function() {
-    const workSection = document.getElementById('Work');
+    const workSection = document.getElementById('work');
+    if (!workSection) return;
+    
     const bgFade = workSection.querySelector('.bg-fade');
+    if (!bgFade) return;
     
     function updateBackgroundOpacity() {
       // Get the work section's position relative to the viewport

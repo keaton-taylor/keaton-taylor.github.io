@@ -11,9 +11,10 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://keaton-taylor.com/">
+    <meta property="og:url" content="{{ site.url }}{{ site.baseurl }}/">
     <meta property="og:title" content="Keaton Taylor - Product Design Leader and Front-end Dabbler">
     <meta property="og:description" content="Keaton Taylor is a product design leader with a passion for building products that are both functional and user-friendly. He is also a front-end dabbler with a knack for building websites and mobile apps.">
+    <meta property="og:image" content="{{ site.url }}{{ site.baseurl }}/assets/images/headerimg.webp">
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="{{ '/assets/favicon/favicon-32x32.png' | relative_url }}">
@@ -21,8 +22,33 @@
     <link rel="manifest" href="{{ '/assets/favicon/manifest.json' | relative_url }}">
     <meta name="theme-color" content="#ffffff">
     
-    <!-- Keywords -->
-    <meta name="keywords" content="Product Design, UX/UI Design, Design Leadership, DesignOps, Cross-Functional Collaboration, Remote Team Management, Figma, Prototyping, User Interviews, Accessibility Design (a11y), Conversion Optimization, Revenue Growth, Startups, SaaS Products, Mobile App Design, Design Systems, Design Thinking, Interaction Design, User Experience Principles, Design Strategy, Design Innovation, Design Education, Customer-Centric Design, Data-Driven Design, Design for Enterprise, Branding, Design for Social Media, Design for Marketplaces, Front-End Development, React">
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Keaton Taylor",
+      "jobTitle": "Director of Design",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Soundstripe"
+      },
+      "url": "{{ site.url }}{{ site.baseurl }}/",
+      "sameAs": [
+        "https://www.linkedin.com/in/keatontaylor/"
+      ],
+      "email": "hello@keatontaylor.com",
+      "description": "Product design leader with a passion for building products that are both functional and user-friendly. Building design orgs, scaling systems, and mentoring high-impact teams.",
+      "knowsAbout": [
+        "Product Design",
+        "Design Leadership",
+        "DesignOps",
+        "UX/UI Design",
+        "Design Systems",
+        "Front-End Development"
+      ]
+    }
+    </script>
     
     <!-- Styles -->
     <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
@@ -37,3 +63,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
   </head>
   <body class="min-h-full bg-white text-gray-900 antialiased">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+      Skip to main content
+    </a>
