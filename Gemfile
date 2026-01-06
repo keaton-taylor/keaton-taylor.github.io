@@ -12,6 +12,7 @@ gem "stringio"
 gem "strscan"
 gem "io-wait"
 gem "ipaddr"
+gem "logger"
 gem "mutex_m"
 gem "resolv"
 

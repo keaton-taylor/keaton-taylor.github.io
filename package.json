@@ -10,8 +10,8 @@
     "start": "npm run watch:css & bundle exec jekyll serve --port 5000 --livereload-port 35729",
     "dev": "npm run watch:css & bundle exec jekyll serve --port 4000 --livereload-port 35729"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["portfolio", "jekyll", "tailwindcss", "design", "product-design"],
+  "author": "Keaton Taylor",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
@@ -42,5 +42,5 @@
     "update-browserslist-db": "^1.1.3",
     "util-deprecate": "^1.0.2"
   },
-  "description": ""
+  "description": "Personal portfolio website for Keaton Taylor - Product Design Leader"
 }
