@@ -17,6 +17,7 @@
         <a href="{{ site.baseurl }}/#thoughts" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Thoughts</a>
         <a href="{{ site.baseurl }}/#principles" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Principles</a>
       {% endif %}
+      <a href="{{ '/contact' | relative_url }}" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Contact</a>
       {% include socialIcons.html %}
     </div>
 
@@ -41,7 +42,7 @@
       </button>
     </div>
     <div class="px-4 py-4 flex flex-col gap-6">
-      <div class="mb-4flex justify-start">
+      <div class="mb-4 flex justify-start">
         <a href="https://www.linkedin.com/in/keatontaylor/" target="_blank" class="bg-gray-200 rounded-full py-3 flex gap-2 mx-auto items-center justify-center w-full active:bg-gray-300 transition-all">
           <span class="font-semibold text-gray-900">LinkedIn</span>
           <span class="block h-6 w-6 ">{% include icon--linkedin.svg %}</span>
@@ -56,6 +57,7 @@
         <a href="{{ site.baseurl }}/#thoughts" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Thoughts</a>
         <a href="{{ site.baseurl }}/#principles" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Principles</a>
       {% endif %}
+      <a href="{{ '/contact' | relative_url }}" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center" onclick="toggleMobileMenu()">Contact</a>
     </div>
   </div>
 </nav>
