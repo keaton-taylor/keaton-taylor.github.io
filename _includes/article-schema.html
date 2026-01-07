@@ -1,0 +1,25 @@
+{% if page.category == 'blog' or page.category == 'case_study' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{% if page.category == 'blog' %}Article{% else %}CreativeWork{% endif %}",
+  "headline": "{{ page.title | escape }}",
+  "author": {
+    "@type": "Person",
+    "name": "Keaton Taylor",
+    "url": "{{ site.url }}{{ site.baseurl }}/"
+  },
+  "datePublished": "{% if page.date %}{{ page.date | date: '%Y-%m-%d' }}{% else %}{{ site.time | date: '%Y-%m-%d' }}{% endif %}",
+  "dateModified": "{% if page.date %}{{ page.date | date: '%Y-%m-%d' }}{% else %}{{ site.time | date: '%Y-%m-%d' }}{% endif %}",
+  "description": "{% if page.summary %}{{ page.summary | escape }}{% elsif page.excerpt %}{{ page.excerpt | escape }}{% else %}{{ site.description | escape }}{% endif %}",
+  "url": "{{ site.url }}{{ site.baseurl }}{{ page.url }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
+  }
+  {% if page.image %}
+  ,"image": "{{ site.url }}{{ site.baseurl }}{{ page.image | relative_url }}"
+  {% endif %}
+}
+</script>
+{% endif %}
