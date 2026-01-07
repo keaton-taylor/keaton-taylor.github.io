@@ -3,8 +3,10 @@ layout: blog
 ---
 
 {% include head.html %}
-
-  {% include navigation.html %}
+{% include article-schema.html %}
+{% include breadcrumb-schema.html %}
+{% include navigation.html %}
+{% include breadcrumbs.html %}
 
 <section class="max-w-2xl mx-auto mb-24 prose px-4 md:px-8">
   {{ content }}

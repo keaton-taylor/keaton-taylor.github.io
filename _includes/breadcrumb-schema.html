@@ -1,0 +1,46 @@
+{% if page.url != '/' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "{{ site.url }}{{ site.baseurl }}/"
+    }{% if page.category == 'case_study' %},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Work",
+      "item": "{{ site.url }}{{ site.baseurl }}/#work"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ page.title | escape }}",
+      "item": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
+    }{% elsif page.category == 'blog' %},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Thoughts",
+      "item": "{{ site.url }}{{ site.baseurl }}/#thoughts"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ page.title | escape }}",
+      "item": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
+    }{% else %},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ page.title | escape }}",
+      "item": "{{ site.url }}{{ site.baseurl }}{{ page.url }}"
+    }{% endif %}
+  ]
+}
+</script>
+{% endif %}

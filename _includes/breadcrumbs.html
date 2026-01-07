@@ -1,0 +1,48 @@
+{% if page.url != '/' %}
+<nav aria-label="Breadcrumb" class="px-4 md:px-8 py-4 max-w-7xl mx-auto">
+  <div class="flex items-center justify-between">
+    {% if page.category == 'case_study' %}
+      <a href="{{ '/#work' | relative_url }}" class="text-blue-600 hover:text-blue-700 font-medium transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
+        <svg class="w-4 h-4 inline-block align-middle mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span style="display: inline-block; vertical-align: middle;">Back to Work</span>
+      </a>
+    {% elsif page.category == 'blog' %}
+      <a href="{{ '/#thoughts' | relative_url }}" class="text-blue-600 hover:text-blue-700 font-medium transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
+        <svg class="w-4 h-4 inline-block align-middle mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+        </svg>
+        <span style="display: inline-block; vertical-align: middle;">Back to Thoughts</span>
+      </a>
+    {% endif %}
+    <ol class="flex items-center space-x-2 text-sm text-gray-600">
+      <li>
+        <a href="{{ '/' | relative_url }}" class="hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">Home</a>
+      </li>
+        <li class="flex items-center">
+          <span class="mx-2 text-gray-400" aria-hidden="true">/</span>
+        </li>
+        {% if page.category == 'case_study' %}
+          <li>
+            <a href="{{ '/#work' | relative_url }}" class="hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">Work</a>
+          </li>
+          <li class="flex items-center">
+            <span class="mx-2 text-gray-400" aria-hidden="true">/</span>
+          </li>
+          <li class="text-gray-900 font-medium" aria-current="page">{{ page.title }}</li>
+        {% elsif page.category == 'blog' %}
+          <li>
+            <a href="{{ '/#thoughts' | relative_url }}" class="hover:text-blue-600 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">Thoughts</a>
+          </li>
+          <li class="flex items-center">
+            <span class="mx-2 text-gray-400" aria-hidden="true">/</span>
+          </li>
+          <li class="text-gray-900 font-medium" aria-current="page">{{ page.title }}</li>
+        {% else %}
+          <li class="text-gray-900 font-medium" aria-current="page">{{ page.title }}</li>
+        {% endif %}
+    </ol>
+  </div>
+</nav>
+{% endif %}
