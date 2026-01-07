@@ -5,123 +5,108 @@ permalink: /contact.html
 ---
 
 <section class="min-h-screen px-4 md:px-8 py-16 max-w-2xl mx-auto">
-  <div class="mb-12">
-    <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get in Touch</h1>
-    <p class="text-lg text-gray-600">
-      Have a project in mind, want to collaborate, or just want to say hello? I'd love to hear from you.
-    </p>
-  </div>
-
-  <form 
-    action="https://formsubmit.co/3657ea9de89d6239fb9a1eaed819b7d8" 
-    method="POST"
-    class="space-y-6"
-  >
-    <!-- FormSubmit configuration -->
-    <input type="hidden" name="_subject" value="New Contact Form Submission from keaton-taylor.github.io">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="{{ site.url }}{{ site.baseurl }}/contact?success=true">
-    <input type="hidden" name="_template" value="box">
-    
-    <!-- Name Field -->
-    <div>
-      <label for="name" class="block text-sm font-semibold text-gray-900 mb-2">
-        Name <span class="text-red-500">*</span>
-      </label>
-      <input 
-        type="text" 
-        id="name" 
-        name="name" 
-        required
-        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
-        placeholder="Your name"
-      >
-    </div>
-
-    <!-- Email Field -->
-    <div>
-      <label for="email" class="block text-sm font-semibold text-gray-900 mb-2">
-        Email <span class="text-red-500">*</span>
-      </label>
-      <input 
-        type="email" 
-        id="email" 
-        name="email" 
-        required
-        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
-        placeholder="your.email@example.com"
-      >
-    </div>
-
-    <!-- Subject Field -->
-    <div>
-      <label for="subject" class="block text-sm font-semibold text-gray-900 mb-2">
-        Subject <span class="text-red-500">*</span>
-      </label>
-      <input 
-        type="text" 
-        id="subject" 
-        name="subject" 
-        required
-        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
-        placeholder="What's this about?"
-      >
-    </div>
-
-    <!-- Message Field -->
-    <div>
-      <label for="message" class="block text-sm font-semibold text-gray-900 mb-2">
-        Message <span class="text-red-500">*</span>
-      </label>
-      <textarea 
-        id="message" 
-        name="message" 
-        rows="6"
-        required
-        class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 resize-y"
-        placeholder="Tell me about your project, idea, or just say hello..."
-      ></textarea>
-    </div>
-
-    <!-- Submit Button -->
-    <div>
-      <button 
-        type="submit"
-        class="w-full bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-      >
-        Send Message
-      </button>
-    </div>
-  </form>
-
-  <!-- Success Message -->
   {% if page.url contains 'success=true' %}
-  <div class="mt-8 p-4 bg-green-50 border border-green-200 rounded-md">
-    <p class="text-green-800 font-medium">
-      ✓ Thank you! Your message has been sent. I'll get back to you soon.
-    </p>
-  </div>
-  {% endif %}
-
-  <!-- Alternative Contact Info -->
-  <div class="mt-12 pt-12 border-t border-gray-200">
-    <p class="text-sm text-gray-600 mb-4">Or reach out directly:</p>
-    <div class="flex flex-col sm:flex-row gap-4">
-      <a 
-        href="mailto:keatonmarcustaylor@gmail.com" 
-        class="text-blue-600 hover:text-blue-700 font-medium transition-colors"
-      >
-        keatonmarcustaylor@gmail.com
-      </a>
-      <span class="hidden sm:inline text-gray-400">•</span>
-      <a 
-        href="https://www.linkedin.com/in/keatontaylor/" 
-        target="_blank" 
-        rel="noopener"
-        class="text-blue-600 hover:text-blue-700 font-medium transition-colors"
-      >
-        LinkedIn
-      </a>
+    <!-- Success Message -->
+    <div class="text-center py-16">
+      <div class="mb-6">
+        <svg class="mx-auto h-16 w-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Message Sent!</h1>
+      <p class="text-lg text-gray-600">
+        Thank you for reaching out! I'll get back to you as soon as possible.
+      </p>
     </div>
-  </div>
+  {% else %}
+    <!-- Form Section -->
+    <div class="mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Get in Touch</h1>
+      <p class="text-lg text-gray-600">
+        Have a project in mind, want to collaborate, or just want to say hello? I'd love to hear from you.
+      </p>
+    </div>
+
+    <form 
+      action="https://formsubmit.co/3657ea9de89d6239fb9a1eaed819b7d8" 
+      method="POST"
+      class="space-y-6"
+    >
+      <!-- FormSubmit configuration -->
+      <input type="hidden" name="_subject" value="New Contact Form Submission from www.keatontaylor.dev">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="{{ site.url }}{{ site.baseurl }}/contact?success=true">
+      <input type="hidden" name="_template" value="box">
+      
+      <!-- Name Field -->
+      <div>
+        <label for="name" class="block text-sm font-semibold text-gray-900 mb-2">
+          Name <span class="text-red-500">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+          placeholder="Your name"
+        >
+      </div>
+
+      <!-- Email Field -->
+      <div>
+        <label for="email" class="block text-sm font-semibold text-gray-900 mb-2">
+          Email <span class="text-red-500">*</span>
+        </label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+          placeholder="your.email@example.com"
+        >
+      </div>
+
+      <!-- Subject Field -->
+      <div>
+        <label for="subject" class="block text-sm font-semibold text-gray-900 mb-2">
+          Subject <span class="text-red-500">*</span>
+        </label>
+        <input 
+          type="text" 
+          id="subject" 
+          name="subject" 
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900"
+          placeholder="What's this about?"
+        >
+      </div>
+
+      <!-- Message Field -->
+      <div>
+        <label for="message" class="block text-sm font-semibold text-gray-900 mb-2">
+          Message <span class="text-red-500">*</span>
+        </label>
+        <textarea 
+          id="message" 
+          name="message" 
+          rows="6"
+          required
+          class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 resize-y"
+          placeholder="Tell me about your project, idea, or just say hello..."
+        ></textarea>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button 
+          type="submit"
+          class="w-full bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors font-semibold text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          Send Message
+        </button>
+      </div>
+    </form>
+  {% endif %}
 </section>
