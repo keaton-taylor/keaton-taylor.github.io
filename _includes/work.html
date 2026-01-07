@@ -12,14 +12,19 @@
     <div class="grid gap-8 md:gap-24 mb-16">
       {% for casestudy in site.data.casestudies %}
         <div class="group relative drop-shadow-lg">
-          <a href="{{ casestudy.permalink }}" class="block relative overflow-hidden">
+          <a href="{{ casestudy.permalink }}" class="block relative overflow-hidden focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-offset-2 rounded-xl">
             <!-- Background Overlay -->
             <div class="absolute inset-0 bg-black opacity-0 md:group-hover:opacity-80 transition-opacity duration-500 z-10"></div>
             
             <!-- Project Title and Logo - Appears on Hover -->
             <div class="absolute inset-0 z-20 grid place-content-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
               <div class="text-center transform translate-y-8 md:group-hover:translate-y-0 transition-transform duration-500">
-                <img src="{{ casestudy.logo_src }}" alt="{{ casestudy.company_name }} logo" class="h-12 mx-auto mb-6">
+                {% if casestudy.logo_src %}
+                  <img src="{{ casestudy.logo_src }}" alt="{% if casestudy.company_name %}{{ casestudy.company_name }}{% else %}Company{% endif %} logo" class="h-12 mx-auto mb-6">
+                {% endif %}
+                {% if casestudy.company_name %}
+                  <p class="text-white/80 text-sm uppercase tracking-wider mb-2">{{ casestudy.company_name }}</p>
+                {% endif %}
                 <h3 class="text-white text-4xl max-w-xl px-4 font-bold mb-2">{{ casestudy.title }}</h3>
                 <button class="mt-4 text-white/80 bg-blue-600 text-lg px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300 drop-shadow-md">View Project</button>
               </div>
@@ -33,6 +38,8 @@
                 src="{{ casestudy.image_src }}" 
                 alt="{{ casestudy.image_alt }}"
                 loading="lazy"
+                width="1200"
+                height="675"
               >
             </picture>
           </a>
@@ -41,37 +48,3 @@
     </div>
   </section>
 </div>
-
-<script>
-  // Wait for the DOM to be ready
-  document.addEventListener('DOMContentLoaded', function() {
-    const workSection = document.getElementById('work');
-    if (!workSection) return;
-    
-    const bgFade = workSection.querySelector('.bg-fade');
-    if (!bgFade) return;
-    
-    function updateBackgroundOpacity() {
-      // Get the work section's position relative to the viewport
-      const workRect = workSection.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      
-      // Calculate when to start fading (when the section enters viewport)
-      const startFade = workRect.top <= viewportHeight;
-      
-      // Calculate fade progress - adjusted to be more gradual
-      if (startFade) {
-        const scrollProgress = Math.min(0.6, Math.max(0, (viewportHeight - workRect.top) / (viewportHeight * 1.5)));
-        bgFade.style.opacity = scrollProgress;
-      } else {
-        bgFade.style.opacity = 0;
-      }
-    }
-
-    // Add scroll listener
-    window.addEventListener('scroll', updateBackgroundOpacity, { passive: true });
-    
-    // Initial check
-    updateBackgroundOpacity();
-  });
-</script>
