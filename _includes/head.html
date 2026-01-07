@@ -22,6 +22,11 @@
     <link rel="manifest" href="{{ '/assets/favicon/manifest.json' | relative_url }}">
     <meta name="theme-color" content="#ffffff">
     
+    <!-- Preload critical images -->
+    {% if page.url == '/' %}
+    <link rel="preload" as="image" href="{{ '/assets/images/headerimg.webp' | relative_url }}">
+    {% endif %}
+    
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -37,7 +42,7 @@
       "sameAs": [
         "https://www.linkedin.com/in/keatontaylor/"
       ],
-      "email": "hello@keatontaylor.com",
+      "email": "keatonmarcustaylor@gmail.com",
       "description": "Product design leader with a passion for building products that are both functional and user-friendly. Building design orgs, scaling systems, and mentoring high-impact teams.",
       "knowsAbout": [
         "Product Design",
@@ -58,9 +63,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://rsms.me/">
     <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        font-display: swap;
+      }
+      /* Enhanced focus styles for accessibility */
+      *:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+    </style>
 
-    <!-- Fancybox -->
+    <!-- Fancybox - Only load if needed -->
+    {% if page.content contains 'data-fancybox' or page.content contains 'image-link' %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css">
+    {% endif %}
   </head>
   <body class="min-h-full bg-white text-gray-900 antialiased">
     <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-blue-600 focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
