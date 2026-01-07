@@ -1,0 +1,30 @@
+{% if page.role or page.year or page.team %}
+<div class="bg-blue-50 border-l-4 border-blue-600 p-6 mb-8 max-w-7xl mx-auto px-4 md:px-8">
+  <div class="grid md:grid-cols-3 gap-6">
+    {% if page.role %}
+      <div>
+        <p class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-1">My Role</p>
+        <p class="text-lg font-bold text-gray-900">{{ page.role }}</p>
+      </div>
+    {% endif %}
+    {% if page.year %}
+      <div>
+        <p class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-1">Timeline</p>
+        <p class="text-lg font-bold text-gray-900">{{ page.year }}</p>
+      </div>
+    {% endif %}
+    {% if page.team %}
+      <div>
+        <p class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-1">Team</p>
+        <p class="text-lg font-bold text-gray-900">{{ page.team }}</p>
+      </div>
+    {% endif %}
+  </div>
+  {% if page.responsibility %}
+    <div class="mt-4 pt-4 border-t border-blue-200">
+      <p class="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2">Responsibilities</p>
+      <p class="text-gray-700">{{ page.responsibility }}</p>
+    </div>
+  {% endif %}
+</div>
+{% endif %}
