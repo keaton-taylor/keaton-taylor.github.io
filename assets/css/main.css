@@ -1482,6 +1482,10 @@ img.old {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+.-mx-4 {
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
 .\!mt-0 {
   margin-top: 0px !important;
 }
@@ -2713,6 +2717,11 @@ table {
     margin-bottom: 4rem;
   }
 
+  .md\:-mx-6 {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+
   .md\:mb-12 {
     margin-bottom: 3rem;
   }
@@ -2886,6 +2895,11 @@ table {
 
   .lg\:col-span-1 {
     grid-column: span 1 / span 1;
+  }
+
+  .lg\:-mx-8 {
+    margin-left: -2rem;
+    margin-right: -2rem;
   }
 
   .lg\:grid {
