@@ -1,0 +1,233 @@
+---
+layout: page
+title: StackSense - MTG Stack Analyzer
+permalink: /stack-analyzer/
+---
+
+<div id="stack-analyzer-app" class="min-h-screen bg-gray-50 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <header class="mb-6 sm:mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">StackSense</h1>
+      <p class="text-base sm:text-lg text-gray-600">MTG Stack Analyzer & Explainer</p>
+      <div class="mt-4 p-3 sm:p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+        <p class="text-xs sm:text-sm text-yellow-800">
+          <strong>Scope:</strong> 4-player cEDH games, instants/sorceries, activated abilities, basic triggers, counterspells.
+          <br class="hidden sm:block">
+          <span class="sm:hidden"> </span>
+          <strong>Not supported:</strong> Replacement effects, continuous layers, complex modal spells, full priority tracking.
+        </p>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+      <!-- Left Column: Scenario Builder -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
+          <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Build Scenario</h2>
+          
+          <!-- Player Selector -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Active Player</label>
+            <div class="grid grid-cols-2 gap-2">
+              <button id="player-a-btn" class="px-3 sm:px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 active-player text-sm sm:text-base">
+                Player A
+              </button>
+              <button id="player-b-btn" class="px-3 sm:px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm sm:text-base">
+                Player B
+              </button>
+              <button id="player-c-btn" class="px-3 sm:px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm sm:text-base">
+                Player C
+              </button>
+              <button id="player-d-btn" class="px-3 sm:px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 text-sm sm:text-base">
+                Player D
+              </button>
+            </div>
+          </div>
+
+          <!-- Action Type Selector -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Action Type</label>
+            <select id="action-type" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <option value="cast-spell">Cast Spell</option>
+              <option value="activate-ability">Activate Ability</option>
+              <option value="triggered-ability">Triggered Ability</option>
+            </select>
+          </div>
+
+          <!-- Card Search -->
+          <div class="mb-4 relative">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Card Name</label>
+            <input 
+              type="text" 
+              id="card-search" 
+              placeholder="Search for a card..."
+              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <div id="card-results" class="absolute z-10 w-full mt-1 max-h-48 overflow-y-auto bg-white border border-gray-200 rounded-md shadow-lg hidden"></div>
+          </div>
+
+          <!-- Target Selection -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Targets</label>
+            <div id="target-list" class="space-y-2 min-h-[40px]">
+              <p class="text-sm text-gray-400">No targets</p>
+            </div>
+            <button id="add-target-btn" class="mt-2 text-sm text-blue-600 hover:text-blue-800 font-medium">
+              + Add Target
+            </button>
+          </div>
+
+          <!-- Add Action Button -->
+          <button 
+            id="add-action-btn" 
+            class="w-full px-3 sm:px-4 py-2 text-sm sm:text-base bg-green-600 text-white rounded-md hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            disabled
+          >
+            Add to Stack
+          </button>
+
+          <!-- Respond Button -->
+          <button 
+            id="respond-btn" 
+            class="w-full mt-2 px-3 sm:px-4 py-2 text-sm sm:text-base bg-purple-600 text-white rounded-md hover:bg-purple-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            disabled
+          >
+            Respond (Insert Above)
+          </button>
+        </div>
+
+        <!-- Battlefield Manager -->
+        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 mt-4 sm:mt-6">
+          <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">
+            Player <span id="battlefield-player-label" class="text-blue-600">A</span> Battlefield
+          </h2>
+          
+          <!-- Add to Battlefield -->
+          <div class="mb-4">
+            <label class="block text-sm font-medium text-gray-700 mb-2">Add Permanent</label>
+            <div class="relative">
+              <input 
+                type="text" 
+                id="battlefield-card-search" 
+                placeholder="Search for a card..."
+                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <div id="battlefield-card-results" class="absolute z-10 w-full mt-1 max-h-48 overflow-y-auto bg-white border border-gray-200 rounded-md shadow-lg hidden"></div>
+            </div>
+          </div>
+
+          <!-- Current Battlefield -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Current Permanents</label>
+            <div id="current-battlefield-list" class="space-y-2 min-h-[60px] border border-gray-200 rounded-md p-2 bg-gray-50">
+              <p class="text-sm text-gray-400 text-center py-2">No permanents</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Playback Controls -->
+        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 mt-4 sm:mt-6">
+          <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Controls</h2>
+          <div class="flex flex-col gap-2">
+            <button id="step-resolve-btn" class="px-3 sm:px-4 py-2 text-sm sm:text-base bg-blue-600 text-white rounded-md hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed">
+              Step Resolve
+            </button>
+            <button id="auto-resolve-btn" class="px-3 sm:px-4 py-2 text-sm sm:text-base bg-indigo-600 text-white rounded-md hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed">
+              Auto Resolve All
+            </button>
+            <button id="reset-btn" class="px-3 sm:px-4 py-2 text-sm sm:text-base bg-gray-600 text-white rounded-md hover:bg-gray-700">
+              Reset Scenario
+            </button>
+            <button id="share-btn" class="px-3 sm:px-4 py-2 text-sm sm:text-base bg-teal-600 text-white rounded-md hover:bg-teal-700">
+              Share Scenario
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Middle Column: Stack Visualization -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">The Stack</h2>
+            <span id="stack-count" class="text-xs sm:text-sm text-gray-500 bg-gray-100 px-2 sm:px-3 py-1 rounded-full">0 objects</span>
+          </div>
+          <div id="stack-container" class="min-h-[300px] sm:min-h-[400px] border-2 border-dashed border-gray-300 rounded-lg p-3 sm:p-4 flex flex-col-reverse gap-2 sm:gap-3 bg-gradient-to-b from-gray-50 to-white">
+            <div class="text-center text-gray-400 py-8">
+              Stack is empty. Add actions to build a scenario.
+            </div>
+          </div>
+        </div>
+
+        <!-- Explanation Panel -->
+        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 mt-4 sm:mt-6">
+          <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Explanation</h2>
+          <div id="explanation-panel" class="text-gray-600 min-h-[150px] sm:min-h-[200px]">
+            <p class="text-sm text-gray-400">Resolve actions to see explanations here.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Game State -->
+      <div class="lg:col-span-1">
+        <div class="bg-white rounded-lg shadow-md p-4 sm:p-6">
+          <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Game State</h2>
+          
+          <!-- Players -->
+          <div class="mb-6">
+            <h3 class="text-lg font-medium text-gray-700 mb-2">Players</h3>
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
+                <span class="text-sm">Player A</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-red-600 rounded-full"></div>
+                <span class="text-sm">Player B</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-green-600 rounded-full"></div>
+                <span class="text-sm">Player C</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div class="w-4 h-4 bg-purple-600 rounded-full"></div>
+                <span class="text-sm">Player D</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Zones -->
+          <div class="mb-6">
+            <h3 class="text-lg font-medium text-gray-700 mb-2">Battlefield</h3>
+            <div id="battlefield-list" class="space-y-1 text-sm text-gray-600">
+              <p class="text-gray-400">No permanents</p>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <h3 class="text-lg font-medium text-gray-700 mb-2">Graveyard</h3>
+            <div id="graveyard-list" class="space-y-1 text-sm text-gray-600">
+              <p class="text-gray-400">Empty</p>
+            </div>
+          </div>
+
+          <!-- Assumptions -->
+          <div>
+            <h3 class="text-lg font-medium text-gray-700 mb-2">Assumptions</h3>
+            <div id="assumptions-list" class="space-y-1 text-sm text-gray-500">
+              <p>• All targets are legal unless marked otherwise</p>
+              <p>• No replacement effects apply</p>
+              <p>• Basic trigger timing only</p>
+              <p>• 4-player cEDH game</p>
+              <p>• Priority passes in turn order (A→B→C→D)</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="/assets/js/stack-analyzer/main.js"></script>
