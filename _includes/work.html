@@ -12,37 +12,96 @@
     <div class="grid gap-8 md:gap-24 mb-16">
       {% for casestudy in site.data.casestudies %}
         <div class="group relative drop-shadow-lg">
-          <a href="{{ casestudy.permalink }}" class="block relative overflow-hidden focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-offset-2 rounded-xl">
-            <!-- Background Overlay -->
-            <div class="absolute inset-0 bg-black opacity-0 md:group-hover:opacity-80 transition-opacity duration-500 z-10"></div>
-            
-            <!-- Project Title and Logo - Appears on Hover -->
-            <div class="absolute inset-0 z-20 grid place-content-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
-              <div class="text-center transform translate-y-8 md:group-hover:translate-y-0 transition-transform duration-500">
-                {% if casestudy.logo_src %}
-                  <img src="{{ casestudy.logo_src }}" alt="{% if casestudy.company_name %}{{ casestudy.company_name }}{% else %}Company{% endif %} logo" class="h-12 mx-auto mb-6">
-                {% endif %}
-                {% if casestudy.company_name %}
-                  <p class="text-white/80 text-sm uppercase tracking-wider mb-2">{{ casestudy.company_name }}</p>
-                {% endif %}
-                <h3 class="text-white text-4xl max-w-xl px-4 font-bold mb-2">{{ casestudy.title }}</h3>
-                <button class="mt-4 text-white/80 bg-blue-600 text-lg px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300 drop-shadow-md">View Project</button>
+          {% if casestudy.coming_soon %}
+            <!-- Coming Soon - Not Clickable -->
+            {% if casestudy.company_name == "Soundstripe" %}
+              <!-- Soundstripe Special Styling -->
+              <div class="block relative overflow-hidden rounded-xl cursor-default aspect-[16/9] w-full max-h-[70vh]" style="background-color: rgb(228, 20, 105);">
+                <!-- Coming Soon Badge -->
+                <div class="absolute top-4 right-4 z-30 bg-amber-500 text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg">
+                  Coming Soon
+                </div>
+                
+                <!-- Background Overlay - Fades to very dark gray on hover -->
+                <div class="absolute inset-0 bg-gray-900 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                
+                <!-- Project Title and Logo - Appears on Hover -->
+                <div class="absolute inset-0 z-20 grid place-content-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+                  <div class="text-center transform translate-y-8 md:group-hover:translate-y-0 transition-transform duration-500">
+                    {% if casestudy.logo_src %}
+                      <img src="{{ casestudy.logo_src }}" alt="{% if casestudy.company_name %}{{ casestudy.company_name }}{% else %}Company{% endif %} logo" class="h-12 mx-auto mb-6 brightness-0 invert">
+                    {% endif %}
+                    <h3 class="text-white text-4xl max-w-xl px-4 font-bold mb-2">{{ casestudy.title }}</h3>
+                    <p class="text-white/60 text-lg mt-4">Case study coming soon</p>
+                  </div>
+                </div>
               </div>
-            </div>
+            {% else %}
+              <!-- Default Coming Soon Styling -->
+              <div class="block relative overflow-hidden rounded-xl cursor-default">
+                <!-- Coming Soon Badge -->
+                <div class="absolute top-4 right-4 z-30 bg-amber-500 text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg">
+                  Coming Soon
+                </div>
+                
+                <!-- Background Overlay - Lighter for coming soon -->
+                <div class="absolute inset-0 bg-black opacity-0 md:group-hover:opacity-60 transition-opacity duration-500 z-10"></div>
+                
+                <!-- Project Title - Appears on Hover -->
+                <div class="absolute inset-0 z-20 grid place-content-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+                  <div class="text-center transform translate-y-8 md:group-hover:translate-y-0 transition-transform duration-500">
+                    <h3 class="text-white text-4xl max-w-xl px-4 font-bold mb-2">{{ casestudy.title }}</h3>
+                    <p class="text-white/60 text-lg mt-4">Case study coming soon</p>
+                  </div>
+                </div>
 
-            
-            <picture class="block aspect-[16/9] w-full max-h-[70vh]">
-              <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
-              <img 
-                class="w-full h-full object-cover rounded-xl transform md:group-hover:scale-[1.02] transition-transform duration-700" 
-                src="{{ casestudy.image_src }}" 
-                alt="{{ casestudy.image_alt }}"
-                loading="lazy"
-                width="1200"
-                height="675"
-              >
-            </picture>
-          </a>
+                <picture class="block aspect-[16/9] w-full max-h-[70vh]">
+                  <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
+                  <img 
+                    class="w-full h-full object-cover rounded-xl transform md:group-hover:scale-[1.02] transition-transform duration-700 opacity-70" 
+                    src="{{ casestudy.image_src }}" 
+                    alt="{{ casestudy.image_alt }}"
+                    loading="lazy"
+                    width="1200"
+                    height="675"
+                  >
+                </picture>
+              </div>
+            {% endif %}
+          {% else %}
+            <!-- Regular Case Study - Clickable -->
+            <a href="{{ casestudy.permalink }}" class="block relative overflow-hidden focus:outline-none focus:ring-4 focus:ring-blue-500 focus:ring-offset-2 rounded-xl">
+              <!-- Background Overlay -->
+              <div class="absolute inset-0 bg-black opacity-0 md:group-hover:opacity-80 transition-opacity duration-500 z-10"></div>
+              
+              <!-- Project Title and Logo - Appears on Hover -->
+              <div class="absolute inset-0 z-20 grid place-content-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+                <div class="text-center transform translate-y-8 md:group-hover:translate-y-0 transition-transform duration-500">
+                  {% if casestudy.logo_src %}
+                    <img src="{{ casestudy.logo_src }}" alt="{% if casestudy.company_name %}{{ casestudy.company_name }}{% else %}Company{% endif %} logo" class="h-12 mx-auto mb-6">
+                  {% endif %}
+                  {% if casestudy.company_name %}
+                    <p class="text-white/80 text-sm uppercase tracking-wider mb-2">{{ casestudy.company_name }}</p>
+                  {% endif %}
+                  <h3 class="text-white text-4xl max-w-xl px-4 font-bold mb-2">{{ casestudy.title }}</h3>
+                  <button class="mt-4 text-white/80 bg-blue-600 text-lg px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-300 drop-shadow-md">View Project</button>
+                </div>
+              </div>
+
+              
+              <picture class="block aspect-[16/9] w-full max-h-[70vh]">
+                <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
+                <img 
+                  class="w-full h-full object-cover rounded-xl transform md:group-hover:scale-[1.02] transition-transform duration-700" 
+                  src="{{ casestudy.image_src }}" 
+                  alt="{{ casestudy.image_alt }}"
+                  loading="lazy"
+                  width="1200"
+                  height="675"
+                >
+              </picture>
+            </a>
+          {% endif %}
         </div>
       {% endfor %}
     </div>
