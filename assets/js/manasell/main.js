@@ -2,7 +2,7 @@
  * ManaSell Main Application Controller
  */
 
-import { CardRow, ManaBoxCSV } from './models.js'
+import { CardRow, ManaBoxCSV, TextListParser } from './models.js'
 import { scryfallEnricher } from './scryfallEnricher.js'
 import { cardKingdomMapper } from './cardKingdomMapper.js'
 
@@ -17,6 +17,10 @@ class ManaSellApp {
     // File upload
     const fileInput = document.getElementById('csv-file-input')
     fileInput.addEventListener('change', (e) => this.handleFileUpload(e))
+
+    // Paste submit button
+    const pasteSubmit = document.getElementById('paste-submit-btn')
+    pasteSubmit.addEventListener('click', () => this.handlePasteSubmit())
 
     // Price threshold controls
     const minPrice = document.getElementById('min-price')
@@ -39,6 +43,29 @@ class ManaSellApp {
     // Export buttons
     document.getElementById('export-ck-btn').addEventListener('click', () => this.exportCardKingdom())
     document.getElementById('export-audit-btn').addEventListener('click', () => this.exportAudit())
+  }
+
+  switchInputMethod(method) {
+    const csvTab = document.getElementById('csv-tab')
+    const pasteTab = document.getElementById('paste-tab')
+    const csvInput = document.getElementById('csv-input')
+    const pasteInput = document.getElementById('paste-input')
+
+    if (method === 'csv') {
+      csvTab.classList.add('text-blue-600', 'border-b-2', 'border-blue-600')
+      csvTab.classList.remove('text-gray-500')
+      pasteTab.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600')
+      pasteTab.classList.add('text-gray-500')
+      csvInput.classList.remove('hidden')
+      pasteInput.classList.add('hidden')
+    } else {
+      pasteTab.classList.add('text-blue-600', 'border-b-2', 'border-blue-600')
+      pasteTab.classList.remove('text-gray-500')
+      csvTab.classList.remove('text-blue-600', 'border-b-2', 'border-blue-600')
+      csvTab.classList.add('text-gray-500')
+      pasteInput.classList.remove('hidden')
+      csvInput.classList.add('hidden')
+    }
   }
 
   async handleFileUpload(event) {
@@ -64,6 +91,71 @@ class ManaSellApp {
       this.showError('Failed to read file')
     }
     reader.readAsText(file)
+  }
+
+  async handlePasteSubmit() {
+    const textarea = document.getElementById('paste-textarea')
+    const text = textarea.value.trim()
+
+    if (!text) {
+      this.showError('Please paste a list of cards')
+      return
+    }
+
+    // Hide error
+    this.hideError()
+
+    try {
+      await this.processTextList(text)
+    } catch (error) {
+      this.showError(error.message || 'Failed to process card list')
+    }
+  }
+
+  async processTextList(textData) {
+    // Parse text list
+    const parser = new TextListParser(textData)
+    if (!parser.parse()) {
+      this.showError(
+        parser.errors.length > 0
+          ? parser.errors.join('; ')
+          : 'Failed to parse card list. Check format: Card Name [SET] collector# finish qty'
+      )
+      return
+    }
+
+    // Debug: Log parsed rows
+    console.log('Parsed text list rows:', parser.rows.slice(0, 3))
+
+    // Normalize and deduplicate
+    const normalized = this.normalizeAndDeduplicate(parser.rows)
+    
+    // Convert to CardRow objects - default quantity to 1
+    this.cardRows = normalized.map(row => {
+      const cardRow = new CardRow(row)
+      // Default sell quantity to 1 (not total quantity)
+      if (cardRow.keepSellStatus === 'sell') {
+        cardRow.quantity = 1
+      }
+      return cardRow
+    })
+
+    // Show controls
+    document.getElementById('controls-section').classList.remove('hidden')
+    document.getElementById('review-section').classList.remove('hidden')
+    document.getElementById('export-section').classList.remove('hidden')
+
+    // Show loading state
+    this.showLoadingState()
+
+    // Enrich with Scryfall data
+    await scryfallEnricher.enrichCards(this.cardRows, (processed, total) => {
+      // Could show progress here if needed
+      console.log(`Enriched ${processed}/${total} cards`)
+    })
+
+    // Render table
+    this.applyFilters()
   }
 
   async processCSV(csvData) {

@@ -238,3 +238,78 @@ export class ManaBoxCSV {
     return 'nonfoil'
   }
 }
+
+export class TextListParser {
+  constructor(rawText) {
+    this.rawText = rawText
+    this.rows = []
+    this.errors = []
+  }
+
+  parse() {
+    const lines = this.rawText.split('\n').filter(line => line.trim())
+    if (lines.length === 0) {
+      this.errors.push('No cards found in pasted text')
+      return false
+    }
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i].trim()
+      if (!line) continue
+
+      // Parse format: Card Name [SET] collector# finish qty
+      // Examples:
+      // "Lightning Bolt [M21] 161 nonfoil 4"
+      // "Sol Ring [CMM] 1 foil 2"
+      // "Island [UNF] 267" (defaults to nonfoil, qty 1)
+      // Also supports: "Card Name SET collector# finish qty" (no brackets)
+      
+      let match = line.match(/^(.+?)\s+\[([A-Z0-9]+)\]\s+(\d+)(?:\s+(foil|nonfoil|f|n))?(?:\s+(\d+))?$/i)
+      
+      if (!match) {
+        // Try alternative format: Card Name SET collector# finish qty (no brackets)
+        match = line.match(/^(.+?)\s+([A-Z0-9]{2,5})\s+(\d+)(?:\s+(foil|nonfoil|f|n))?(?:\s+(\d+))?$/i)
+      }
+      
+      if (match) {
+        const cardName = match[1].trim()
+        const setCode = match[2].toUpperCase().trim()
+        const collectorNumber = match[3].trim()
+        const finishRaw = match[4] || 'nonfoil'
+        const quantityRaw = match[5] || '1'
+        
+        const finish = this.normalizeFinish(finishRaw)
+        const quantity = parseInt(quantityRaw, 10) || 1
+
+        if (cardName && setCode && collectorNumber) {
+          this.rows.push({
+            name: cardName,
+            setCode: setCode,
+            collectorNumber: collectorNumber,
+            finish: finish,
+            quantity: quantity,
+            originalRow: line
+          })
+        }
+      } else {
+        // Skip invalid lines but don't error - just log
+        console.warn(`Skipping invalid line ${i + 1}: ${line}`)
+      }
+    }
+
+    if (this.rows.length === 0) {
+      this.errors.push('No valid cards found. Check format: Card Name [SET] collector# finish qty')
+      return false
+    }
+
+    return true
+  }
+
+  normalizeFinish(finish) {
+    const normalized = (finish || '').toLowerCase().trim()
+    if (normalized.includes('foil') || normalized === 'f') {
+      return 'foil'
+    }
+    return 'nonfoil'
+  }
+}
