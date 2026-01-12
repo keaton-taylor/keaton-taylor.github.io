@@ -3,7 +3,8 @@ module.exports = {
     './_includes/**/*.{html,md}',
     './_layouts/**/*.{html,md}',
     './_posts/**/*.{html,md}',
-    './*.{html,md}'
+    './*.{html,md}',
+    './stack-analyzer.html'
   ],
   theme: {
     extend: {},
