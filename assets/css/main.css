@@ -1449,6 +1449,9 @@ img.old {
 .z-50 {
   z-index: 50;
 }
+.z-30 {
+  z-index: 30;
+}
 .col-span-1 {
   grid-column: span 1 / span 1;
 }
@@ -1749,6 +1752,9 @@ img.old {
 .cursor-pointer {
   cursor: pointer;
 }
+.cursor-default {
+  cursor: default;
+}
 .resize-y {
   resize: vertical;
 }
@@ -2044,6 +2050,10 @@ img.old {
 .bg-amber-50 {
   --tw-bg-opacity: 1;
   background-color: rgb(255 251 235 / var(--tw-bg-opacity));
+}
+.bg-amber-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 158 11 / var(--tw-bg-opacity));
 }
 .bg-gradient-to-b {
   background-image: linear-gradient(to bottom, var(--tw-gradient-stops));
@@ -2342,6 +2352,9 @@ img.old {
   --tw-text-opacity: 1;
   color: rgb(146 64 14 / var(--tw-text-opacity));
 }
+.text-white\/60 {
+  color: rgb(255 255 255 / 0.6);
+}
 .underline-offset-4 {
   text-underline-offset: 4px;
 }
@@ -2354,6 +2367,12 @@ img.old {
 }
 .opacity-75 {
   opacity: 0.75;
+}
+.opacity-70 {
+  opacity: 0.7;
+}
+.opacity-30 {
+  opacity: 0.3;
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -2380,12 +2399,20 @@ img.old {
 .ring-opacity-5 {
   --tw-ring-opacity: 0.05;
 }
+.brightness-0 {
+  --tw-brightness: brightness(0);
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
 .drop-shadow-lg {
   --tw-drop-shadow: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .drop-shadow-md {
   --tw-drop-shadow: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+.invert {
+  --tw-invert: invert(100%);
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 .filter {
@@ -2974,6 +3001,10 @@ table {
 
   .group:hover .md\:group-hover\:opacity-80 {
     opacity: 0.8;
+  }
+
+  .group:hover .md\:group-hover\:opacity-60 {
+    opacity: 0.6;
   }
 }
 @media (min-width: 1024px) {
