@@ -78,6 +78,15 @@ class ManaSellApp {
       return
     }
 
+    // Debug: Log column mapping for verification
+    if (csv.columnMap) {
+      console.log('Column mapping:', csv.columnMap)
+      // Log first few rows to verify parsing
+      if (csv.rows.length > 0) {
+        console.log('Sample parsed rows:', csv.rows.slice(0, 3))
+      }
+    }
+
     // Normalize and deduplicate
     const normalized = this.normalizeAndDeduplicate(csv.rows)
     

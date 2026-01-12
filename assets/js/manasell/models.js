@@ -87,27 +87,71 @@ export class ManaBoxCSV {
     // Normalize headers (trim, lowercase for comparison)
     const normalizedHeaders = headers.map(h => h.trim().toLowerCase())
     
-    // Map of required columns with possible variations
+    // Map of required columns with possible variations (ordered by priority)
     const requiredColumnMap = {
-      'Card Name': ['card name', 'name', 'card'],
-      'Set Code': ['set code', 'set', 'setcode'],
-      'Collector Number': ['collector number', 'collector', 'number', 'collector #', 'collector#'],
+      'Card Name': ['card name', 'cardname', 'card_name', 'name'], // 'name' is last resort
+      'Set Code': ['set code', 'setcode', 'set_code', 'set'],
+      'Collector Number': ['collector number', 'collector_number', 'collector #', 'collector#', 'collector', 'number'],
       'Finish': ['finish', 'foil', 'printing'],
       'Quantity': ['quantity', 'qty', 'qty.', 'count']
     }
 
-    // Find column indices
+    // Find column indices - prefer exact matches, then partial matches
     this.columnMap = {}
     let missingColumns = []
 
     for (const [requiredCol, variations] of Object.entries(requiredColumnMap)) {
-      const foundIndex = headers.findIndex((h, i) => {
-        const normalized = h.trim().toLowerCase()
-        return variations.some(v => normalized === v || normalized.includes(v))
-      })
+      // Try variations in order of priority
+      let foundIndex = -1
+      
+      for (const variation of variations) {
+        // First try exact match
+        foundIndex = headers.findIndex((h, i) => {
+          const normalized = h.trim().toLowerCase()
+          return normalized === variation
+        })
+        
+        // If exact match found, use it
+        if (foundIndex >= 0) {
+          break
+        }
+        
+        // For "name" specifically, be very strict - only match if it's the whole word
+        if (variation === 'name' && requiredCol === 'Card Name') {
+          foundIndex = headers.findIndex((h, i) => {
+            const normalized = h.trim().toLowerCase()
+            // Match "name" only if it's at the end or start, or is the whole header
+            return normalized === 'name' || 
+                   normalized === 'card name' ||
+                   normalized.endsWith(' card name') ||
+                   normalized.startsWith('card name')
+          })
+          if (foundIndex >= 0) {
+            break
+          }
+        } else {
+          // For other variations, try partial match but be strict
+          foundIndex = headers.findIndex((h, i) => {
+            const normalized = h.trim().toLowerCase()
+            // Only match if variation is significant length or at word boundaries
+            if (variation.length >= 4) {
+              return normalized.includes(variation)
+            } else {
+              // For short variations, require exact match or word boundary
+              return normalized === variation || 
+                     normalized.startsWith(variation + ' ') ||
+                     normalized.endsWith(' ' + variation)
+            }
+          })
+          if (foundIndex >= 0) {
+            break
+          }
+        }
+      }
       
       if (foundIndex >= 0) {
         this.columnMap[requiredCol] = foundIndex
+        console.log(`Mapped "${requiredCol}" to column ${foundIndex}: "${headers[foundIndex]}"`)
       } else {
         missingColumns.push(requiredCol)
       }
@@ -118,7 +162,8 @@ export class ManaBoxCSV {
       return false
     }
 
-    // Parse data rows
+    // Parse data rows - process in chunks for large files
+    const chunkSize = 1000
     for (let i = 1; i < lines.length; i++) {
       const values = this.parseCSVLine(lines[i])
       if (values.length < headers.length) {
@@ -126,16 +171,27 @@ export class ManaBoxCSV {
       }
 
       // Extract required fields using column map
-      const cardName = values[this.columnMap['Card Name']]?.trim() || ''
-      const setCode = values[this.columnMap['Set Code']]?.trim() || ''
-      const collectorNumber = values[this.columnMap['Collector Number']]?.trim() || ''
-      const finishRaw = values[this.columnMap['Finish']]?.trim() || ''
-      const quantityRaw = values[this.columnMap['Quantity']]?.trim() || '1'
+      const cardNameIndex = this.columnMap['Card Name']
+      const setCodeIndex = this.columnMap['Set Code']
+      const collectorNumberIndex = this.columnMap['Collector Number']
+      const finishIndex = this.columnMap['Finish']
+      const quantityIndex = this.columnMap['Quantity']
+      
+      if (cardNameIndex === undefined || setCodeIndex === undefined || collectorNumberIndex === undefined) {
+        continue // Skip if required columns not found
+      }
+
+      const cardName = values[cardNameIndex]?.trim() || ''
+      const setCode = values[setCodeIndex]?.trim() || ''
+      const collectorNumber = values[collectorNumberIndex]?.trim() || ''
+      const finishRaw = finishIndex !== undefined ? (values[finishIndex]?.trim() || '') : ''
+      const quantityRaw = quantityIndex !== undefined ? (values[quantityIndex]?.trim() || '1') : '1'
       
       const finish = this.normalizeFinish(finishRaw)
       const quantity = parseInt(quantityRaw, 10) || 1
 
-      if (cardName && setCode && collectorNumber) {
+      // Validate card name is not empty and doesn't look like a path/directory
+      if (cardName && setCode && collectorNumber && !cardName.includes('/') && !cardName.includes('\\')) {
         this.rows.push({
           name: cardName,
           setCode: setCode.toUpperCase(),
