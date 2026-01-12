@@ -17,6 +17,46 @@
         <a href="{{ site.baseurl }}/#thoughts" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">Thoughts</a>
         <a href="{{ site.baseurl }}/#principles" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">Principles</a>
       {% endif %}
+      
+      <!-- Skunkworks Dropdown -->
+      <div class="relative group">
+        <button 
+          class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded flex items-center gap-1"
+          onclick="toggleSkunkworksDropdown()"
+          aria-expanded="false"
+          aria-haspopup="true"
+          id="skunkworksButton"
+        >
+          Skunkworks
+          <svg class="w-4 h-4 transition-transform" id="skunkworksChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div 
+          id="skunkworksDropdown" 
+          class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50"
+          role="menu"
+          aria-orientation="vertical"
+        >
+          <div class="py-1" role="none">
+            <a 
+              href="{{ '/stack-analyzer' | relative_url }}" 
+              class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 hover:text-blue-600 transition-colors focus:outline-none focus:bg-gray-100 focus:text-blue-600"
+              role="menuitem"
+            >
+              StackSense
+            </a>
+            <a 
+              href="{{ '/scryfall-parser' | relative_url }}" 
+              class="block px-4 py-2 text-sm text-gray-900 hover:bg-gray-100 hover:text-blue-600 transition-colors focus:outline-none focus:bg-gray-100 focus:text-blue-600"
+              role="menuitem"
+            >
+              Scryfall Parser
+            </a>
+          </div>
+        </div>
+      </div>
+      
       <a href="{{ '/contact' | relative_url }}" class="text-gray-900 hover:text-blue-600 transition-all hover:scale-[1.02] font-bold">Contact</a>
       {% include socialIcons.html %}
     </div>
@@ -57,6 +97,38 @@
         <a href="{{ site.baseurl }}/#thoughts" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded" onclick="toggleMobileMenu()">Thoughts</a>
         <a href="{{ site.baseurl }}/#principles" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded" onclick="toggleMobileMenu()">Principles</a>
       {% endif %}
+      
+      <!-- Mobile Skunkworks Section -->
+      <div class="border-t border-gray-200 pt-4 mt-4">
+        <button 
+          class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 w-full text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded flex items-center justify-center gap-2"
+          onclick="toggleMobileSkunkworks()"
+          aria-expanded="false"
+          id="mobileSkunkworksButton"
+        >
+          Skunkworks
+          <svg class="w-5 h-5 transition-transform" id="mobileSkunkworksChevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="mobileSkunkworksDropdown" class="hidden mt-2 space-y-2">
+          <a 
+            href="{{ '/stack-analyzer' | relative_url }}" 
+            class="block text-lg text-gray-700 hover:text-blue-600 transition-all font-medium py-2 px-4 text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+            onclick="toggleMobileMenu()"
+          >
+            StackSense
+          </a>
+          <a 
+            href="{{ '/scryfall-parser' | relative_url }}" 
+            class="block text-lg text-gray-700 hover:text-blue-600 transition-all font-medium py-2 px-4 text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded"
+            onclick="toggleMobileMenu()"
+          >
+            Scryfall Parser
+          </a>
+        </div>
+      </div>
+      
       <a href="{{ '/contact' | relative_url }}" class="text-2xl text-gray-900 hover:text-blue-600 transition-all font-bold py-3 text-center focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded" onclick="toggleMobileMenu()">Contact</a>
     </div>
   </div>
@@ -73,4 +145,53 @@
       button.setAttribute('aria-expanded', !isHidden);
     }
   }
+
+  function toggleSkunkworksDropdown() {
+    const dropdown = document.getElementById('skunkworksDropdown');
+    const button = document.getElementById('skunkworksButton');
+    const chevron = document.getElementById('skunkworksChevron');
+    const isHidden = dropdown.classList.contains('hidden');
+    
+    dropdown.classList.toggle('hidden');
+    if (button) {
+      button.setAttribute('aria-expanded', !isHidden);
+    }
+    if (chevron) {
+      chevron.classList.toggle('rotate-180');
+    }
+  }
+
+  function toggleMobileSkunkworks() {
+    const dropdown = document.getElementById('mobileSkunkworksDropdown');
+    const button = document.getElementById('mobileSkunkworksButton');
+    const chevron = document.getElementById('mobileSkunkworksChevron');
+    const isHidden = dropdown.classList.contains('hidden');
+    
+    dropdown.classList.toggle('hidden');
+    if (button) {
+      button.setAttribute('aria-expanded', !isHidden);
+    }
+    if (chevron) {
+      chevron.classList.toggle('rotate-180');
+    }
+  }
+
+  // Close dropdowns when clicking outside
+  document.addEventListener('click', function(event) {
+    const skunkworksButton = document.getElementById('skunkworksButton');
+    const skunkworksDropdown = document.getElementById('skunkworksDropdown');
+    
+    if (skunkworksButton && skunkworksDropdown && 
+        !skunkworksButton.contains(event.target) && 
+        !skunkworksDropdown.contains(event.target)) {
+      skunkworksDropdown.classList.add('hidden');
+      const chevron = document.getElementById('skunkworksChevron');
+      if (chevron) {
+        chevron.classList.remove('rotate-180');
+      }
+      if (skunkworksButton) {
+        skunkworksButton.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
 </script>
