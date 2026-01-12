@@ -81,8 +81,15 @@ class ManaSellApp {
     // Normalize and deduplicate
     const normalized = this.normalizeAndDeduplicate(csv.rows)
     
-    // Convert to CardRow objects
-    this.cardRows = normalized.map(row => new CardRow(row))
+    // Convert to CardRow objects - default quantity to 1
+    this.cardRows = normalized.map(row => {
+      const cardRow = new CardRow(row)
+      // Default sell quantity to 1 (not total quantity)
+      if (cardRow.keepSellStatus === 'sell') {
+        cardRow.quantity = 1
+      }
+      return cardRow
+    })
 
     // Show controls
     document.getElementById('controls-section').classList.remove('hidden')
@@ -194,9 +201,21 @@ class ManaSellApp {
         </td>
         <td class="px-2 py-3 text-sm">${this.escapeHtml(row.collectorNumber)}</td>
         <td class="px-2 py-3 text-sm">${row.finish === 'foil' ? 'Foil' : 'Non-Foil'}</td>
-        <td class="px-2 py-3 text-sm font-semibold">${row.quantity}</td>
+        <td class="px-2 py-3">
+          <div class="flex items-center gap-1">
+            <input
+              type="number"
+              min="0"
+              max="${row.totalQuantity}"
+              value="${row.quantity}"
+              data-card-id="${this.escapeHtml(row.id)}"
+              class="w-16 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            ${row.quantity < row.totalQuantity ? `<span class="text-xs text-gray-400">/ ${row.totalQuantity}</span>` : ''}
+          </div>
+        </td>
         <td class="px-2 py-3 text-sm">$${row.marketPrice.toFixed(2)}</td>
-        <td class="px-2 py-3 text-sm font-semibold">$${row.totalValue.toFixed(2)}</td>
+        <td class="px-2 py-3 text-sm font-semibold">$${row.sellValue.toFixed(2)}</td>
         <td class="px-2 py-3">
           ${row.warnings.map(w => `
             <span class="bg-amber-100 text-amber-800 text-xs px-2 py-1 rounded inline-block mb-1">
@@ -207,21 +226,108 @@ class ManaSellApp {
       `
       tbody.appendChild(tr)
     })
+    
+    // Attach event listeners after rendering
+    this.attachQuantityListeners()
+  }
+
+  attachQuantityListeners() {
+    const inputs = document.querySelectorAll('input[data-card-id]')
+    inputs.forEach(input => {
+      // Remove existing listeners by cloning
+      const newInput = input.cloneNode(true)
+      input.parentNode.replaceChild(newInput, input)
+      
+      // Add new listeners
+      newInput.addEventListener('change', (e) => {
+        const cardId = e.target.getAttribute('data-card-id')
+        this.updateQuantity(cardId, e.target.value)
+      })
+      newInput.addEventListener('input', (e) => {
+        const cardId = e.target.getAttribute('data-card-id')
+        this.updateQuantity(cardId, e.target.value, false) // Don't re-render on input
+      })
+    })
   }
 
   toggleKeepSell(cardId) {
     const row = this.cardRows.find(r => r.id === cardId)
     if (row) {
-      row.keepSellStatus = row.keepSellStatus === 'keep' ? 'sell' : 'keep'
+      const newStatus = row.keepSellStatus === 'keep' ? 'sell' : 'keep'
+      row.keepSellStatus = newStatus
+      
+      // Update quantity based on status
+      if (newStatus === 'keep') {
+        row.quantity = 0
+      } else {
+        // When switching to sell, default to 1
+        row.quantity = 1
+      }
+      
       this.renderTable()
       this.updateSummary()
     }
+  }
+
+  updateQuantity(cardId, value, shouldRender = true) {
+    const row = this.cardRows.find(r => r.id === cardId)
+    if (!row) {
+      console.error('Card not found:', cardId)
+      return
+    }
+    
+    const newQty = Math.max(0, Math.min(row.totalQuantity, parseInt(value, 10) || 0))
+    row.quantity = newQty
+    
+    // Auto-update status based on quantity
+    if (newQty === 0) {
+      row.keepSellStatus = 'keep'
+    } else {
+      row.keepSellStatus = 'sell'
+    }
+    
+    // Update the button status if needed
+    if (shouldRender) {
+      const button = document.querySelector(`button[data-card-id="${cardId}"]`)
+      if (button) {
+        const status = row.keepSellStatus === 'keep' ? 'keep' : 'sell'
+        const statusColor = status === 'keep' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
+        button.textContent = status === 'keep' ? 'Keep' : 'Sell'
+        button.className = `px-2 py-1 text-xs rounded ${statusColor} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-blue-500`
+      }
+      
+      // Update the total value cell
+      const rowElement = button?.closest('tr')
+      if (rowElement) {
+        const valueCell = rowElement.querySelectorAll('td')[7] // Total Value column
+        if (valueCell) {
+          valueCell.textContent = `$${row.sellValue.toFixed(2)}`
+        }
+        
+        // Update the "/ total" hint
+        const qtyCell = rowElement.querySelectorAll('td')[5] // Quantity column
+        if (qtyCell) {
+          const hint = qtyCell.querySelector('span')
+          if (hint) {
+            if (row.quantity < row.totalQuantity) {
+              hint.textContent = `/ ${row.totalQuantity}`
+              hint.style.display = 'inline'
+            } else {
+              hint.style.display = 'none'
+            }
+          }
+        }
+      }
+    }
+    
+    this.updateSummary()
   }
 
   keepAllFoils() {
     this.cardRows.forEach(row => {
       if (row.finish === 'foil') {
         row.keepSellStatus = 'keep'
+        row.quantity = 0
       }
     })
     this.renderTable()
@@ -252,7 +358,13 @@ class ManaSellApp {
 
       // Keep the first one, sell the rest
       rows.forEach((row, index) => {
-        row.keepSellStatus = index === 0 ? 'keep' : 'sell'
+        if (index === 0) {
+          row.keepSellStatus = 'keep'
+          row.quantity = 0
+        } else {
+          row.keepSellStatus = 'sell'
+          row.quantity = 1
+        }
       })
     })
 
@@ -278,7 +390,13 @@ class ManaSellApp {
         // Keep the one with highest quantity (or first if equal)
         rows.sort((a, b) => b.quantity - a.quantity)
         rows.forEach((row, index) => {
-          row.keepSellStatus = index === 0 ? 'keep' : 'sell'
+          if (index === 0) {
+            row.keepSellStatus = 'keep'
+            row.quantity = 0
+          } else {
+            row.keepSellStatus = 'sell'
+            row.quantity = 1
+          }
         })
       }
     })
@@ -290,6 +408,7 @@ class ManaSellApp {
   markAllSell() {
     this.cardRows.forEach(row => {
       row.keepSellStatus = 'sell'
+      row.quantity = 1
     })
     this.renderTable()
     this.updateSummary()
@@ -298,6 +417,7 @@ class ManaSellApp {
   resetAllSell() {
     this.cardRows.forEach(row => {
       row.keepSellStatus = 'sell'
+      row.quantity = 1
     })
     this.renderTable()
     this.updateSummary()
@@ -308,17 +428,20 @@ class ManaSellApp {
     const totalCards = this.filteredRows.length
     const filteredSellRows = this.filteredRows.filter(row => row.shouldSell)
     const filteredSellCount = filteredSellRows.length
-    const filteredTotalValue = filteredSellRows.reduce((sum, row) => sum + row.totalValue, 0)
+    const filteredTotalValue = filteredSellRows.reduce((sum, row) => sum + row.sellValue, 0)
 
     // Export stats show all cards marked for sale
     const allSellRows = this.cardRows.filter(row => row.shouldSell)
     const allSellCount = allSellRows.length
-    const allTotalValue = allSellRows.reduce((sum, row) => sum + row.totalValue, 0)
+    const allTotalValue = allSellRows.reduce((sum, row) => sum + row.sellValue, 0)
+    
+    // Calculate total quantity to sell
+    const totalSellQuantity = allSellRows.reduce((sum, row) => sum + row.quantity, 0)
 
     document.getElementById('total-cards').textContent = totalCards
     document.getElementById('sell-count').textContent = filteredSellCount
     document.getElementById('total-value').textContent = filteredTotalValue.toFixed(2)
-    document.getElementById('export-count').textContent = allSellCount
+    document.getElementById('export-count').textContent = `${allSellCount} (${totalSellQuantity} cards)`
     document.getElementById('export-value').textContent = allTotalValue.toFixed(2)
   }
 

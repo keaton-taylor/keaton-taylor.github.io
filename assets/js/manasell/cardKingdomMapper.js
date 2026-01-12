@@ -48,8 +48,10 @@ export class CardKingdomMapper {
       'Set',
       'Collector Number',
       'Finish',
-      'Quantity',
+      'Total Quantity',
+      'Sell Quantity',
       'Market Price',
+      'Sell Value',
       'Keep/Sell Status',
       'Warnings'
     ]
@@ -61,8 +63,10 @@ export class CardKingdomMapper {
         this.escapeCSV(audit.set),
         this.escapeCSV(audit.collectorNumber),
         this.escapeCSV(audit.finish),
-        audit.quantity,
+        audit.totalQuantity,
+        audit.sellQuantity,
         audit.marketPrice.toFixed(2),
+        audit.sellValue.toFixed(2),
         this.escapeCSV(audit.keepSellStatus),
         this.escapeCSV(audit.warnings)
       ]

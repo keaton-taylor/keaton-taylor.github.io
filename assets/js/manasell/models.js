@@ -9,7 +9,8 @@ export class CardRow {
     this.setCode = data.setCode || ''
     this.collectorNumber = data.collectorNumber || ''
     this.finish = data.finish || 'nonfoil' // 'foil' or 'nonfoil'
-    this.quantity = data.quantity || 1
+    this.totalQuantity = data.quantity || 1 // Original total quantity from CSV
+    this.quantity = data.quantity !== undefined ? (data.keepSellStatus === 'keep' ? 0 : 1) : 1 // Editable sell quantity (defaults to 1)
     this.marketPrice = data.marketPrice || 0
     this.setName = data.setName || ''
     this.ckEdition = data.ckEdition || '' // Card Kingdom edition name
@@ -22,16 +23,16 @@ export class CardRow {
     return `${this.name}-${this.setCode}-${this.collectorNumber}-${this.finish}`
   }
 
-  get totalValue() {
+  get sellValue() {
     return this.marketPrice * this.quantity
   }
 
   get shouldSell() {
-    // Manual Keep overrides everything
+    // Must have quantity > 0 and not be manually kept
     if (this.keepSellStatus === 'keep') {
       return false
     }
-    return this.keepSellStatus === 'sell'
+    return this.quantity > 0
   }
 
   addWarning(warning) {
@@ -55,8 +56,10 @@ export class CardRow {
       set: this.setCode,
       collectorNumber: this.collectorNumber,
       finish: this.finish,
-      quantity: this.quantity,
+      totalQuantity: this.totalQuantity,
+      sellQuantity: this.quantity,
       marketPrice: this.marketPrice,
+      sellValue: this.sellValue,
       keepSellStatus: this.keepSellStatus,
       warnings: this.warnings.join('; ')
     }
