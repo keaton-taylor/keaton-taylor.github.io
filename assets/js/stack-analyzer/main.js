@@ -123,6 +123,25 @@ class StackAnalyzerApp {
       return
     }
 
+    // First, try to get autocomplete suggestions for immediate feedback
+    const autocompleteSuggestions = await scryfallService.getAutocompleteSuggestions(query)
+    
+    // If we have autocomplete suggestions, search for those cards directly
+    if (autocompleteSuggestions.length > 0) {
+      const cards = []
+      for (const suggestion of autocompleteSuggestions.slice(0, 10)) {
+        const card = await scryfallService.getCardByName(suggestion, false)
+        if (card) {
+          cards.push(card)
+        }
+      }
+      if (cards.length > 0) {
+        this.displayCardResults(cards)
+        return
+      }
+    }
+
+    // Fall back to regular search
     scryfallService.debouncedSearch(query, (cards) => {
       this.displayCardResults(cards)
     })
