@@ -36,10 +36,14 @@ class StackAnalyzerApp {
       this.setCurrentPlayer('D')
     })
 
-    // Card search
+    // Card search with debouncing
     const cardSearch = document.getElementById('card-search')
+    let searchDebounceTimer = null
     cardSearch.addEventListener('input', (e) => {
-      this.handleCardSearch(e.target.value)
+      clearTimeout(searchDebounceTimer)
+      searchDebounceTimer = setTimeout(() => {
+        this.handleCardSearch(e.target.value)
+      }, 300)
     })
 
     // Battlefield card search
@@ -123,34 +127,66 @@ class StackAnalyzerApp {
       return
     }
 
-    // First, try to get autocomplete suggestions for immediate feedback
+    // First, show autocomplete suggestions (limit to 3)
     const autocompleteSuggestions = await scryfallService.getAutocompleteSuggestions(query)
-    
-    // If we have autocomplete suggestions, search for those cards directly
     if (autocompleteSuggestions.length > 0) {
-      const cards = []
-      for (const suggestion of autocompleteSuggestions.slice(0, 10)) {
-        const card = await scryfallService.getCardByName(suggestion, false)
-        if (card) {
-          cards.push(card)
-        }
-      }
-      if (cards.length > 0) {
+      this.displayAutocompleteSuggestions(autocompleteSuggestions.slice(0, 3), query)
+    } else {
+      // If no autocomplete, try regular search
+      scryfallService.debouncedSearch(query, (cards) => {
         this.displayCardResults(cards)
-        return
+      })
+    }
+  }
+
+  displayAutocompleteSuggestions(suggestions, query) {
+    const resultsContainer = document.getElementById('card-results')
+    
+    resultsContainer.innerHTML = suggestions.map((suggestion, index) => `
+      <div 
+        class="p-3 hover:bg-blue-50 cursor-pointer border-b border-gray-100 transition-colors autocomplete-suggestion ${index === 0 ? 'bg-blue-50' : ''}"
+        data-card-name="${suggestion}"
+      >
+        <div class="font-medium text-sm text-gray-900">${suggestion}</div>
+        <div class="text-xs text-gray-500 mt-0.5">Click to select</div>
+      </div>
+    `).join('')
+
+    resultsContainer.classList.remove('hidden')
+
+    // Add click handlers to fetch and select the card
+    resultsContainer.querySelectorAll('.autocomplete-suggestion').forEach(item => {
+      item.addEventListener('click', async () => {
+        const cardName = item.dataset.cardName
+        const card = await scryfallService.getCardByName(cardName, false)
+        if (card) {
+          this.selectCard(card)
+        } else {
+          // If exact fetch fails, try fuzzy
+          const fuzzyCard = await scryfallService.getCardByName(cardName, true)
+          if (fuzzyCard) {
+            this.selectCard(fuzzyCard)
+          }
+        }
+      })
+    })
+
+    // Close on outside click
+    const closeHandler = (e) => {
+      if (!resultsContainer.contains(e.target) && e.target.id !== 'card-search') {
+        resultsContainer.classList.add('hidden')
+        document.removeEventListener('click', closeHandler)
       }
     }
-
-    // Fall back to regular search
-    scryfallService.debouncedSearch(query, (cards) => {
-      this.displayCardResults(cards)
-    })
+    setTimeout(() => {
+      document.addEventListener('click', closeHandler)
+    }, 0)
   }
 
   displayCardResults(cards) {
     const resultsContainer = document.getElementById('card-results')
     
-    if (cards.length === 0) {
+    if (!cards || cards.length === 0) {
       resultsContainer.innerHTML = '<div class="p-3 text-sm text-gray-500 text-center">No cards found</div>'
       resultsContainer.classList.remove('hidden')
       return

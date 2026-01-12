@@ -1,0 +1,197 @@
+---
+layout: page
+title: ManaSell - ManaBox to Card Kingdom Bulk Seller
+permalink: /manasell/
+---
+
+<div id="manasell-app" class="bg-gray-50 min-h-full">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header -->
+    <header class="mb-6 sm:mb-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">ManaSell</h1>
+      <p class="text-base sm:text-lg text-gray-600">Convert ManaBox CSV to Card Kingdom Bulk Seller Format</p>
+      <div class="mt-4 p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg">
+        <p class="text-xs sm:text-sm text-blue-800">
+          <strong>Input:</strong> ManaBox CSV export only. Re-export from ManaBox → Collection → Export CSV if you encounter errors.
+        </p>
+      </div>
+    </header>
+
+    <!-- Upload Section -->
+    <div id="upload-section" class="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
+      <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Upload ManaBox CSV</h2>
+      <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+        <input
+          type="file"
+          id="csv-file-input"
+          accept=".csv"
+          class="hidden"
+        />
+        <label
+          for="csv-file-input"
+          class="cursor-pointer inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+          </svg>
+          Choose CSV File
+        </label>
+        <p class="mt-2 text-sm text-gray-500">Select your ManaBox collection export</p>
+      </div>
+      <div id="upload-error" class="hidden mt-4 p-3 bg-red-50 border border-red-300 text-red-800 rounded-lg text-sm">
+        <p id="upload-error-message"></p>
+      </div>
+    </div>
+
+    <!-- Controls Section -->
+    <div id="controls-section" class="hidden bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
+      <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Controls</h2>
+      
+      <!-- Price Thresholds -->
+      <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Minimum Price ($)</label>
+          <input
+            type="number"
+            id="min-price"
+            min="0"
+            step="0.01"
+            value="0"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2">Maximum Price ($)</label>
+          <input
+            type="number"
+            id="max-price"
+            min="0"
+            step="0.01"
+            value=""
+            placeholder="No limit"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          />
+        </div>
+      </div>
+
+      <!-- Finish Toggles -->
+      <div class="mb-6 flex gap-4">
+        <label class="flex items-center">
+          <input
+            type="checkbox"
+            id="include-foil"
+            checked
+            class="mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          <span class="text-sm text-gray-700">Include Foils</span>
+        </label>
+        <label class="flex items-center">
+          <input
+            type="checkbox"
+            id="include-nonfoil"
+            checked
+            class="mr-2 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+          />
+          <span class="text-sm text-gray-700">Include Non-Foils</span>
+        </label>
+      </div>
+
+      <!-- Bulk Actions -->
+      <div class="mb-4">
+        <label class="block text-sm font-medium text-gray-700 mb-2">Bulk Actions</label>
+        <div class="flex flex-wrap gap-2">
+          <button
+            id="keep-all-foils"
+            class="px-3 py-2 text-sm bg-slate-100 hover:bg-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Keep All Foils
+          </button>
+          <button
+            id="keep-one-copy"
+            class="px-3 py-2 text-sm bg-slate-100 hover:bg-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Keep One Copy
+          </button>
+          <button
+            id="sell-duplicates"
+            class="px-3 py-2 text-sm bg-slate-100 hover:bg-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Sell Duplicates Only
+          </button>
+          <button
+            id="mark-all-sell"
+            class="px-3 py-2 text-sm bg-slate-100 hover:bg-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Mark All as Sell
+          </button>
+          <button
+            id="reset-all-sell"
+            class="px-3 py-2 text-sm bg-slate-100 hover:bg-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            Reset All to Sell
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review Table Section -->
+    <div id="review-section" class="hidden bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl sm:text-2xl font-semibold text-gray-900">Review Cards</h2>
+        <div id="summary-stats" class="text-sm text-gray-600">
+          <span id="total-cards">0</span> cards | 
+          <span id="sell-count">0</span> to sell | 
+          <span id="total-value" class="font-semibold">$0.00</span>
+        </div>
+      </div>
+      <div class="overflow-x-auto">
+        <table class="table-fixed w-full border-collapse">
+          <thead>
+            <tr class="sticky top-0 bg-slate-50 border-b-2 border-gray-300">
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-20">Keep/Sell</th>
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-48">Card Name</th>
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-32">Set</th>
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-24">Collector #</th>
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-20">Finish</th>
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-20">Quantity</th>
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-24">Price</th>
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-28">Total Value</th>
+              <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-32">Warnings</th>
+            </tr>
+          </thead>
+          <tbody id="review-table-body" class="divide-y divide-gray-200">
+            <!-- Table rows will be inserted here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Export Section -->
+    <div id="export-section" class="hidden sticky bottom-0 bg-white border-t border-gray-200 p-4 sm:p-6 shadow-lg">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-sm text-gray-600">
+          <strong class="text-gray-900">Ready to export:</strong> 
+          <span id="export-count">0</span> cards marked for sale
+          <span class="mx-2">•</span>
+          <span class="font-semibold text-gray-900">$<span id="export-value">0.00</span></span>
+        </div>
+        <div class="flex gap-2">
+          <button
+            id="export-ck-btn"
+            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm font-medium"
+          >
+            Export Card Kingdom CSV
+          </button>
+          <button
+            id="export-audit-btn"
+            class="px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm font-medium"
+          >
+            Export Audit CSV
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="{{ '/assets/js/manasell/main.js' | relative_url }}"></script>

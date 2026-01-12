@@ -23,56 +23,57 @@ export class ScryfallService {
 
     try {
       // First, try autocomplete to get suggestions
-      let searchTerms = [query]
+      let autocompleteSuggestions = []
       try {
         const autocompleteUrl = `${SCRYFALL_API}/cards/autocomplete?q=${encodeURIComponent(query)}`
         const autocompleteResponse = await fetch(autocompleteUrl)
         if (autocompleteResponse.ok) {
           const autocompleteData = await autocompleteResponse.json()
           if (autocompleteData.data && autocompleteData.data.length > 0) {
-            // Use autocomplete suggestions - these are exact card names
-            searchTerms = autocompleteData.data.slice(0, 5)
+            autocompleteSuggestions = autocompleteData.data.slice(0, limit)
           }
         }
       } catch (e) {
-        // If autocomplete fails, continue with original query
+        // If autocomplete fails, continue
       }
 
-      // Try searching with each autocomplete suggestion
-      for (const term of searchTerms) {
-        // Search by exact name first
-        const exactUrl = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(`!"${term}"`)}&unique=cards&order=released&dir=desc&limit=${limit}`
-        const exactResponse = await fetch(exactUrl)
-        
-        if (exactResponse.ok) {
-          const exactData = await exactResponse.json()
-          const cards = exactData.data || []
-          
-          if (cards.length > 0) {
-            this.cache.set(cacheKey, cards)
-            return cards
+      // If we have autocomplete suggestions, fetch the full card data for each
+      if (autocompleteSuggestions.length > 0) {
+        const cards = []
+        for (const cardName of autocompleteSuggestions) {
+          try {
+            // Use exact match for autocomplete suggestions since they're already exact names
+            const card = await this.getCardByName(cardName, false)
+            if (card) {
+              cards.push(card)
+              // Stop once we have enough cards
+              if (cards.length >= limit) break
+            }
+          } catch (e) {
+            console.warn(`Failed to fetch card: ${cardName}`, e)
+            // Skip this card if fetch fails
           }
+        }
+        if (cards.length > 0) {
+          this.cache.set(cacheKey, cards)
+          return cards
         }
       }
 
-      // If autocomplete suggestions didn't work, try fuzzy search on the original query
-      // This helps with typos like "K'riik" vs "K'rrik"
-      if (query.length >= 3) {
-        const fuzzyUrl = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(query)}&unique=cards&order=released&dir=desc&limit=${limit}`
-        const fuzzyResponse = await fetch(fuzzyUrl)
-        
-        if (fuzzyResponse.ok) {
-          const fuzzyData = await fuzzyResponse.json()
-          const cards = fuzzyData.data || []
-          
-          if (cards.length > 0) {
-            this.cache.set(cacheKey, cards)
-            return cards
-          }
+      // Fallback: try regular search API
+      const searchUrl = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(query)}&unique=cards&order=released&dir=desc&limit=${limit}`
+      const searchResponse = await fetch(searchUrl)
+      
+      if (searchResponse.ok) {
+        const searchData = await searchResponse.json()
+        const cards = searchData.data || []
+        if (cards.length > 0) {
+          this.cache.set(cacheKey, cards)
+          return cards
         }
       }
 
-      // Last resort: try the named endpoint with fuzzy matching
+      // Last resort: try fuzzy named search
       try {
         const namedCard = await this.getCardByName(query, true)
         if (namedCard) {
@@ -80,7 +81,7 @@ export class ScryfallService {
           return [namedCard]
         }
       } catch (e) {
-        // Named endpoint failed, continue
+        // Named endpoint failed
       }
 
       return []
@@ -134,8 +135,13 @@ export class ScryfallService {
   debouncedSearch(query, callback, delay = 300) {
     clearTimeout(this.debounceTimer)
     this.debounceTimer = setTimeout(async () => {
-      const results = await this.searchCards(query)
-      callback(results)
+      try {
+        const results = await this.searchCards(query)
+        callback(results)
+      } catch (error) {
+        console.error('Search error:', error)
+        callback([])
+      }
     }, delay)
   }
 }
