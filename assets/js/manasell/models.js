@@ -257,28 +257,23 @@ export class TextListParser {
       const line = lines[i].trim()
       if (!line) continue
 
-      // Parse format: Card Name [SET] collector# finish qty
+      // Parse format: Qty Card name (set) number ?*F*?
       // Examples:
-      // "Lightning Bolt [M21] 161 nonfoil 4"
-      // "Sol Ring [CMM] 1 foil 2"
-      // "Island [UNF] 267" (defaults to nonfoil, qty 1)
-      // Also supports: "Card Name SET collector# finish qty" (no brackets)
+      // "1 The Legend of Kuruk / Avatar Kuruk (TLA) 61"
+      // "1 The Legend of Yangchen / Avatar Yangchen (PTLA) 27s *F*"
+      // "1 Uthros, Titanic Godcore (EOE) 260"
       
-      let match = line.match(/^(.+?)\s+\[([A-Z0-9]+)\]\s+(\d+)(?:\s+(foil|nonfoil|f|n))?(?:\s+(\d+))?$/i)
-      
-      if (!match) {
-        // Try alternative format: Card Name SET collector# finish qty (no brackets)
-        match = line.match(/^(.+?)\s+([A-Z0-9]{2,5})\s+(\d+)(?:\s+(foil|nonfoil|f|n))?(?:\s+(\d+))?$/i)
-      }
+      // Match: quantity, card name, (set code), collector number, optional *F*
+      const match = line.match(/^(\d+)\s+(.+?)\s+\(([A-Z0-9]+)\)\s+([A-Z0-9]+)(?:\s+\*F\*)?$/i)
       
       if (match) {
-        const cardName = match[1].trim()
-        const setCode = match[2].toUpperCase().trim()
-        const collectorNumber = match[3].trim()
-        const finishRaw = match[4] || 'nonfoil'
-        const quantityRaw = match[5] || '1'
+        const quantityRaw = match[1].trim()
+        const cardName = match[2].trim()
+        const setCode = match[3].toUpperCase().trim()
+        const collectorNumber = match[4].trim()
+        const hasFoil = line.includes('*F*')
         
-        const finish = this.normalizeFinish(finishRaw)
+        const finish = hasFoil ? 'foil' : 'nonfoil'
         const quantity = parseInt(quantityRaw, 10) || 1
 
         if (cardName && setCode && collectorNumber) {
