@@ -22,52 +22,43 @@ export class ScryfallService {
     }
 
     try {
-      // Try autocomplete first for better results with special characters
-      const autocompleteUrl = `${SCRYFALL_API}/cards/autocomplete?q=${encodeURIComponent(query)}`
-      const autocompleteResponse = await fetch(autocompleteUrl)
-      
-      let searchQuery = query
-      if (autocompleteResponse.ok) {
-        const autocompleteData = await autocompleteResponse.json()
-        if (autocompleteData.data && autocompleteData.data.length > 0) {
-          // Use the first autocomplete suggestion for more accurate results
-          searchQuery = autocompleteData.data[0]
-        }
-      }
-
-      // Build search query - use name search for better matching
-      // Escape special characters and use quotes for exact phrase matching
-      const escapedQuery = searchQuery.replace(/'/g, "\\'")
-      const scryfallQuery = `!"${escapedQuery}" OR ${escapedQuery}`
-      
-      const url = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(scryfallQuery)}&unique=cards&order=released&dir=desc&limit=${limit}`
-      const response = await fetch(url)
-      
-      if (!response.ok) {
-        if (response.status === 404) {
-          // If exact search fails, try a simpler search without quotes
-          const fallbackUrl = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(searchQuery)}&unique=cards&order=released&dir=desc&limit=${limit}`
-          const fallbackResponse = await fetch(fallbackUrl)
-          
-          if (!fallbackResponse.ok) {
-            return []
+      // First, try to get autocomplete suggestions for better matching
+      let searchTerms = [query]
+      try {
+        const autocompleteUrl = `${SCRYFALL_API}/cards/autocomplete?q=${encodeURIComponent(query)}`
+        const autocompleteResponse = await fetch(autocompleteUrl)
+        if (autocompleteResponse.ok) {
+          const autocompleteData = await autocompleteResponse.json()
+          if (autocompleteData.data && autocompleteData.data.length > 0) {
+            // Use autocomplete suggestions as search terms
+            searchTerms = autocompleteData.data.slice(0, 3)
           }
-          
-          const fallbackData = await fallbackResponse.json()
-          const cards = fallbackData.data || []
-          this.cache.set(cacheKey, cards)
-          return cards
         }
-        throw new Error(`Scryfall API error: ${response.status}`)
+      } catch (e) {
+        // If autocomplete fails, just use the original query
       }
 
-      const data = await response.json()
-      const cards = data.data || []
-      
-      // Cache results
-      this.cache.set(cacheKey, cards)
-      
-      return cards
+      // Try searching with each term, starting with the most likely match
+      for (const term of searchTerms) {
+        // Use name search with the term - Scryfall handles apostrophes correctly
+        const searchQuery = term.includes(' ') ? `!"${term}"` : term
+        const url = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(searchQuery)}&unique=cards&order=released&dir=desc&limit=${limit}`
+        const response = await fetch(url)
+        
+        if (response.ok) {
+          const data = await response.json()
+          const cards = data.data || []
+          
+          if (cards.length > 0) {
+            // Cache results
+            this.cache.set(cacheKey, cards)
+            return cards
+          }
+        }
+      }
+
+      // If all searches failed, return empty
+      return []
     } catch (error) {
       console.error('Scryfall search error:', error)
       return []
