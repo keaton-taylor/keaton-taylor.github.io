@@ -22,12 +22,41 @@ export class ScryfallService {
     }
 
     try {
-      const url = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(query)}&unique=cards&order=released&dir=desc&limit=${limit}`
+      // Try autocomplete first for better results with special characters
+      const autocompleteUrl = `${SCRYFALL_API}/cards/autocomplete?q=${encodeURIComponent(query)}`
+      const autocompleteResponse = await fetch(autocompleteUrl)
+      
+      let searchQuery = query
+      if (autocompleteResponse.ok) {
+        const autocompleteData = await autocompleteResponse.json()
+        if (autocompleteData.data && autocompleteData.data.length > 0) {
+          // Use the first autocomplete suggestion for more accurate results
+          searchQuery = autocompleteData.data[0]
+        }
+      }
+
+      // Build search query - use name search for better matching
+      // Escape special characters and use quotes for exact phrase matching
+      const escapedQuery = searchQuery.replace(/'/g, "\\'")
+      const scryfallQuery = `!"${escapedQuery}" OR ${escapedQuery}`
+      
+      const url = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(scryfallQuery)}&unique=cards&order=released&dir=desc&limit=${limit}`
       const response = await fetch(url)
       
       if (!response.ok) {
         if (response.status === 404) {
-          return []
+          // If exact search fails, try a simpler search without quotes
+          const fallbackUrl = `${SCRYFALL_API}/cards/search?q=${encodeURIComponent(searchQuery)}&unique=cards&order=released&dir=desc&limit=${limit}`
+          const fallbackResponse = await fetch(fallbackUrl)
+          
+          if (!fallbackResponse.ok) {
+            return []
+          }
+          
+          const fallbackData = await fallbackResponse.json()
+          const cards = fallbackData.data || []
+          this.cache.set(cacheKey, cards)
+          return cards
         }
         throw new Error(`Scryfall API error: ${response.status}`)
       }
