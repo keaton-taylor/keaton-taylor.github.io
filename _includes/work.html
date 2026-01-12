@@ -16,14 +16,14 @@
             <!-- Coming Soon - Not Clickable -->
             {% if casestudy.company_name == "Soundstripe" %}
               <!-- Soundstripe Special Styling -->
-              <div class="block relative overflow-hidden rounded-xl cursor-default aspect-[16/9] w-full max-h-[70vh]" style="background-color: rgb(228, 20, 105);">
+              <div class="block relative overflow-hidden rounded-xl cursor-default">
                 <!-- Coming Soon Badge -->
                 <div class="absolute top-4 right-4 z-30 bg-amber-500 text-white text-xs font-semibold uppercase tracking-wider px-4 py-2 rounded-full shadow-lg">
                   Coming Soon
                 </div>
                 
-                <!-- Background Overlay - Fades to very dark gray on hover -->
-                <div class="absolute inset-0 bg-gray-900 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10"></div>
+                <!-- Background Overlay - Only appears on hover -->
+                <div class="absolute inset-0 bg-black opacity-0 md:group-hover:opacity-80 transition-opacity duration-500 z-10"></div>
                 
                 <!-- Project Title and Logo - Appears on Hover -->
                 <div class="absolute inset-0 z-20 grid place-content-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
@@ -32,9 +32,21 @@
                       <img src="{{ casestudy.logo_src }}" alt="{% if casestudy.company_name %}{{ casestudy.company_name }}{% else %}Company{% endif %} logo" class="h-12 mx-auto mb-6 brightness-0 invert">
                     {% endif %}
                     <h3 class="text-white text-4xl max-w-xl px-4 font-bold mb-2">{{ casestudy.title }}</h3>
-                    <p class="text-white/60 text-lg mt-4">Case study coming soon</p>
+                    <p class="text-white/60 text-lg mt-4">Leadership case study coming soon</p>
                   </div>
                 </div>
+
+                <picture class="block aspect-[16/9] w-full max-h-[70vh]">
+                  <source type="image/webp" srcset="{{ casestudy.image_src | replace: '.png', '.webp' }}">
+                  <img 
+                    class="w-full h-full object-cover rounded-xl transform md:group-hover:scale-[1.02] transition-transform duration-700" 
+                    src="{{ casestudy.image_src }}" 
+                    alt="{{ casestudy.image_alt }}"
+                    loading="lazy"
+                    width="1200"
+                    height="675"
+                  >
+                </picture>
               </div>
             {% else %}
               <!-- Default Coming Soon Styling -->

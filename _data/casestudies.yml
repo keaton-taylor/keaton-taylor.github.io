@@ -1,3 +1,11 @@
+  - title: "Unifying a Distributed Design Guild into a Single Organization"
+    company_name: "Soundstripe"
+    permalink: ""
+    image_src: "assets/images/Soundstripe/upsell.jpeg"
+    image_alt: "Soundstripe homepage showing the design work."
+    logo_src: "assets/images/Soundstripe/logo.svg"
+    coming_soon: true
+
   - title: "Launching Casual Games in a Place Nobody Asked for Them (Yet)"
     company_name: "Discord"
     permalink: "/discord-activities.html"
@@ -18,11 +26,3 @@
     image_src: "assets/images/treehouse/TechdegreeTwo.webp"
     image_alt: "Work for the Treehouse Techdegree program."
     logo_src: "assets/images/treehouse/treehouse.png"
-
-  - title: "Unifying a Distributed Design Guild into a Single Organization"
-    company_name: "Soundstripe"
-    permalink: ""
-    image_src: "assets/images/Web.webp"
-    image_alt: "Placeholder for upcoming Soundstripe case study."
-    logo_src: "assets/images/Soundstripe/logo.svg"
-    coming_soon: true
