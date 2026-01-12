@@ -18,6 +18,12 @@ class ManaSellApp {
     const fileInput = document.getElementById('csv-file-input')
     fileInput.addEventListener('change', (e) => this.handleFileUpload(e))
 
+    // Tab switching
+    const csvTab = document.getElementById('csv-tab')
+    const pasteTab = document.getElementById('paste-tab')
+    csvTab.addEventListener('click', () => this.switchInputMethod('csv'))
+    pasteTab.addEventListener('click', () => this.switchInputMethod('paste'))
+
     // Paste submit button
     const pasteSubmit = document.getElementById('paste-submit-btn')
     pasteSubmit.addEventListener('click', () => this.handlePasteSubmit())
