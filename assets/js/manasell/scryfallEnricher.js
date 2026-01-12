@@ -95,7 +95,15 @@ export class ScryfallEnricher {
       'The Lord of the Rings: Tales of Middle-earth': 'The Lord of the Rings: Tales of Middle-earth'
     }
 
-    return specialMappings[setName] || setName
+    let edition = specialMappings[setName] || setName
+    
+    // If the last word in the set name is "Commander", add " Decks" to the end
+    const words = edition.trim().split(/\s+/)
+    if (words.length > 0 && words[words.length - 1].toLowerCase() === 'commander') {
+      edition = edition + ' Decks'
+    }
+
+    return edition
   }
 
   /**
