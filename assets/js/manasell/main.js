@@ -154,11 +154,16 @@ class ManaSellApp {
     // Show loading state
     this.showLoadingState()
 
+    // Show progress indicator
+    this.showProgress(0, this.cardRows.length)
+
     // Enrich with Scryfall data
     await scryfallEnricher.enrichCards(this.cardRows, (processed, total) => {
-      // Could show progress here if needed
-      console.log(`Enriched ${processed}/${total} cards`)
+      this.updateProgress(processed, total)
     })
+
+    // Hide progress when done
+    this.hideProgress()
 
     // Render table
     this.applyFilters()
@@ -206,11 +211,16 @@ class ManaSellApp {
     // Show loading state
     this.showLoadingState()
 
+    // Show progress indicator
+    this.showProgress(0, this.cardRows.length)
+
     // Enrich with Scryfall data
     await scryfallEnricher.enrichCards(this.cardRows, (processed, total) => {
-      // Could show progress here if needed
-      console.log(`Enriched ${processed}/${total} cards`)
+      this.updateProgress(processed, total)
     })
+
+    // Hide progress when done
+    this.hideProgress()
 
     // Render table
     this.applyFilters()
@@ -582,6 +592,32 @@ class ManaSellApp {
         </td>
       </tr>
     `
+  }
+
+  showProgress(processed, total) {
+    const progressIndicator = document.getElementById('progress-indicator')
+    if (progressIndicator) {
+      progressIndicator.classList.remove('hidden')
+      this.updateProgress(processed, total)
+    }
+  }
+
+  updateProgress(processed, total) {
+    const progressText = document.getElementById('progress-text')
+    const progressBar = document.getElementById('progress-bar')
+    
+    if (progressText && progressBar) {
+      const percentage = total > 0 ? Math.round((processed / total) * 100) : 0
+      progressText.textContent = `${processed} / ${total}`
+      progressBar.style.width = `${percentage}%`
+    }
+  }
+
+  hideProgress() {
+    const progressIndicator = document.getElementById('progress-indicator')
+    if (progressIndicator) {
+      progressIndicator.classList.add('hidden')
+    }
   }
 
   escapeHtml(text) {
