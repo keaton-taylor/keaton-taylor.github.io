@@ -8,13 +8,23 @@
     "watch:css": "postcss assets/css/styles.css -o assets/css/main.css --watch",
     "build": "npm run build:css && bundle exec jekyll build",
     "start": "npm run watch:css & bundle exec jekyll serve --port 5000 --livereload-port 35729",
-    "dev": "npm run watch:css & bundle exec jekyll serve --port 4000 --livereload-port 35729"
+    "dev": "npm run watch:css & bundle exec jekyll serve --port 4000 --livereload-port 35729",
+    "sync": "browser-sync start --config bs-config.js",
+    "dev:sync": "concurrently -n \"css,jekyll,browsersync\" -c \"yellow,blue,green\" \"npm run watch:css\" \"bundle exec jekyll serve --port 4000\" \"sleep 5 && browser-sync start --config bs-config.js\""
   },
-  "keywords": ["portfolio", "jekyll", "tailwindcss", "design", "product-design"],
+  "keywords": [
+    "portfolio",
+    "jekyll",
+    "tailwindcss",
+    "design",
+    "product-design"
+  ],
   "author": "Keaton Taylor",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^10.4.21",
+    "browser-sync": "^3.0.4",
+    "concurrently": "^9.2.1",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1"
   },
