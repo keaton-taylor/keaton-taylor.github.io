@@ -4,11 +4,22 @@
 
 const SCRYFALL_API = 'https://api.scryfall.com'
 
+// Set code aliases: some sources (e.g. ManaBox) use different codes than Scryfall
+const SET_CODE_ALIASES = {
+  eoc: 'eoe' // Edge of Eternities: EOC (common typo/alt) -> EOE (Scryfall)
+}
+
 export class ScryfallEnricher {
   constructor() {
     this.cache = new Map()
     this.requestQueue = []
     this.processing = false
+  }
+
+  /** Resolve set code to Scryfall's code (lowercase), using aliases if needed */
+  resolveSetCode(setCode) {
+    const code = (setCode || '').toLowerCase().trim()
+    return SET_CODE_ALIASES[code] || code
   }
 
   /**
@@ -23,9 +34,18 @@ export class ScryfallEnricher {
     }
 
     try {
-      // Search by set code and collector number
-      const card = await this.getCardBySetAndNumber(cardRow.setCode, cardRow.collectorNumber)
-      
+      // 1. Try direct lookup by set code + collector number
+      let card = await this.getCardBySetAndNumber(cardRow.setCode, cardRow.collectorNumber)
+
+      // 2. Fallback: search by exact card name + set (handles set code / collector number mismatches)
+      if (!card && cardRow.name && cardRow.setCode) {
+        await new Promise((r) => setTimeout(r, 120)) // rate limit before fallback request
+        card = await this.getCardByNameAndSet(cardRow.name, cardRow.setCode)
+        if (card) {
+          console.info('Scryfall fallback matched:', cardRow.name, 'set:', cardRow.setCode)
+        }
+      }
+
       if (!card) {
         cardRow.addWarning('Card not found in Scryfall')
         this.cache.set(cacheKey, null)
@@ -54,8 +74,7 @@ export class ScryfallEnricher {
    */
   async getCardBySetAndNumber(setCode, collectorNumber) {
     try {
-      // Scryfall API uses lowercase set codes
-      const code = (setCode || '').toLowerCase().trim()
+      const code = this.resolveSetCode(setCode)
       // Collector number as-is (can include letters, e.g. "27s")
       const number = encodeURIComponent(String(collectorNumber || '').trim())
 
@@ -84,6 +103,29 @@ export class ScryfallEnricher {
       return await response.json()
     } catch (error) {
       console.error('Scryfall API error:', error)
+      return null
+    }
+  }
+
+  /**
+   * Fallback: get card by exact name and set code (for when set+number lookup fails)
+   * Uses Scryfall /cards/named?exact=...&set=...
+   */
+  async getCardByNameAndSet(cardName, setCode) {
+    try {
+      const code = this.resolveSetCode(setCode)
+      const name = (cardName || '').trim()
+      if (!name || !code) return null
+
+      const url = `${SCRYFALL_API}/cards/named?exact=${encodeURIComponent(name)}&set=${encodeURIComponent(code)}`
+      const response = await fetch(url)
+
+      if (!response.ok) {
+        return null
+      }
+
+      return await response.json()
+    } catch (error) {
       return null
     }
   }
