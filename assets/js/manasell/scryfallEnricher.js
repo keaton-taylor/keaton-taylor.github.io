@@ -75,6 +75,7 @@ export class ScryfallEnricher {
         marketPrice: this.getMarketPrice(card, cardRow.finish),
         setName: card.set_name || '',
         ckEdition: this.mapToCardKingdomEdition(card),
+        resolvedSetCode: (card.set || '').toLowerCase(),
         scryfallData: card
       }
 

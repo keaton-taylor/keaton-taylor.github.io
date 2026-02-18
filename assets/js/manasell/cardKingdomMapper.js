@@ -21,18 +21,18 @@ export class CardKingdomMapper {
         grouped.set(key, {
           title: row.name,
           edition: row.ckEdition || row.setName || row.setCode,
-          foil: row.finish === 'foil' ? 1 : 0,
+          foil: row.finish === 'foil',
           quantity: row.quantity
         })
       }
     })
 
-    // Convert to CSV
+    // Match Card Kingdom example: Title, Edition (full set name), Foil (TRUE/FALSE), Quantity
     const headers = ['Title', 'Edition', 'Foil', 'Quantity']
     const rows = Array.from(grouped.values()).map(row => [
       this.escapeCSV(row.title),
       this.escapeCSV(row.edition),
-      row.foil,
+      row.foil ? 'TRUE' : 'FALSE',
       row.quantity
     ])
 
