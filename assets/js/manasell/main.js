@@ -28,23 +28,29 @@ class ManaSellApp {
     const pasteSubmit = document.getElementById('paste-submit-btn')
     pasteSubmit.addEventListener('click', () => this.handlePasteSubmit())
 
-    // Price threshold controls
+    // Price threshold controls (only if controls section exists)
     const minPrice = document.getElementById('min-price')
     const maxPrice = document.getElementById('max-price')
     const includeFoil = document.getElementById('include-foil')
     const includeNonfoil = document.getElementById('include-nonfoil')
 
-    minPrice.addEventListener('input', () => this.applyFilters())
-    maxPrice.addEventListener('input', () => this.applyFilters())
-    includeFoil.addEventListener('change', () => this.applyFilters())
-    includeNonfoil.addEventListener('change', () => this.applyFilters())
+    if (minPrice) minPrice.addEventListener('input', () => this.applyFilters())
+    if (maxPrice) maxPrice.addEventListener('input', () => this.applyFilters())
+    if (includeFoil) includeFoil.addEventListener('change', () => this.applyFilters())
+    if (includeNonfoil) includeNonfoil.addEventListener('change', () => this.applyFilters())
 
-    // Bulk actions
-    document.getElementById('keep-all-foils').addEventListener('click', () => this.keepAllFoils())
-    document.getElementById('keep-one-copy').addEventListener('click', () => this.keepOneCopy())
-    document.getElementById('sell-duplicates').addEventListener('click', () => this.sellDuplicates())
-    document.getElementById('mark-all-sell').addEventListener('click', () => this.markAllSell())
-    document.getElementById('reset-all-sell').addEventListener('click', () => this.resetAllSell())
+    // Bulk actions (only if controls section exists)
+    const keepAllFoilsBtn = document.getElementById('keep-all-foils')
+    const keepOneCopyBtn = document.getElementById('keep-one-copy')
+    const sellDuplicatesBtn = document.getElementById('sell-duplicates')
+    const markAllSellBtn = document.getElementById('mark-all-sell')
+    const resetAllSellBtn = document.getElementById('reset-all-sell')
+    
+    if (keepAllFoilsBtn) keepAllFoilsBtn.addEventListener('click', () => this.keepAllFoils())
+    if (keepOneCopyBtn) keepOneCopyBtn.addEventListener('click', () => this.keepOneCopy())
+    if (sellDuplicatesBtn) sellDuplicatesBtn.addEventListener('click', () => this.sellDuplicates())
+    if (markAllSellBtn) markAllSellBtn.addEventListener('click', () => this.markAllSell())
+    if (resetAllSellBtn) resetAllSellBtn.addEventListener('click', () => this.resetAllSell())
 
     // Export buttons
     document.getElementById('export-ck-btn').addEventListener('click', () => this.exportCardKingdom())
@@ -146,8 +152,8 @@ class ManaSellApp {
       return cardRow
     })
 
-    // Show controls
-    document.getElementById('controls-section').classList.remove('hidden')
+    // Show controls (commented out - controls section stays hidden)
+    // document.getElementById('controls-section').classList.remove('hidden')
     document.getElementById('review-section').classList.remove('hidden')
     document.getElementById('export-section').classList.remove('hidden')
 
@@ -203,8 +209,8 @@ class ManaSellApp {
       return cardRow
     })
 
-    // Show controls
-    document.getElementById('controls-section').classList.remove('hidden')
+    // Show controls (commented out - controls section stays hidden)
+    // document.getElementById('controls-section').classList.remove('hidden')
     document.getElementById('review-section').classList.remove('hidden')
     document.getElementById('export-section').classList.remove('hidden')
 
@@ -248,11 +254,17 @@ class ManaSellApp {
   }
 
   applyFilters() {
-    const minPrice = parseFloat(document.getElementById('min-price').value) || 0
-    const maxPriceInput = document.getElementById('max-price').value
+    const minPriceEl = document.getElementById('min-price')
+    const maxPriceEl = document.getElementById('max-price')
+    const includeFoilEl = document.getElementById('include-foil')
+    const includeNonfoilEl = document.getElementById('include-nonfoil')
+    
+    // Default values if controls section is hidden
+    const minPrice = minPriceEl ? (parseFloat(minPriceEl.value) || 0) : 0
+    const maxPriceInput = maxPriceEl ? maxPriceEl.value : ''
     const maxPrice = maxPriceInput ? parseFloat(maxPriceInput) : Infinity
-    const includeFoil = document.getElementById('include-foil').checked
-    const includeNonfoil = document.getElementById('include-nonfoil').checked
+    const includeFoil = includeFoilEl ? includeFoilEl.checked : true
+    const includeNonfoil = includeNonfoilEl ? includeNonfoilEl.checked : true
 
     this.filteredRows = this.cardRows.filter(row => {
       // Price filter
