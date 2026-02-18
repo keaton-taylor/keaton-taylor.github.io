@@ -37,12 +37,31 @@ export class ScryfallEnricher {
       // 1. Try direct lookup by set code + collector number
       let card = await this.getCardBySetAndNumber(cardRow.setCode, cardRow.collectorNumber)
 
-      // 2. Fallback: search by exact card name + set (handles set code / collector number mismatches)
+      // 1b. Retry with zero-padded collector number (e.g. 8 -> 008) if numeric and first try failed
+      if (!card && cardRow.collectorNumber && /^\d+$/.test(String(cardRow.collectorNumber).trim())) {
+        const padded = String(cardRow.collectorNumber).trim().padStart(3, '0')
+        if (padded !== String(cardRow.collectorNumber).trim()) {
+          await new Promise((r) => setTimeout(r, 100))
+          card = await this.getCardBySetAndNumber(cardRow.setCode, padded)
+        }
+      }
+
+      // 2. Fallback: search by exact card name + set
       if (!card && cardRow.name && cardRow.setCode) {
-        await new Promise((r) => setTimeout(r, 120)) // rate limit before fallback request
+        await new Promise((r) => setTimeout(r, 120))
         card = await this.getCardByNameAndSet(cardRow.name, cardRow.setCode)
         if (card) {
-          console.info('Scryfall fallback matched:', cardRow.name, 'set:', cardRow.setCode)
+          console.info('Scryfall fallback (name+set):', cardRow.name, 'set:', cardRow.setCode)
+        }
+      }
+
+      // 3. Last resort: exact name only (may be different printing; we still get price/set)
+      if (!card && cardRow.name) {
+        await new Promise((r) => setTimeout(r, 120))
+        card = await this.getCardByNameOnly(cardRow.name)
+        if (card) {
+          cardRow.addWarning('Matched by name only (printing may differ)')
+          console.info('Scryfall fallback (name only):', cardRow.name)
         }
       }
 
@@ -118,6 +137,28 @@ export class ScryfallEnricher {
       if (!name || !code) return null
 
       const url = `${SCRYFALL_API}/cards/named?exact=${encodeURIComponent(name)}&set=${encodeURIComponent(code)}`
+      const response = await fetch(url)
+
+      if (!response.ok) {
+        return null
+      }
+
+      return await response.json()
+    } catch (error) {
+      return null
+    }
+  }
+
+  /**
+   * Last-resort fallback: get card by exact name only (no set).
+   * Returns one printing; may not match requested set but provides price/set name.
+   */
+  async getCardByNameOnly(cardName) {
+    try {
+      const name = (cardName || '').trim()
+      if (!name) return null
+
+      const url = `${SCRYFALL_API}/cards/named?exact=${encodeURIComponent(name)}`
       const response = await fetch(url)
 
       if (!response.ok) {
