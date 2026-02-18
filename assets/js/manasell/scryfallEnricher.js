@@ -190,17 +190,40 @@ export class ScryfallEnricher {
   mapToCardKingdomEdition(card) {
     const setName = card.set_name || ''
     
-    // Card Kingdom typically uses the full set name
-    // Some sets may need special mapping, but for MVP we'll use the set name
-    // Common mappings can be added here as needed
     const specialMappings = {
       'The Brothers\' War': 'The Brothers\' War',
       'Phyrexia: All Will Be One': 'Phyrexia: All Will Be One',
       'March of the Machine': 'March of the Machine',
-      'The Lord of the Rings: Tales of Middle-earth': 'The Lord of the Rings: Tales of Middle-earth'
+      'The Lord of the Rings: Tales of Middle-earth': 'The Lord of the Rings: Tales of Middle-earth',
+      'Avatar: The Last Airbender Eternal': 'Avatar: The Last Airbender Eternal-Legal Variants',
+      'Bloomburrow Commander': 'Bloomburrow Commander Decks Variants',
+      'Bloomburrow Commander Decks': 'Bloomburrow Commander Decks Variants',
+      'Breaking News': 'Outlaws of Thunder Junction Breaking News',
+      'Crimson Vow Commander': 'Innistrad: Crimson Vow Commander Decks',
+      'Crimson Vow Commander Decks': 'Innistrad: Crimson Vow Commander Decks',
+      'Duskmourn: House of Horror Commander': 'Duskmourn: House of Horror Commander Decks Variants',
+      'Duskmourn: House of Horror Commander Decks': 'Duskmourn: House of Horror Commander Decks Variants'
     }
 
-    let edition = specialMappings[setName] || setName
+    // Universes Beyond sets: CK uses "Universes Beyond: [Set Name] Variants"
+    const universesBeyondSets = new Set([
+      'Doctor Who',
+      'Doctor Who Tokens',
+      'Fallout',
+      'Marvel\'s Spider-Man',
+      'Warhammer 40,000 Commander',
+      'Street Fighter',
+      'Fortnite',
+      'Arcane'
+    ])
+
+    let edition = specialMappings[setName]
+    if (!edition && universesBeyondSets.has(setName)) {
+      edition = `Universes Beyond: ${setName} Variants`
+    }
+    if (!edition) {
+      edition = setName
+    }
     
     // If the last word in the set name is "Commander", add " Decks" to the end
     const words = edition.trim().split(/\s+/)
