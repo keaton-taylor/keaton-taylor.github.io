@@ -50,13 +50,34 @@ export class ScryfallEnricher {
 
   /**
    * Get card by set code and collector number
+   * Scryfall expects lowercase set codes in the URL (e.g. m21, not M21)
    */
   async getCardBySetAndNumber(setCode, collectorNumber) {
     try {
-      const url = `${SCRYFALL_API}/cards/${setCode}/${collectorNumber}`
+      // Scryfall API uses lowercase set codes
+      const code = (setCode || '').toLowerCase().trim()
+      // Collector number as-is (can include letters, e.g. "27s")
+      const number = encodeURIComponent(String(collectorNumber || '').trim())
+
+      if (!code || !number) {
+        console.warn('Scryfall lookup: missing setCode or collectorNumber', {
+          setCode,
+          collectorNumber
+        })
+        return null
+      }
+
+      const url = `${SCRYFALL_API}/cards/${code}/${number}`
       const response = await fetch(url)
-      
+
       if (!response.ok) {
+        // Log failed lookups to help debug "not found" issues
+        console.warn('Scryfall lookup failed', {
+          url,
+          status: response.status,
+          setCode: code,
+          collectorNumber: decodeURIComponent(number)
+        })
         return null
       }
 
