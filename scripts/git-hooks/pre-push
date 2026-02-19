@@ -13,4 +13,4 @@ if echo "$PUSH_COMMITS" | grep -qv "Bump ManaSell version"; then
   fi
 fi
 
-exec git push "$1"
+exec git push --no-verify "$1"
