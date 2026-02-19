@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "main": "postcss.config.js",
   "scripts": {
+    "setup:hooks": "node scripts/setup-hooks.js",
+    "version:bump": "node scripts/bump-manasell-version.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:css": "postcss assets/css/styles.css -o assets/css/main.css",
     "watch:css": "postcss assets/css/styles.css -o assets/css/main.css --watch",
