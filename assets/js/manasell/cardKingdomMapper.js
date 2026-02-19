@@ -30,8 +30,8 @@ export class CardKingdomMapper {
     // Match Card Kingdom example: Title, Edition (full set name), Foil (TRUE/FALSE), Quantity
     const headers = ['Title', 'Edition', 'Foil', 'Quantity']
     const rows = Array.from(grouped.values()).map(row => [
-      this.escapeCSV(row.title),
-      this.escapeCSV(row.edition),
+      this.escapeCSV(String(row.title || '').trim()),
+      this.escapeCSV(String(row.edition || '').trim()),
       row.foil ? 'TRUE' : 'FALSE',
       row.quantity
     ])
@@ -94,22 +94,24 @@ export class CardKingdomMapper {
   }
 
   /**
-   * Generate CSV string from headers and rows
+   * Generate CSV string from headers and rows.
+   * Uses CRLF so Excel/Windows and web parsers handle the file reliably.
    */
   generateCSV(headers, rows) {
     const csvRows = [
       headers.map(h => this.escapeCSV(h)).join(','),
       ...rows.map(row => row.join(','))
     ]
-    
-    return csvRows.join('\n')
+    return csvRows.join('\r\n')
   }
 
   /**
-   * Download CSV file
+   * Download CSV file.
+   * Prepends UTF-8 BOM so parsers (Excel, CK) detect encoding correctly.
    */
   downloadCSV(csvContent, filename) {
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+    const BOM = '\uFEFF'
+    const blob = new Blob([BOM + csvContent], { type: 'text/csv;charset=utf-8;' })
     const link = document.createElement('a')
     const url = URL.createObjectURL(blob)
     
