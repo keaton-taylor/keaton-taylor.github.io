@@ -203,7 +203,7 @@ export class ScryfallEnricher {
       'Crimson Vow Commander Decks': 'Innistrad: Crimson Vow Commander Decks',
       'Duskmourn: House of Horror Commander': 'Duskmourn: House of Horror Commander Decks',
       'Duskmourn: House of Horror Commander Decks': 'Duskmourn: House of Horror Commander Decks',
-      'Edge of Eternities': 'Edge of Eternities Commander',
+      'Edge of Eternities': 'Edge of Eternities',
       'Marvel\'s Spider-Man': 'Marvel\'s Spider-Man'
     }
 
