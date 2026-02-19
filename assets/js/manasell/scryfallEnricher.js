@@ -202,10 +202,11 @@ export class ScryfallEnricher {
       'Crimson Vow Commander': 'Innistrad: Crimson Vow Commander Decks',
       'Crimson Vow Commander Decks': 'Innistrad: Crimson Vow Commander Decks',
       'Duskmourn: House of Horror Commander': 'Duskmourn: House of Horror Commander Decks Variants',
-      'Duskmourn: House of Horror Commander Decks': 'Duskmourn: House of Horror Commander Decks Variants'
+      'Duskmourn: House of Horror Commander Decks': 'Duskmourn: House of Horror Commander Decks Variants',
+      'Edge of Eternities': 'Edge of Eternities Commander'
     }
 
-    // Universes Beyond sets: CK uses "Universes Beyond: [Set Name] Variants"
+    // Universes Beyond sets: CK uses "Universes Beyond: [Set Name]"
     const universesBeyondSets = new Set([
       'Doctor Who',
       'Doctor Who Tokens',
@@ -219,7 +220,7 @@ export class ScryfallEnricher {
 
     let edition = specialMappings[setName]
     if (!edition && universesBeyondSets.has(setName)) {
-      edition = `Universes Beyond: ${setName} Variants`
+      edition = `Universes Beyond: ${setName}`
     }
     if (!edition) {
       edition = setName
