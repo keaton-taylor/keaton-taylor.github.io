@@ -201,9 +201,10 @@ export class ScryfallEnricher {
       'Breaking News': 'Outlaws of Thunder Junction Breaking News',
       'Crimson Vow Commander': 'Innistrad: Crimson Vow Commander Decks',
       'Crimson Vow Commander Decks': 'Innistrad: Crimson Vow Commander Decks',
-      'Duskmourn: House of Horror Commander': 'Duskmourn: House of Horror Commander Decks Variants',
-      'Duskmourn: House of Horror Commander Decks': 'Duskmourn: House of Horror Commander Decks Variants',
-      'Edge of Eternities': 'Edge of Eternities Commander'
+      'Duskmourn: House of Horror Commander': 'Duskmourn: House of Horror Commander Decks',
+      'Duskmourn: House of Horror Commander Decks': 'Duskmourn: House of Horror Commander Decks',
+      'Edge of Eternities': 'Edge of Eternities Commander',
+      'Marvel\'s Spider-Man': 'Marvel\'s Spider-Man'
     }
 
     // Universes Beyond sets: CK uses "Universes Beyond: [Set Name]"
@@ -211,7 +212,6 @@ export class ScryfallEnricher {
       'Doctor Who',
       'Doctor Who Tokens',
       'Fallout',
-      'Marvel\'s Spider-Man',
       'Warhammer 40,000 Commander',
       'Street Fighter',
       'Fortnite',
