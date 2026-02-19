@@ -4,10 +4,9 @@
 
 const SCRYFALL_API = 'https://api.scryfall.com'
 
-// Set code aliases: some sources (e.g. ManaBox) use different codes than Scryfall
-const SET_CODE_ALIASES = {
-  eoc: 'eoe' // Edge of Eternities: EOC (common typo/alt) -> EOE (Scryfall)
-}
+// Set code aliases: some sources use different codes than Scryfall (only add when needed)
+// EOC = Edge of Eternities Commander, EOE = Edge of Eternities (main set) - no alias
+const SET_CODE_ALIASES = {}
 
 export class ScryfallEnricher {
   constructor() {
