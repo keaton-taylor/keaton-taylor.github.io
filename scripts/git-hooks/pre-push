@@ -1,12 +1,16 @@
 #!/bin/sh
-# Bump ManaSell version before every push, then run the push (so the bump commit is included).
+# Bump ManaSell version only when pushing commits that are not version bumps, then push.
 
 cd "$(git rev-parse --show-toplevel)" || exit 1
 
-NEW_VERSION=$(node scripts/bump-manasell-version.js 2>/dev/null)
-if [ -n "$NEW_VERSION" ] && ! git diff --quiet manasell.html 2>/dev/null; then
-  git add manasell.html
-  git commit -m "Bump ManaSell version to ${NEW_VERSION}"
+# Only bump if we have at least one commit to push that isn't already a version bump
+PUSH_COMMITS=$(git log origin/main..HEAD --oneline 2>/dev/null)
+if echo "$PUSH_COMMITS" | grep -qv "Bump ManaSell version"; then
+  NEW_VERSION=$(node scripts/bump-manasell-version.js 2>/dev/null)
+  if [ -n "$NEW_VERSION" ] && ! git diff --quiet manasell.html 2>/dev/null; then
+    git add manasell.html
+    git commit -m "Bump ManaSell version to ${NEW_VERSION}"
+  fi
 fi
 
-exec git push "$@"
+exec git push "$1"
