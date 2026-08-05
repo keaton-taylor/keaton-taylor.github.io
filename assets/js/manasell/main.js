@@ -6,10 +6,14 @@ import { CardRow, ManaBoxCSV, TextListParser } from './models.js'
 import { scryfallEnricher } from './scryfallEnricher.js'
 import { cardKingdomMapper } from './cardKingdomMapper.js'
 
+const LOW_VALUE_THRESHOLD = 1
+
 class ManaSellApp {
   constructor() {
     this.cardRows = []
     this.filteredRows = []
+    this.omitLowValue = false
+    this.priceSortDirection = null // null | 'asc' | 'desc'
     this.initializeUI()
   }
 
@@ -27,6 +31,21 @@ class ManaSellApp {
     // Paste submit button
     const pasteSubmit = document.getElementById('paste-submit-btn')
     pasteSubmit.addEventListener('click', () => this.handlePasteSubmit())
+
+    // Price column sort
+    const priceHeader = document.getElementById('sort-price')
+    if (priceHeader) priceHeader.addEventListener('click', () => this.togglePriceSort())
+
+    // Omit low-value cards switch
+    const omitLowValue = document.getElementById('omit-low-value')
+    if (omitLowValue) {
+      omitLowValue.addEventListener('change', (e) => {
+        this.omitLowValue = e.target.checked
+        this.applyOmitLowValue()
+        this.renderTable()
+        this.updateSummary()
+      })
+    }
 
     // Price threshold controls (only if controls section exists)
     const minPrice = document.getElementById('min-price')
@@ -171,6 +190,9 @@ class ManaSellApp {
     // Hide progress when done
     this.hideProgress()
 
+    // Re-apply the omit-low-value switch to the freshly loaded rows
+    this.applyOmitLowValue()
+
     // Render table
     this.applyFilters()
   }
@@ -228,8 +250,54 @@ class ManaSellApp {
     // Hide progress when done
     this.hideProgress()
 
+    // Re-apply the omit-low-value switch to the freshly loaded rows
+    this.applyOmitLowValue()
+
     // Render table
     this.applyFilters()
+  }
+
+  applyOmitLowValue() {
+    if (this.omitLowValue) {
+      this.cardRows.forEach(row => {
+        if (row.marketPrice < LOW_VALUE_THRESHOLD && row.keepSellStatus === 'sell') {
+          row.keepSellStatus = 'keep'
+          row.quantity = 0
+          row.autoKept = true
+        }
+      })
+    } else {
+      this.cardRows.forEach(row => {
+        if (row.autoKept) {
+          row.keepSellStatus = 'sell'
+          row.quantity = 1
+          row.autoKept = false
+        }
+      })
+    }
+  }
+
+  togglePriceSort() {
+    if (this.priceSortDirection === 'desc') {
+      this.priceSortDirection = 'asc'
+    } else if (this.priceSortDirection === 'asc') {
+      this.priceSortDirection = null
+    } else {
+      this.priceSortDirection = 'desc'
+    }
+    this.applyFilters()
+  }
+
+  updateSortIndicator() {
+    const indicator = document.getElementById('price-sort-indicator')
+    if (!indicator) return
+    if (this.priceSortDirection === 'asc') {
+      indicator.textContent = ' ▲'
+    } else if (this.priceSortDirection === 'desc') {
+      indicator.textContent = ' ▼'
+    } else {
+      indicator.textContent = ''
+    }
   }
 
   normalizeAndDeduplicate(rows) {
@@ -283,6 +351,13 @@ class ManaSellApp {
       return true
     })
 
+    if (this.priceSortDirection === 'asc') {
+      this.filteredRows.sort((a, b) => a.marketPrice - b.marketPrice)
+    } else if (this.priceSortDirection === 'desc') {
+      this.filteredRows.sort((a, b) => b.marketPrice - a.marketPrice)
+    }
+
+    this.updateSortIndicator()
     this.renderTable()
     this.updateSummary()
   }
@@ -384,7 +459,8 @@ class ManaSellApp {
     if (row) {
       const newStatus = row.keepSellStatus === 'keep' ? 'sell' : 'keep'
       row.keepSellStatus = newStatus
-      
+      row.autoKept = false // manual override takes precedence over the switch
+
       // Update quantity based on status
       if (newStatus === 'keep') {
         row.quantity = 0
@@ -407,7 +483,8 @@ class ManaSellApp {
     
     const newQty = Math.max(0, Math.min(row.totalQuantity, parseInt(value, 10) || 0))
     row.quantity = newQty
-    
+    row.autoKept = false // manual override takes precedence over the switch
+
     // Auto-update status based on quantity
     if (newQty === 0) {
       row.keepSellStatus = 'keep'
