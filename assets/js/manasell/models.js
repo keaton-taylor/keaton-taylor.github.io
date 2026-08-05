@@ -16,6 +16,7 @@ export class CardRow {
     this.ckEdition = data.ckEdition || '' // Card Kingdom edition name
     this.resolvedSetCode = data.resolvedSetCode || '' // Scryfall set code (lowercase) for CK CSV
     this.keepSellStatus = data.keepSellStatus || 'sell' // 'keep' or 'sell'
+    this.autoKept = false // true when keepSellStatus was set by the "omit under $1" switch, not the user
     this.warnings = data.warnings || []
     this.originalRows = data.originalRows || [] // Track original CSV rows for deduplication
   }
