@@ -14,6 +14,7 @@ class ManaSellApp {
     this.filteredRows = []
     this.omitLowValue = false
     this.priceSortDirection = null // null | 'asc' | 'desc'
+    this.keptSectionExpanded = false
     this.initializeUI()
   }
 
@@ -41,9 +42,8 @@ class ManaSellApp {
     if (omitLowValue) {
       omitLowValue.addEventListener('change', (e) => {
         this.omitLowValue = e.target.checked
-        this.applyOmitLowValue()
-        this.renderTable()
-        this.updateSummary()
+        this.applyAutoKeep()
+        this.applyFilters()
       })
     }
 
@@ -53,10 +53,19 @@ class ManaSellApp {
     const includeFoil = document.getElementById('include-foil')
     const includeNonfoil = document.getElementById('include-nonfoil')
 
-    if (minPrice) minPrice.addEventListener('input', () => this.applyFilters())
-    if (maxPrice) maxPrice.addEventListener('input', () => this.applyFilters())
+    if (minPrice) minPrice.addEventListener('input', () => { this.applyAutoKeep(); this.applyFilters() })
+    if (maxPrice) maxPrice.addEventListener('input', () => { this.applyAutoKeep(); this.applyFilters() })
     if (includeFoil) includeFoil.addEventListener('change', () => this.applyFilters())
     if (includeNonfoil) includeNonfoil.addEventListener('change', () => this.applyFilters())
+
+    // Kept section collapse/expand
+    const keptToggle = document.getElementById('kept-toggle')
+    if (keptToggle) {
+      keptToggle.addEventListener('click', () => {
+        this.keptSectionExpanded = !this.keptSectionExpanded
+        this.updateKeptSectionVisibility()
+      })
+    }
 
     // Bulk actions (only if controls section exists)
     const keepAllFoilsBtn = document.getElementById('keep-all-foils')
@@ -171,8 +180,8 @@ class ManaSellApp {
       return cardRow
     })
 
-    // Show controls (commented out - controls section stays hidden)
-    // document.getElementById('controls-section').classList.remove('hidden')
+    // Show controls
+    document.getElementById('controls-section').classList.remove('hidden')
     document.getElementById('review-section').classList.remove('hidden')
     document.getElementById('export-section').classList.remove('hidden')
 
@@ -190,8 +199,8 @@ class ManaSellApp {
     // Hide progress when done
     this.hideProgress()
 
-    // Re-apply the omit-low-value switch to the freshly loaded rows
-    this.applyOmitLowValue()
+    // Re-apply price/switch auto-keep rules to the freshly loaded rows
+    this.applyAutoKeep()
 
     // Render table
     this.applyFilters()
@@ -231,8 +240,8 @@ class ManaSellApp {
       return cardRow
     })
 
-    // Show controls (commented out - controls section stays hidden)
-    // document.getElementById('controls-section').classList.remove('hidden')
+    // Show controls
+    document.getElementById('controls-section').classList.remove('hidden')
     document.getElementById('review-section').classList.remove('hidden')
     document.getElementById('export-section').classList.remove('hidden')
 
@@ -250,31 +259,43 @@ class ManaSellApp {
     // Hide progress when done
     this.hideProgress()
 
-    // Re-apply the omit-low-value switch to the freshly loaded rows
-    this.applyOmitLowValue()
+    // Re-apply price/switch auto-keep rules to the freshly loaded rows
+    this.applyAutoKeep()
 
     // Render table
     this.applyFilters()
   }
 
-  applyOmitLowValue() {
+  // Recomputes which rows the price controls (the $1 switch and/or the
+  // Min/Max Price fields) should auto-keep. Rows the user has manually
+  // toggled are only overridden the next time this runs, not retroactively.
+  applyAutoKeep() {
+    const minPriceEl = document.getElementById('min-price')
+    const maxPriceEl = document.getElementById('max-price')
+    const minPriceInput = minPriceEl && minPriceEl.value !== '' ? parseFloat(minPriceEl.value) : NaN
+    const maxPriceInput = maxPriceEl && maxPriceEl.value !== '' ? parseFloat(maxPriceEl.value) : NaN
+
+    let effectiveMin = Number.isFinite(minPriceInput) ? minPriceInput : 0
     if (this.omitLowValue) {
-      this.cardRows.forEach(row => {
-        if (row.marketPrice < LOW_VALUE_THRESHOLD && row.keepSellStatus === 'sell') {
+      effectiveMin = Math.max(effectiveMin, LOW_VALUE_THRESHOLD)
+    }
+    const effectiveMax = Number.isFinite(maxPriceInput) ? maxPriceInput : Infinity
+
+    this.cardRows.forEach(row => {
+      const outsideRange = row.marketPrice < effectiveMin || row.marketPrice > effectiveMax
+
+      if (outsideRange) {
+        if (row.keepSellStatus === 'sell') {
           row.keepSellStatus = 'keep'
           row.quantity = 0
           row.autoKept = true
         }
-      })
-    } else {
-      this.cardRows.forEach(row => {
-        if (row.autoKept) {
-          row.keepSellStatus = 'sell'
-          row.quantity = 1
-          row.autoKept = false
-        }
-      })
-    }
+      } else if (row.autoKept) {
+        row.keepSellStatus = 'sell'
+        row.quantity = 1
+        row.autoKept = false
+      }
+    })
   }
 
   togglePriceSort() {
@@ -322,24 +343,16 @@ class ManaSellApp {
   }
 
   applyFilters() {
-    const minPriceEl = document.getElementById('min-price')
-    const maxPriceEl = document.getElementById('max-price')
     const includeFoilEl = document.getElementById('include-foil')
     const includeNonfoilEl = document.getElementById('include-nonfoil')
-    
+
     // Default values if controls section is hidden
-    const minPrice = minPriceEl ? (parseFloat(minPriceEl.value) || 0) : 0
-    const maxPriceInput = maxPriceEl ? maxPriceEl.value : ''
-    const maxPrice = maxPriceInput ? parseFloat(maxPriceInput) : Infinity
     const includeFoil = includeFoilEl ? includeFoilEl.checked : true
     const includeNonfoil = includeNonfoilEl ? includeNonfoilEl.checked : true
 
+    // Price range is handled by applyAutoKeep(), which marks out-of-range
+    // rows as "keep" so they land in the Kept section instead of vanishing.
     this.filteredRows = this.cardRows.filter(row => {
-      // Price filter
-      if (row.marketPrice < minPrice || row.marketPrice > maxPrice) {
-        return false
-      }
-
       // Finish filter
       if (row.finish === 'foil' && !includeFoil) {
         return false
@@ -363,21 +376,42 @@ class ManaSellApp {
   }
 
   renderTable() {
-    const tbody = document.getElementById('review-table-body')
+    const sellRows = this.filteredRows.filter(row => row.keepSellStatus !== 'keep')
+    const keptRows = this.filteredRows.filter(row => row.keepSellStatus === 'keep')
+
+    this.renderRowGroup('review-table-body', sellRows, 'No cards match the current filters')
+    this.renderRowGroup('kept-table-body', keptRows, '')
+
+    const keptSection = document.getElementById('kept-section')
+    const keptCount = document.getElementById('kept-count')
+    if (keptSection) keptSection.classList.toggle('hidden', keptRows.length === 0)
+    if (keptCount) keptCount.textContent = `(${keptRows.length})`
+    this.updateKeptSectionVisibility()
+
+    // Attach event listeners after rendering
+    this.attachQuantityListeners()
+    this.attachKeepSellListeners()
+  }
+
+  renderRowGroup(tbodyId, rows, emptyMessage) {
+    const tbody = document.getElementById(tbodyId)
+    if (!tbody) return
     tbody.innerHTML = ''
 
-    if (this.filteredRows.length === 0) {
-      tbody.innerHTML = `
-        <tr>
-          <td colspan="9" class="px-4 py-8 text-center text-gray-400">
-            No cards match the current filters
-          </td>
-        </tr>
-      `
+    if (rows.length === 0) {
+      if (emptyMessage) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="9" class="px-4 py-8 text-center text-gray-400">
+              ${emptyMessage}
+            </td>
+          </tr>
+        `
+      }
       return
     }
 
-    this.filteredRows.forEach(row => {
+    rows.forEach(row => {
       const tr = document.createElement('tr')
       tr.className = 'hover:bg-slate-50'
       if (row.warnings.length > 0) {
@@ -386,13 +420,13 @@ class ManaSellApp {
 
       const status = row.keepSellStatus === 'keep' ? 'keep' : 'sell'
       const statusColor = status === 'keep' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
-      
+      const escapedId = this.escapeHtml(row.id)
+
       tr.innerHTML = `
         <td class="px-2 py-3">
           <button
-            data-card-id="${row.id}"
+            data-card-id="${escapedId}"
             class="px-2 py-1 text-xs rounded ${statusColor} hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            onclick="manasellApp.toggleKeepSell('${row.id}')"
           >
             ${status === 'keep' ? 'Keep' : 'Sell'}
           </button>
@@ -412,7 +446,7 @@ class ManaSellApp {
               min="0"
               max="${row.totalQuantity}"
               value="${row.quantity}"
-              data-card-id="${this.escapeHtml(row.id)}"
+              data-card-id="${escapedId}"
               class="w-16 px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             ${row.quantity < row.totalQuantity ? `<span class="text-xs text-gray-400">/ ${row.totalQuantity}</span>` : ''}
@@ -430,9 +464,13 @@ class ManaSellApp {
       `
       tbody.appendChild(tr)
     })
-    
-    // Attach event listeners after rendering
-    this.attachQuantityListeners()
+  }
+
+  updateKeptSectionVisibility() {
+    const keptContent = document.getElementById('kept-content')
+    const keptChevron = document.getElementById('kept-chevron')
+    if (keptContent) keptContent.classList.toggle('hidden', !this.keptSectionExpanded)
+    if (keptChevron) keptChevron.classList.toggle('rotate-180', this.keptSectionExpanded)
   }
 
   attachQuantityListeners() {
@@ -450,6 +488,15 @@ class ManaSellApp {
       newInput.addEventListener('input', (e) => {
         const cardId = e.target.getAttribute('data-card-id')
         this.updateQuantity(cardId, e.target.value, false) // Don't re-render on input
+      })
+    })
+  }
+
+  attachKeepSellListeners() {
+    const buttons = document.querySelectorAll('button[data-card-id]')
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        this.toggleKeepSell(button.getAttribute('data-card-id'))
       })
     })
   }
@@ -481,6 +528,7 @@ class ManaSellApp {
       return
     }
     
+    const previousStatus = row.keepSellStatus
     const newQty = Math.max(0, Math.min(row.totalQuantity, parseInt(value, 10) || 0))
     row.quantity = newQty
     row.autoKept = false // manual override takes precedence over the switch
@@ -491,7 +539,15 @@ class ManaSellApp {
     } else {
       row.keepSellStatus = 'sell'
     }
-    
+
+    // If the row just crossed the keep/sell boundary, it needs to move
+    // between the Sell table and the Kept section - a full re-render.
+    if (shouldRender && row.keepSellStatus !== previousStatus) {
+      this.renderTable()
+      this.updateSummary()
+      return
+    }
+
     // Update the button status if needed
     if (shouldRender) {
       const button = document.querySelector(`button[data-card-id="${cardId}"]`)
@@ -534,6 +590,7 @@ class ManaSellApp {
       if (row.finish === 'foil') {
         row.keepSellStatus = 'keep'
         row.quantity = 0
+        row.autoKept = false
       }
     })
     this.renderTable()
@@ -564,6 +621,7 @@ class ManaSellApp {
 
       // Keep the first one, sell the rest
       rows.forEach((row, index) => {
+        row.autoKept = false
         if (index === 0) {
           row.keepSellStatus = 'keep'
           row.quantity = 0
@@ -596,6 +654,7 @@ class ManaSellApp {
         // Keep the one with highest quantity (or first if equal)
         rows.sort((a, b) => b.quantity - a.quantity)
         rows.forEach((row, index) => {
+          row.autoKept = false
           if (index === 0) {
             row.keepSellStatus = 'keep'
             row.quantity = 0
@@ -615,6 +674,7 @@ class ManaSellApp {
     this.cardRows.forEach(row => {
       row.keepSellStatus = 'sell'
       row.quantity = 1
+      row.autoKept = false
     })
     this.renderTable()
     this.updateSummary()
@@ -624,6 +684,7 @@ class ManaSellApp {
     this.cardRows.forEach(row => {
       row.keepSellStatus = 'sell'
       row.quantity = 1
+      row.autoKept = false
     })
     this.renderTable()
     this.updateSummary()

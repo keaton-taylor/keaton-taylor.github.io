@@ -4,11 +4,11 @@
 
 export class CardRow {
   constructor(data) {
-    this.id = data.id || this.generateId()
     this.name = data.name || ''
     this.setCode = data.setCode || ''
     this.collectorNumber = data.collectorNumber || ''
     this.finish = data.finish || 'nonfoil' // 'foil' or 'nonfoil'
+    this.id = data.id || this.generateId() // must run after name/setCode/collectorNumber/finish are set
     this.totalQuantity = data.quantity || 1 // Original total quantity from CSV
     this.quantity = data.quantity !== undefined ? (data.keepSellStatus === 'keep' ? 0 : 1) : 1 // Editable sell quantity (defaults to 1)
     this.marketPrice = data.marketPrice || 0
