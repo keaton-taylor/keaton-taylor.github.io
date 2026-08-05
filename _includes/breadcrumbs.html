@@ -3,17 +3,17 @@
   <div class="flex items-center justify-between">
     {% if page.category == 'case_study' %}
       <a href="{{ '/#work' | relative_url }}" class="text-blue-600 hover:text-blue-700 font-medium transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
-        <svg class="w-4 h-4 inline-block align-middle mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+        <svg class="w-4 h-4 inline-block align-middle mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
         </svg>
-        <span style="display: inline-block; vertical-align: middle;">Back to Work</span>
+        <span class="inline-block align-middle">Back to Work</span>
       </a>
     {% elsif page.category == 'blog' %}
       <a href="{{ '/#thoughts' | relative_url }}" class="text-blue-600 hover:text-blue-700 font-medium transition-colors text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded">
-        <svg class="w-4 h-4 inline-block align-middle mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" style="display: inline-block; vertical-align: middle;">
+        <svg class="w-4 h-4 inline-block align-middle mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
         </svg>
-        <span style="display: inline-block; vertical-align: middle;">Back to Thoughts</span>
+        <span class="inline-block align-middle">Back to Thoughts</span>
       </a>
     {% endif %}
     <ol class="flex items-center space-x-2 text-sm text-gray-600">
