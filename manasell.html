@@ -8,7 +8,7 @@ permalink: /manasell/
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Header -->
     <header class="mb-6 sm:mb-8">
-      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">ManaSell <span class="font-normal text-gray-400">(1.55)</span></h1>
+      <h1 class="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">ManaSell <span class="font-normal text-gray-400">(1.56)</span></h1>
       <p class="text-base sm:text-lg text-gray-600">Convert ManaBox CSV to Card Kingdom Bulk Seller Format</p>
       <div class="mt-4 space-y-2">
         <div class="p-3 sm:p-4 bg-blue-50 border border-blue-200 rounded-lg">
@@ -98,7 +98,7 @@ permalink: /manasell/
     </div>
 
     <!-- Controls Section -->
-    <div id="controls-section" class="hidden bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6" style="display: none !important;">
+    <div id="controls-section" class="hidden bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
       <h2 class="text-xl sm:text-2xl font-semibold text-gray-900 mb-4">Controls</h2>
       
       <!-- Price Thresholds -->
@@ -238,6 +238,40 @@ permalink: /manasell/
             <!-- Table rows will be inserted here -->
           </tbody>
         </table>
+      </div>
+
+      <!-- Kept Cards (collapsed by default) -->
+      <div id="kept-section" class="hidden mt-4 border border-gray-200 rounded-lg">
+        <button
+          id="kept-toggle"
+          type="button"
+          class="w-full flex items-center justify-between px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+        >
+          <span>Kept (not for sale) <span id="kept-count" class="text-gray-400 font-normal">(0)</span></span>
+          <svg id="kept-chevron" class="w-4 h-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div id="kept-content" class="hidden overflow-x-auto border-t border-gray-200">
+          <table class="table-fixed w-full border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b-2 border-gray-300">
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-20">Keep/Sell</th>
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-48">Card Name</th>
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-32">Set</th>
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-24">Collector #</th>
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-20">Finish</th>
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-24">Quantity</th>
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-24">Price</th>
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-28">Total Value</th>
+                <th class="text-xs uppercase tracking-wide text-slate-500 px-2 py-3 text-left w-32">Warnings</th>
+              </tr>
+            </thead>
+            <tbody id="kept-table-body" class="divide-y divide-gray-200">
+              <!-- Kept rows inserted here -->
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
