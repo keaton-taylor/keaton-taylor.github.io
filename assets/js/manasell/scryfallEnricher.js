@@ -70,8 +70,10 @@ export class ScryfallEnricher {
         return cardRow
       }
 
+      const priceInfo = this.getMarketPriceInfo(card, cardRow.finish)
       const enrichment = {
-        marketPrice: this.getMarketPrice(card, cardRow.finish),
+        marketPrice: priceInfo.price,
+        priceIsEstimate: priceInfo.isEstimate,
         setName: card.set_name || '',
         ckEdition: this.mapToCardKingdomEdition(card),
         resolvedSetCode: (card.set || '').toLowerCase(),
@@ -172,13 +174,29 @@ export class ScryfallEnricher {
   }
 
   /**
-   * Get market price for a card based on finish
+   * Get market price for a card based on finish.
+   * Foil USD pricing is often missing on Scryfall for newer or precon-only
+   * foils even when the card itself has a real foil printing (e.g. Modern
+   * Horizons 3 Commander foils). Fall back to the etched price, then to
+   * the nonfoil price as a rough estimate, rather than reporting $0.
    */
-  getMarketPrice(card, finish) {
+  getMarketPriceInfo(card, finish) {
     if (finish === 'foil') {
-      return card.prices?.usd_foil ? parseFloat(card.prices.usd_foil) : 0
-    } else {
-      return card.prices?.usd ? parseFloat(card.prices.usd) : 0
+      if (card.prices?.usd_foil) {
+        return { price: parseFloat(card.prices.usd_foil), isEstimate: false }
+      }
+      if (card.prices?.usd_etched) {
+        return { price: parseFloat(card.prices.usd_etched), isEstimate: false }
+      }
+      if (card.prices?.usd) {
+        return { price: parseFloat(card.prices.usd), isEstimate: true }
+      }
+      return { price: 0, isEstimate: false }
+    }
+
+    return {
+      price: card.prices?.usd ? parseFloat(card.prices.usd) : 0,
+      isEstimate: false
     }
   }
 
@@ -248,6 +266,8 @@ export class ScryfallEnricher {
 
     if (cardRow.marketPrice === 0) {
       cardRow.addWarning('No price data available')
+    } else if (enrichment.priceIsEstimate) {
+      cardRow.addWarning('Foil price estimated from nonfoil (no foil price on Scryfall)')
     }
 
     return cardRow
